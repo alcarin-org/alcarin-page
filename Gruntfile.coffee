@@ -2,7 +2,8 @@
 
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
-               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent']
+               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify']
+    DIST_DIR = 'dist/'
 
     grunt.loadNpmTasks(module) for module in modules
 
@@ -25,7 +26,10 @@ module.exports = (grunt)->
                 files: 'src/**/*.less'
                 tasks: ['newer:less:compile']
             css:
-                files: 'public/**/*.css'
+                files: "#{DIST_DIR}/**/*.css"
+            browserify_index:
+                files: 'src/index.coffee'
+                tasks: ['newer:browserify:buildjs']
         coffee:
             compile:
                 options:
@@ -34,7 +38,7 @@ module.exports = (grunt)->
                 flatten: false
                 cwd: 'src/'
                 src: '**/*.coffee'
-                dest: 'public/'
+                dest: DIST_DIR
                 ext: '.js'
         less:
             compile:
@@ -42,7 +46,7 @@ module.exports = (grunt)->
                     expand: true,
                     cwd: 'src/',
                     src: '**/*.less',
-                    dest: 'public/',
+                    dest: DIST_DIR,
                     ext: '.css'
                 ]
         htmlmin:
@@ -54,7 +58,7 @@ module.exports = (grunt)->
                     expand: true,
                     cwd: 'src/',
                     src: '**/*.html',
-                    dest: 'public/',
+                    dest: DIST_DIR,
                     ext: '.html'
                 ]
         shell:
@@ -64,10 +68,18 @@ module.exports = (grunt)->
                 command: "nodemon -x 'coffee index.coffee --serve-src-files'"
         concurrent:
             dev:
-                tasks: ['shell::nodemon', 'watch'],
+                tasks: ['shell:nodemon', 'watch'],
                 options:
                     logConcurrentOutput: true
+        browserify:
+            buildjs:
+                expand: true
+                flatten: false
+                cwd: DIST_DIR
+                src: 'index.js'
+                dest: DIST_DIR
+                ext: '.js'
 
-    grunt.registerTask('build', ['coffee', 'less', 'htmlmin'])
-    grunt.registerTask('run', ['concurrent'])
+    grunt.registerTask('build', ['newer:coffee', 'newer:browserify:buildjs', 'newer:less', 'newer:htmlmin'])
+    grunt.registerTask('run', ['build', 'concurrent'])
     grunt.registerTask('default', ['run'])
