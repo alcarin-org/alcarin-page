@@ -1,10 +1,10 @@
 "use strict"
 
 module.exports = (grunt)->
-    grunt.loadNpmTasks('grunt-contrib-watch')
-    grunt.loadNpmTasks('grunt-newer')
-    grunt.loadNpmTasks('grunt-contrib-coffee')
-    grunt.loadNpmTasks('grunt-contrib-less')
+    modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
+               'grunt-contrib-htmlmin', 'grunt-nodemon', 'grunt-concurrent']
+
+    grunt.loadNpmTasks(module) for module in modules
 
     grunt.initConfig
         pkg: grunt.file.readJSON('package.json')
@@ -13,8 +13,9 @@ module.exports = (grunt)->
                 livereload: true
             grunt:
                 files: 'Gruntfile.coffee'
-            html:
+            htmlmin:
                 files: 'src/**/*.html'
+                tasks: ['newer:htmlmin:min']
             coffee:
                 files: 'src/**/*.coffee'
                 tasks: ['newer:coffee:compile']
@@ -44,7 +45,29 @@ module.exports = (grunt)->
                     dest: 'public/',
                     ext: '.css'
                 ]
+        htmlmin:
+            min:
+                options:
+                    removeComments: true
+                    collapseWhitespace: true
+                files: [
+                    expand: true,
+                    cwd: 'src/',
+                    src: '**/*.html',
+                    dest: 'public/',
+                    ext: '.html'
+                ]
+        nodemon:
+            dev:
+                options:
+                    logConcurrentOutput: true
+                script: 'index.coffee'
+        concurrent:
+            dev:
+                tasks: ['nodemon', 'watch'],
+                options:
+                    logConcurrentOutput: true
 
-
-    grunt.registerTask('default', ['watch'])
-    grunt.registerTask('build', ['coffee', 'less'])
+    grunt.registerTask('build', ['coffee', 'less', 'htmlmin'])
+    grunt.registerTask('run', ['concurrent'])
+    grunt.registerTask('default', ['run'])
