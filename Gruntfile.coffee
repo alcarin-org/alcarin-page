@@ -9,10 +9,20 @@ module.exports = (grunt)->
     grunt.initConfig
         pkg: grunt.file.readJSON('package.json')
         watch:
+            grunt:
+                files: 'Gruntfile.coffee'
+            html:
+                options:
+                  livereload: true
+                files: 'src/**/*.html'
             coffee:
+                options:
+                  livereload: true
                 files: 'src/**/*.coffee'
                 tasks: ['newer:coffee:compile']
             less:
+                options:
+                  livereload: true
                 files: 'src/**/*.less'
                 tasks: ['newer:less:compile']
         coffee:
