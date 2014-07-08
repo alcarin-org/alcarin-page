@@ -2,7 +2,7 @@
 
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
-               'grunt-contrib-htmlmin', 'grunt-nodemon', 'grunt-concurrent']
+               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent']
 
     grunt.loadNpmTasks(module) for module in modules
 
@@ -57,14 +57,14 @@ module.exports = (grunt)->
                     dest: 'public/',
                     ext: '.html'
                 ]
-        nodemon:
-            dev:
-                options:
-                    logConcurrentOutput: true
-                script: 'index.coffee'
+        shell:
+            nodemon:
+                # nodemon have problem with sending command line args to app when use coffeescript compiler,
+                # its a reason for use grunt-shell instead of grunt-nodemon
+                command: "nodemon -x 'coffee index.coffee --serve-src-files'"
         concurrent:
             dev:
-                tasks: ['nodemon', 'watch'],
+                tasks: ['shell::nodemon', 'watch'],
                 options:
                     logConcurrentOutput: true
 
