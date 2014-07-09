@@ -49,7 +49,7 @@ module.exports = (grunt)->
             nodemon:
                 # nodemon have problem with sending command line args to app when use coffeescript compiler,
                 # its a reason for use grunt-shell instead of grunt-nodemon
-                command: "nodemon -x 'coffee index.coffee --serve-src-files'"
+                command: "nodemon --watch index.coffee -x 'coffee index.coffee --serve-src-files'"
             npmcss_index:
                 command: "npm-css src/vendor.css > dist/vendor.css"
         concurrent:
