@@ -10,14 +10,14 @@ module.exports = exports =
         files: 'src/**/*.html'
         tasks: ['newer:htmlmin:min']
     coffee_index:
-        # we dont livereload browser after compiling vendor file - cauze it need be
+        # we dont livereload browser after compiling app file - cauze it need be
         # processed by browserify first
         options:
             livereload: false
-        files: 'src/vendor.coffee'
+        files: 'src/app.coffee'
         tasks: 'newer:coffee:compile_index'
     browserify_index:
-        files: 'dist/vendor.js'
+        files: 'dist/app.js'
         tasks: ['newer:browserify:build_index_js']
     coffee:
         files: 'src/alcarin/**/*.coffee'

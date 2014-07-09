@@ -20,10 +20,10 @@ module.exports = (grunt)->
                 join: true
             compile_index:
                 files:
-                    'dist/vendor.js': 'src/vendor.coffee'
+                    'dist/app.js': 'src/app.coffee'
             compile:
                 files:
-                    'dist/app.js': 'src/alcarin/**/*.coffee'
+                    'dist/alcarin.js': 'src/alcarin/**/*.coffee'
         less:
             compile:
                 files: [
@@ -62,7 +62,7 @@ module.exports = (grunt)->
                 expand: true
                 flatten: false
                 cwd: 'dist/'
-                src: 'vendor.js'
+                src: 'app.js'
                 dest: 'dist/'
                 ext: '.js'
 
