@@ -2,38 +2,22 @@
 
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
-               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify']
-    DIST_DIR = 'dist/'
+               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify',
+               'grunt-contrib-clean']
 
     grunt.loadNpmTasks(module) for module in modules
 
     grunt.initConfig
         pkg: grunt.file.readJSON('package.json')
-        watch:
-            options:
-                livereload: true
-            grunt:
-                files: 'Gruntfile.coffee'
-            htmlmin:
-                files: 'src/**/*.html'
-                tasks: ['newer:htmlmin:min']
-            coffee:
-                files: 'src/**/*.coffee'
-                tasks: ['newer:coffee:compile']
-            less:
-                options:
-                    livereload: false
-                files: 'src/**/*.less'
-                tasks: ['newer:less:compile']
-            css:
-                files: "#{DIST_DIR}/**/*.css"
-            browserify_index:
-                files: 'src/index.coffee'
-                tasks: ['newer:browserify:build_index_js']
+        clean:
+            all: ['dist']
+        watch: require './grunt-tasks/watch'
         coffee:
             options:
                 sourceMap: true
+                # sourceMapDir: "dist/source-maps/"
                 bare: true
+                join: true
             compile_index:
                 files:
                     'dist/vendor.js': 'src/vendor.coffee'
@@ -46,7 +30,7 @@ module.exports = (grunt)->
                     expand: true,
                     cwd: 'src/',
                     src: '**/*.less',
-                    dest: DIST_DIR,
+                    dest: 'dist/',
                     ext: '.css'
                 ]
         htmlmin:
@@ -58,7 +42,7 @@ module.exports = (grunt)->
                     expand: true,
                     cwd: 'src/',
                     src: '**/*.html',
-                    dest: DIST_DIR,
+                    dest: 'dist/',
                     ext: '.html'
                 ]
         shell:
@@ -67,7 +51,7 @@ module.exports = (grunt)->
                 # its a reason for use grunt-shell instead of grunt-nodemon
                 command: "nodemon -x 'coffee index.coffee --serve-src-files'"
             npmcss_index:
-                command: "npm-css src/vendor.css > #{DIST_DIR}/vendor.css"
+                command: "npm-css src/vendor.css > dist/vendor.css"
         concurrent:
             dev:
                 tasks: ['shell:nodemon', 'watch'],
@@ -77,12 +61,12 @@ module.exports = (grunt)->
             build_index_js:
                 expand: true
                 flatten: false
-                cwd: DIST_DIR
+                cwd: 'dist/'
                 src: 'vendor.js'
-                dest: DIST_DIR
+                dest: 'dist/'
                 ext: '.js'
 
-    grunt.registerTask('build', ['newer:coffee', 'newer:browserify:build_index_js',
+    grunt.registerTask('build', ['clean', 'newer:coffee', 'newer:browserify:build_index_js',
                                  'newer:less', 'shell:npmcss_index', 'newer:htmlmin'])
     grunt.registerTask('run', ['build', 'concurrent'])
     grunt.registerTask('default', ['run'])
