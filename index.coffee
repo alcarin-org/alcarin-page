@@ -14,11 +14,11 @@ oneDay = 86400000
 
 app.use(logger()) if flags.get('log-requests')
 app.use(compression())
+
+app.use('/static', express.static(__dirname + '/dist', { maxAge: oneDay }))
 app.use '/', (req, res, next)->
-    path = req.url or '/index.html'
-    fpath = __dirname + '/dist' + path
-    res.sendfile fpath, (err)->
-        res.sendfile(__dirname + '/dist/index.html') if err
+    res.set('Content-Type', 'text/html')
+    res.sendfile(__dirname + '/dist/index.html')
 
 # thanks to serve /src we can see coffee script sources
 # in chrome debug console.

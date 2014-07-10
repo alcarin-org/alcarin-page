@@ -10,25 +10,27 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <base href="/">
+
         <!-- temporary turning off favicon requests -->
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/vendor.css">
+        <link rel="stylesheet" type="text/css" href="/static/vendor.css">
+        <link rel="stylesheet" type="text/css" href="/static/alcarin.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <div class="navbar-inner">
             <a class="navbar-brand" href="/">Alcarin</a>
           </div>
-        </nav>
+        </div>
 
         <div class="container main" ng-app="alcarin">
             <div class="game-container" ng-view>
-
             </div>
 
             <footer>
@@ -39,8 +41,8 @@
         <!-- some librariries designed to be client-side only dont work proper with npm :/ -->
         <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="/app.js"></script>
-        <script src="/alcarin.js"></script>
+        <script src="/static/app.js"></script>
+        <script src="/static/alcarin.js"></script>
         <script src="//localhost:35729/livereload.js"></script>
     </body>
 </html>

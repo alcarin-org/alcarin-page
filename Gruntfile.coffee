@@ -26,13 +26,11 @@ module.exports = (grunt)->
                     'dist/alcarin.js': 'src/alcarin/**/*.coffee'
         less:
             compile:
-                files: [
-                    expand: true,
-                    cwd: 'src/',
-                    src: '**/*.less',
-                    dest: 'dist/',
-                    ext: '.css'
-                ]
+                options:
+                    compress: true
+                    sourceMap: true
+                files:
+                    'dist/alcarin.css': 'src/alcarin/**/*.less'
         htmlmin:
             min:
                 options:
