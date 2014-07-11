@@ -4,8 +4,8 @@ express     = require 'express'
 compression = require 'compression'
 flags       = require 'flags'
 logger      = require 'morgan'
-flags.defineBoolean('serve-src-files', false, 'Serve coffeescript and less files on "/src" path.'
-                                              'Useful when working in debug mode and source maps.')
+flags.defineBoolean('serve-src-files', false, 'Serve coffeescript and less files on "/src" path.
+    Useful when working in debug mode and source maps.')
 flags.defineBoolean('log-requests', false, 'Log to STDOUT all requests, in apache like way.')
 flags.parse()
 
