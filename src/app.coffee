@@ -11,12 +11,36 @@ main = ->
     window.io      = require 'socket.io-client'
     window.Promise = require 'bluebird'
 
+    # override blubird default 'catch' method to support error reason catch filtering.
+    # example:
+    # promise
+    #  .then(...)
+    #  .catch('validation.error', (err)-> console.log('validate problem'))
+    #  .catch( (err)-> console.log('other problem'))
+    promiseCatch = Promise::catch
+    Promise::catch = (type, err)->
+        if typeof type is 'string'
+            return promiseCatch.call(@, ((err)-> err.reason is type), err)
+        else
+            err = type
+            return promiseCatch.call(@, err)
+
     $('html').removeClass('no-js').addClass('js')
 
     angular.module('alcarin', ['ngRoute', 'btford.socket-io'])
         .factory 'socket', (socketFactory)->
             ioSocket = io.connect('http://localhost:8888')
-            return socketFactory({ioSocket})
+            socket = socketFactory({ioSocket})
+            socket._emit = socket.emit
+            socket.emit = (args...)->
+                promise = new Promise (resolve, reject)->
+                    args.push (response)->
+                        return reject(response.error) if response.error
+                        resolve(response)
+                    socket._emit.apply(socket, args)
+
+                return promise
+            return socket
         .config ($routeProvider, $locationProvider)->
             $routeProvider.
             when('/login', {
