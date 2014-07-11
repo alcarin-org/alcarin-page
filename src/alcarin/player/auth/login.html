@@ -1,15 +1,17 @@
 <h1>Login</h1>
 <form name="form" class="well well-lg" novalidate>
-    <div class="form-group" ng-class="{ 'has-error': form.email.$invalid }">
+    <div class="form-group" show-errors>
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
-               ng-model="form.email" required>
-        <p class="help-block" ng-if="form.email.$error.required">Email is required</p>
+               ng-model="email" required>
     </div>
-    <div class="form-group">
+    <div class="form-group" show-errors>
         <label for="exampleInputPassword1">Password</label>
         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-               ng-model="form.password" required>
+               ng-model="password" required>
     </div>
-    <button type="submit" class="btn btn-default" ng-click="test()">Submit</button>
+    <div class="alert alert-danger" ng-show="loginInvalid">
+        <p>Sorry, your e-mail or password is incorrect - please try again.</p>
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="login()">Log In</button>
 </form>

@@ -3,7 +3,7 @@
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
                'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify',
-               'grunt-contrib-clean', 'grunt-debowerify']
+               'grunt-contrib-clean']
 
     grunt.loadNpmTasks(module) for module in modules
 

@@ -1,10 +1,16 @@
 angular.module('alcarin')
     .controller 'LoginController', ($scope, socket)->
-        $scope.test = ->
-            socket.emit('game.getinfo', {test: '3232'})
-                .then (data)->
-                    console.log 'response: ', data
-                .catch 'validation.failed', (err)->
-                    console.log 'validation problem', err.msg
-                .catch (err)->
-                    console.log 'other'
+        $scope.loginInvalid = false
+        $scope.login = ->
+            $scope.$broadcast('show-errors-check-validity')
+            if $scope.form.$valid
+                socket.emit 'auth.login',
+                    email: $scope.email,
+                    password: $scope.password
+                .then (response)->
+                    {token} = response
+                    localStorage.setItem('apiToken', token)
+                    $scope.loginInvalid = false
+                .catch 'authorization.failed', (msg)->
+                    $scope.loginInvalid = true
+

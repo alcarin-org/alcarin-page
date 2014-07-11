@@ -28,7 +28,7 @@ main = ->
 
     $('html').removeClass('no-js').addClass('js')
 
-    angular.module('alcarin', ['ngRoute', 'btford.socket-io'])
+    angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErrors'])
         .config ($routeProvider, $locationProvider)->
             $routeProvider.
             when('/login', {
@@ -56,6 +56,15 @@ main = ->
                     socket._emit.apply(socket, args)
 
                 return promise
+
+            # if we have api token in local storage use it to restore user privilages after reconnection
+            apiToken = localStorage.getItem('apiToken')
+            if apiToken
+                socket.emit 'auth.verifyToken', {token: apiToken}
+                .then ->
+                    console.log 'User permissions confirmed on server.'
+                .catch 'invalid.token', ->
+                    console.warn 'Wrong token used.'
             return socket
 
         .run ($rootScope)->
