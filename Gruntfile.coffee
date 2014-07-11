@@ -3,7 +3,7 @@
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
                'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify',
-               'grunt-contrib-clean']
+               'grunt-contrib-clean', 'grunt-debowerify']
 
     grunt.loadNpmTasks(module) for module in modules
 
@@ -63,6 +63,8 @@ module.exports = (grunt)->
                 src: 'app.js'
                 dest: 'dist/'
                 ext: '.js'
+                options:
+                    transform: ['debowerify']
 
     grunt.registerTask('build', ['clean', 'newer:coffee', 'newer:browserify:build_index_js',
                                  'newer:less', 'shell:npmcss_index', 'newer:htmlmin'])

@@ -1,0 +1,19 @@
+{
+  "name": "alcarin-page",
+  "version": "0.0.0",
+  "homepage": "https://github.com/alcarin-org/alcarin-page",
+  "authors": [
+    "Wiktor Obrębski <wiktor.obrebski@10clouds.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap-show-errors": "~1.0.2"
+  }
+}

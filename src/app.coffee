@@ -7,6 +7,7 @@ main = ->
     require 'angular-bootstrap'
     require 'angular-route'
     require 'angular-socket-io'
+    require 'angular-bootstrap-show-errors'
 
     window.io      = require 'socket.io-client'
     window.Promise = require 'bluebird'
