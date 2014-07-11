@@ -28,7 +28,22 @@ main = ->
     $('html').removeClass('no-js').addClass('js')
 
     angular.module('alcarin', ['ngRoute', 'btford.socket-io'])
+        .config ($routeProvider, $locationProvider)->
+            $routeProvider.
+            when('/login', {
+                templateUrl: '/static/alcarin/player/auth/login.html',
+                controller: 'LoginController'
+            }).
+            otherwise
+                redirectTo: '/login'
+
+            $locationProvider.html5Mode(true)
+
         .factory 'socket', (socketFactory)->
+            # prepare server socket.io connection
+            # override default socket.emit so it return a bluebird promise that have
+            # resolved when (and if only) server send acknowledgements response for this
+            # specific emit.
             ioSocket = io.connect('http://localhost:8888')
             socket = socketFactory({ioSocket})
             socket._emit = socket.emit
@@ -41,14 +56,8 @@ main = ->
 
                 return promise
             return socket
-        .config ($routeProvider, $locationProvider)->
-            $routeProvider.
-            when('/login', {
-                templateUrl: '/static/alcarin/player/auth/login.html',
-                controller: 'LoginController'
-            }).
-            otherwise
-                redirectTo: '/login'
 
-            $locationProvider.html5Mode(true)
+        .run ($rootScope)->
+            # lets make bluebird promises start angularjs digest process
+            Promise.setScheduler (cb)-> $rootScope.$evalAsync(cb)
 main()
