@@ -19,11 +19,13 @@ module.exports = (grunt)->
                 bare: true
                 join: true
             compile_index:
+                options:
+                    sourceMap: false
                 files:
-                    'dist/app.js': 'src/app.coffee'
+                    'dist/vendor.tmp.js': 'src/vendor.coffee'
             compile:
                 files:
-                    'dist/alcarin.js': 'src/alcarin/**/*.coffee'
+                    'dist/alcarin.js': ['src/app.coffee', 'src/alcarin/**/*.coffee']
         less:
             compile:
                 options:
@@ -60,7 +62,7 @@ module.exports = (grunt)->
                 expand: true
                 flatten: false
                 cwd: 'dist/'
-                src: 'app.js'
+                src: 'vendor.tmp.js'
                 dest: 'dist/'
                 ext: '.js'
                 options:
