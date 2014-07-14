@@ -17,16 +17,6 @@ Promise::catch = (type, err)->
 $('html').removeClass('no-js').addClass('js')
 
 angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErrors'])
-    .config ($routeProvider, $locationProvider)->
-        $routeProvider.
-        when('/login', {
-            templateUrl: '/static/alcarin/player/auth/login.html',
-            controller: 'LoginController'
-        }).
-        otherwise
-            redirectTo: '/login'
-
-        $locationProvider.html5Mode(true)
 
     .factory 'socket', (socketFactory)->
         # prepare server socket.io connection
