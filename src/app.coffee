@@ -16,6 +16,8 @@ Promise::catch = (type, err)->
 
 $('html').removeClass('no-js').addClass('js')
 
+API_SERVER = 'http://localhost:8888'
+
 angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErrors'])
 
     .factory 'socket', (socketFactory)->
@@ -23,7 +25,7 @@ angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErro
         # override default socket.emit so it return a bluebird promise that have
         # resolved when (and if only) server send acknowledgements response for this
         # specific emit.
-        ioSocket = io.connect('http://localhost:8888')
+        ioSocket = io.connect(API_SERVER)
         socket = socketFactory({ioSocket})
         socket._emit = socket.emit
         socket.emit = (args...)->

@@ -15,8 +15,6 @@ module.exports = (grunt)->
         coffee:
             options:
                 sourceMap: true
-                # sourceMapDir: "dist/source-maps/"
-                bare: true
                 join: true
             compile_index:
                 options:
@@ -25,7 +23,7 @@ module.exports = (grunt)->
                     'dist/vendor.tmp.js': 'src/vendor.coffee'
             compile:
                 files:
-                    'dist/alcarin.js': ['src/app.coffee', 'src/alcarin/**/*.coffee']
+                    'dist/alcarin.js': ['src/app.coffee', 'src/components/**/*.coffee', 'src/alcarin/**/*.coffee']
         less:
             compile:
                 options:
