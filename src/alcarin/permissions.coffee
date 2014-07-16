@@ -4,8 +4,8 @@ angular.module('alcarin')
 
         $rootScope.hasPermission = (permission)->
             return false if not permission?
-            return permission in $rootScope.__current
+            return permission in $rootScope.__user_permission
 
         $rootScope.$on 'socket:user.permissions', (event, data)=>
             $rootScope[pName] = val for pName, val of data.all
-            $rootScope.__current = data.user
+            $rootScope.__user_permission = data.user
