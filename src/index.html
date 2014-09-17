@@ -15,8 +15,10 @@
         <!-- temporary turning off favicon requests -->
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
-        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/vendor.css">
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
+        <!-- endbower -->
+
         <link rel="stylesheet" type="text/css" href="/static/alcarin.css">
     </head>
     <body>
@@ -38,11 +40,20 @@
             <p>&copy; Not idea what I should write in footer for open-source projects.</p>
         </footer>
 
-        <!-- some librariries designed to be client-side only dont work proper with npm :/ -->
-        <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="/static/vendor.js"></script>
+        <!-- bower:js -->
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
+        <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-socket-io/socket.js"></script>
+        <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+        <script src="/bower_components/bluebird/js/browser/bluebird.js"></script>
+        <!-- endbower -->
+
         <script src="/static/alcarin.js"></script>
-        <script src="//localhost:35729/livereload.js"></script>
+
+        <!-- temporary, debug only -->
+        <script src="http://localhost:8888/socket.io/socket.io.js"></script>
     </body>
 </html>

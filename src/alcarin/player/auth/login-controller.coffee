@@ -1,6 +1,8 @@
 angular.module('alcarin')
     .controller 'LoginController', ($scope, socket)->
+
         $scope.loginInvalid = false
+
         $scope.login = ->
             $scope.$broadcast('show-errors-check-validity')
             if $scope.form.$valid

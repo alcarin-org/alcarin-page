@@ -45,6 +45,7 @@ angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErro
                 console.log 'User permissions confirmed on server.'
             .catch 'invalid.token', ->
                 console.warn 'Wrong token used.'
+                localStorage.removeItem('apiToken')
         return socket
 
     .run ($rootScope)->

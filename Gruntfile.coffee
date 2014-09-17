@@ -2,8 +2,8 @@
 
 module.exports = (grunt)->
     modules = ['grunt-contrib-watch', 'grunt-newer', 'grunt-contrib-coffee', 'grunt-contrib-less',
-               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-browserify',
-               'grunt-contrib-clean']
+               'grunt-contrib-htmlmin', 'grunt-shell', 'grunt-concurrent', 'grunt-contrib-clean',
+               'grunt-wiredep']
 
     grunt.loadNpmTasks(module) for module in modules
 
@@ -16,11 +16,6 @@ module.exports = (grunt)->
             options:
                 sourceMap: true
                 join: true
-            compile_index:
-                options:
-                    sourceMap: false
-                files:
-                    'dist/vendor.tmp.js': 'src/vendor.coffee'
             compile:
                 files:
                     'dist/alcarin.js': ['src/app.coffee', 'src/components/**/*.coffee', 'src/alcarin/**/*.coffee']
@@ -47,26 +42,18 @@ module.exports = (grunt)->
             nodemon:
                 # nodemon have problem with sending command line args to app when use coffeescript compiler,
                 # its a reason for use grunt-shell instead of grunt-nodemon
-                command: "nodemon --watch index.coffee -x 'coffee index.coffee --serve-src-files'"
-            npmcss_index:
-                command: "npm-css src/vendor.css > dist/vendor.css"
+                command: "nodemon --watch index.coffee -x 'coffee index.coffee --inject-livereload --serve-src-files'"
         concurrent:
             dev:
                 tasks: ['shell:nodemon', 'watch'],
                 options:
                     logConcurrentOutput: true
-        browserify:
-            build_index_js:
-                expand: true
-                flatten: false
-                cwd: 'dist/'
-                src: 'vendor.tmp.js'
-                dest: 'dist/'
-                ext: '.js'
+        wiredep:
+            target:
+                src: ['src/**/*.html']
                 options:
-                    transform: ['debowerify']
+                    ignorePath: '..',
 
-    grunt.registerTask('build', ['clean', 'newer:coffee', 'newer:browserify:build_index_js',
-                                 'newer:less', 'shell:npmcss_index', 'newer:htmlmin'])
-    grunt.registerTask('run', ['build', 'concurrent'])
-    grunt.registerTask('default', ['run'])
+    grunt.registerTask('build', ['clean', 'wiredep', 'newer:coffee', 'newer:less', 'newer:htmlmin'])
+    grunt.registerTask('serve', ['build', 'concurrent'])
+    grunt.registerTask('default', ['serve'])
