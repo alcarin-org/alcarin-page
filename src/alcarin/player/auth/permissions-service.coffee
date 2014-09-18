@@ -26,8 +26,7 @@ angular.module('alcarin')
                 return permissionCode in @userPermissions
         }
     .run ($rootScope, socket, Permissions)->
-        socket.forward('user.permissions')
-        $rootScope.$on 'socket:user.permissions', (event, data)=>
+        socket.on 'user.permissions', (data)=>
             Permissions.registerPermissionsList(data.all)
             Permissions.registerUserPermissions(data.user)
             $rootScope.$broadcast('permissions.changed')
