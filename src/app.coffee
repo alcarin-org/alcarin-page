@@ -37,7 +37,8 @@ angular.module('alcarin', ['ngRoute', 'btford.socket-io', 'ui.bootstrap.showErro
 
             return promise
 
-        # if we have api token in local storage use it to restore user privilages after reconnection
+        # if we have api token in local storage
+        # use it to restore user privilages after reconnection
         apiToken = localStorage.getItem('apiToken')
         if apiToken
             socket.emit 'auth.verifyToken', {token: apiToken}

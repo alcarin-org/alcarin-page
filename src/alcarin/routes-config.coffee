@@ -13,8 +13,7 @@ angular.module('alcarin')
 
     .run ($rootScope, $location)->
         $rootScope.$on '$routeChangeStart', (event, next, current)->
-            # console.log next
-            # if $rootScope.loggedUser is null
-            #     $location.path('/login')
+            if $rootScope.loggedUser is null
+                $location.path('/login')
 
 
