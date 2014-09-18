@@ -1,3 +1,2 @@
-angular.module('alcarin')
-    .controller 'MainPageController', ($scope, socket)->
+alcarin.controller 'MainPageController', ($scope, socket)->
         ;

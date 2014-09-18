@@ -1,16 +1,10 @@
-angular.module('alcarin')
-    .factory 'Permissions', (socket)->
+alcarin.factory 'Permissions', (socket, PermissionsTable, UserPermissions)->
+        # console.log PermissionsTable
         return {
-            registerPermissionsList: (list)->
-                @permissionsList = list
-
-            registerUserPermissions: (userPermissions)->
-                @userPermissions = userPermissions
-
             hasRaw: (permissionCode)->
                 return true if permission is 1 # public
                 return false if not permission?
-                return permissionCode in @userPermissions
+                return permissionCode in UserPermissions.get()
 
             has: (permission)->
                 ###
@@ -19,16 +13,11 @@ angular.module('alcarin')
                 ###
                 permission = permission.toUpperCase()
                 return true if permission is 'PUBLIC'
-                return false if not @permissionsList?
+                return false if not PermissionsTable?
 
-                return false if permission not of @permissionsList
-                permissionCode = @permissionsList[permission]
-                return permissionCode in @userPermissions
+                # console.log permission, PermissionsTable, UserPermissions.get()
+                return false if permission not of PermissionsTable
+                permissionCode = PermissionsTable[permission]
+                return permissionCode in UserPermissions.get()
         }
-    .run ($rootScope, socket, Permissions)->
-        socket.on 'user.permissions', (data)=>
-            console.log 'get'
-            Permissions.registerPermissionsList(data.all)
-            Permissions.registerUserPermissions(data.user)
-            $rootScope.$broadcast('permissions.changed')
 

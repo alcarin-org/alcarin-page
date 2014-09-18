@@ -1,5 +1,4 @@
-angular.module('alcarin')
-    .directive 'needPermission', ($rootScope, Permissions)->
+alcarin.directive 'needPermission', ($rootScope, Permissions)->
         replace: false,
         restrict: 'A'
         link: ($scope, $element, $attrs)->
@@ -8,4 +7,4 @@ angular.module('alcarin')
                 $element.toggle(hasPermission)
 
             $attrs.$observe 'needPermission', refreshVisibility
-            $scope.$on 'permissions.changed', refreshVisibility
+            $scope.$on 'userPermissions.updated', refreshVisibility

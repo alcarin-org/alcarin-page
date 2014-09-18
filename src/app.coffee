@@ -55,23 +55,36 @@ alcarin = angular.module('alcarin', [
     Promise.setScheduler (cb)-> $rootScope.$evalAsync(cb)
 
 $ ->
+    ###
+    Configure connection to socket.io and check user privilages. before this we
+    dont load angularjs - so routing wont be called before privilages are known.
+    ###
     ioSocket = io.connect(API_SERVER)
-    alcarin.value('ioSocket', ioSocket)
     # if we have api token in local storage
     # use it to restore user privilages after reconnection
     apiToken = localStorage.getItem('apiToken')
     bootstrap = -> angular.bootstrap($('#main-container'), ['alcarin'])
 
-    if apiToken
-        ioSocket.emit 'auth.verifyToken', {token: apiToken}, (response)->
-            if response.error
-                if response.error is 'invalid.token'
-                    console.warn 'Wrong token used.'
-                    localStorage.removeItem('apiToken')
+    UserPermissions = do ->
+        permissions: []
+        get: -> @permissions
+        set: (val)-> @permissions = val
+
+    alcarin.value('UserPermissions', UserPermissions)
+    ioSocket.on 'alcarin.init', (options)->
+        alcarin.value('ioSocket', ioSocket)
+        alcarin.value('PermissionsTable', options.permissions)
+        if apiToken
+            ioSocket.emit 'auth.verifyToken', {token: apiToken}, (response)->
+                if response.error
+                    if response.error is 'invalid.token'
+                        console.warn 'Wrong token used.'
+                        localStorage.removeItem('apiToken')
+                    else
+                        console.warn "Auth token verification failed. #{response.error}"
                 else
-                    console.warn "Auth token verification failed. #{response.error}"
-            else
-                console.log 'User permissions confirmed on server.'
+                    UserPermissions.set(response.permissions)
+                    console.log 'User permissions confirmed on server.'
+                bootstrap()
+        else
             bootstrap()
-    else
-        bootstrap()

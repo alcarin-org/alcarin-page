@@ -1,4 +1,4 @@
-angular.module('alcarin')
+alcarin
     .config ($routeProvider, $locationProvider)->
         $routeProvider
         .when '/',
@@ -28,7 +28,7 @@ angular.module('alcarin')
                     Any route need have required permissions defined.
                     """)
 
-                console.log permissions, Permissions.has(permissions)
+                # console.log Permissions, permissions, Permissions.has(permissions)
                 if not Permissions.has(permissions)
                     $location.path('/home')
 
