@@ -17,6 +17,7 @@
 
         <!-- bower:css -->
         <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
         <!-- endbower -->
 
         <link rel="stylesheet" type="text/css" href="/static/alcarin.css">
@@ -31,7 +32,10 @@
           </div>
         </div>
 
-        <div class="container main" ng-app="alcarin">
+        <div id="main-container" class="container main">
+            <h2 ng-init="initialized=true" ng-hide="initialized">
+              <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
+            </h2>
             <div class="game-container" ng-view>
             </div>
         </div>

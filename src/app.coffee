@@ -23,7 +23,7 @@ $('html').removeClass('no-js').addClass('js')
 
 API_SERVER = 'http://localhost:8888'
 
-angular.module('alcarin', [
+alcarin = angular.module('alcarin', [
     # angularjs routing extension
     'ngRoute',
     # socket.io cooperating with angularjs
@@ -32,12 +32,11 @@ angular.module('alcarin', [
     'ui.bootstrap.showErrors'
 ])
 
-.factory 'socket', (socketFactory)->
+.factory 'socket', (socketFactory, ioSocket)->
     # prepare server socket.io connection
     # override default socket.emit so it return a bluebird promise that have
     # resolved when (and if only) server send acknowledgements response for this
     # specific emit.
-    ioSocket = io.connect(API_SERVER)
     socket = socketFactory({ioSocket})
     socket._emit = socket.emit
     socket.emit = (args...)->
@@ -49,18 +48,30 @@ angular.module('alcarin', [
 
         return promise
 
-    # if we have api token in local storage
-    # use it to restore user privilages after reconnection
-    apiToken = localStorage.getItem('apiToken')
-    if apiToken
-        socket.emit 'auth.verifyToken', {token: apiToken}
-        .then ->
-            console.log 'User permissions confirmed on server.'
-        .catch 'invalid.token', ->
-            console.warn 'Wrong token used.'
-            localStorage.removeItem('apiToken')
     return socket
 
 .run ($rootScope)->
     # lets make bluebird promises start angularjs digest process
     Promise.setScheduler (cb)-> $rootScope.$evalAsync(cb)
+
+$ ->
+    ioSocket = io.connect(API_SERVER)
+    alcarin.value('ioSocket', ioSocket)
+    # if we have api token in local storage
+    # use it to restore user privilages after reconnection
+    apiToken = localStorage.getItem('apiToken')
+    bootstrap = -> angular.bootstrap($('#main-container'), ['alcarin'])
+
+    if apiToken
+        ioSocket.emit 'auth.verifyToken', {token: apiToken}, (response)->
+            if response.error
+                if response.error is 'invalid.token'
+                    console.warn 'Wrong token used.'
+                    localStorage.removeItem('apiToken')
+                else
+                    console.warn "Auth token verification failed. #{response.error}"
+            else
+                console.log 'User permissions confirmed on server.'
+            bootstrap()
+    else
+        bootstrap()

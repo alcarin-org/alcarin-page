@@ -27,6 +27,7 @@ angular.module('alcarin')
         }
     .run ($rootScope, socket, Permissions)->
         socket.on 'user.permissions', (data)=>
+            console.log 'get'
             Permissions.registerPermissionsList(data.all)
             Permissions.registerUserPermissions(data.user)
             $rootScope.$broadcast('permissions.changed')
