@@ -4,7 +4,7 @@ angular.module('alcarin')
         restrict: 'A'
         link: ($scope, $element, $attrs)->
             refreshVisibility = ->
-                hasPermission = Permissions.hasPermission($attrs.needPermission)
+                hasPermission = Permissions.has($attrs.needPermission)
                 $element.toggle(hasPermission)
 
             $attrs.$observe 'needPermission', refreshVisibility

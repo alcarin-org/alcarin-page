@@ -4,16 +4,24 @@ angular.module('alcarin')
         .when '/login',
             templateUrl: '/static/alcarin/player/auth/login.html',
             controller: 'LoginController'
-            privilages: 1
+            permissions: 'PUBLIC'
         .otherwise
             redirectTo: '/login'
-            privilages: 2
+            permissions: 'PUBLIC'
 
         $locationProvider.html5Mode(true)
 
-    .run ($rootScope, $location)->
+    .run ($rootScope, $location, Permissions)->
         $rootScope.$on '$routeChangeStart', (event, next, current)->
-            if $rootScope.loggedUser is null
-                $location.path('/login')
+            permissions = next.$$route.permissions
+            if not permissions?
+                $location.path('/')
+                throw Error("""
+                Route '#{next.$$route.originalPath}' have not permissions flag set.
+                Any route need have required permissions defined.
+                """)
+            $location.path('/') if not Permissions.has(permissions)
+            $location.path('/login') if $rootScope.loggedUser is null
+
 
 

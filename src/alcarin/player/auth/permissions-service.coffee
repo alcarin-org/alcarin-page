@@ -7,12 +7,12 @@ angular.module('alcarin')
             registerUserPermissions: (userPermissions)->
                 @userPermissions = userPermissions
 
-            hasRawPermission: (permissionCode)->
+            hasRaw: (permissionCode)->
                 return true if permission is 1 # public
                 return false if not permission?
                 return permissionCode in @userPermissions
 
-            hasPermission: (permission)->
+            has: (permission)->
                 ###
                 Interprete permission as string permission name, cast it to int
                 and check user has this permission.
