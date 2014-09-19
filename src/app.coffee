@@ -65,12 +65,17 @@ $ ->
     apiToken = localStorage.getItem('apiToken')
     bootstrap = -> angular.bootstrap($('#main-container'), ['alcarin'])
 
-    UserPermissions = do ->
+    class UserPermissions extends EventsBus
         permissions: []
-        get: -> @permissions
-        set: (val)-> @permissions = val
 
-    alcarin.value('UserPermissions', UserPermissions)
+        get: -> @permissions
+        set: (val)->
+            @permissions = val
+            @emit 'updated'
+
+    userPermissions = new UserPermissions()
+
+    alcarin.value('UserPermissions', userPermissions)
     ioSocket.on 'alcarin.init', (options)->
         alcarin.value('ioSocket', ioSocket)
         alcarin.value('PermissionsTable', options.permissions)
@@ -83,7 +88,7 @@ $ ->
                     else
                         console.warn "Auth token verification failed. #{response.error}"
                 else
-                    UserPermissions.set(response.permissions)
+                    userPermissions.set(response.permissions)
                     console.log 'User permissions confirmed on server.'
                 bootstrap()
         else
