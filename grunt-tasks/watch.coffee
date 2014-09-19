@@ -11,7 +11,7 @@ module.exports = exports =
         files: 'src/**/*.html'
         tasks: ['newer:htmlmin:min']
     coffee:
-        files: ['src/app.coffee', 'src/alcarin/**/*.coffee']
+        files: ['src/app.coffee', 'src/alcarin/**/*.coffee', 'src/components/**/*.coffee']
         tasks: ['newer:coffee:compile']
     less:
         options:
