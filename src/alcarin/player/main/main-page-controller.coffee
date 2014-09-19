@@ -1,5 +1,5 @@
 alcarin.controller 'MainPageController',
 
 class MainPageController
-    test: 'pusty test'
+    characters: [{name: 'Arhun'}, {name: 'Anhim'}]
     constructor: (@socket)->

@@ -1,1 +1,12 @@
-{{ MainCtrl.test }}
+<div class="row">
+  <div class="col-sm-4">
+    <!-- characters list -->
+    <ul class="list-group char-list">
+      <li class="list-group-item" ng-bind="char.name"
+          ng-repeat="char in MainCtrl.characters"></li>
+    </ul>
+  </div>
+  <div class="col-sm-8">
+    &nbsp;
+  </div>
+</div>
