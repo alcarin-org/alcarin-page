@@ -6,6 +6,11 @@ alcarin
             controllerAs: 'MainCtrl'
             controller: 'MainPageController'
             permissions: 'LOGGED'
+        .when '/game-panel/:charId',
+            templateUrl: '/static/alcarin/player/game-panel/main.html'
+            controllerAs: 'GamePanelCtrl'
+            controller: 'GamePanelController'
+            permissions: 'LOGGED'
         .when '/login',
             templateUrl: '/static/alcarin/player/auth/login.html'
             controllerAs: 'LoginCtrl'
