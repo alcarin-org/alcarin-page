@@ -1,7 +1,13 @@
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-4 char-list">
     <!-- characters list -->
-    <div class="list-group char-list">
+    <div class="new-char">
+      <a href="/char/create" class="btn btn-success btn-block">
+        <i class="fa fa-plus-circle"></i>
+        New character
+      </button>
+    </div>
+    <div class="list-group">
       <a ng-href="/game-panel/{{char.id}}" ng-repeat="char in MainCtrl.characters"
          ng-bind="char.name" mouse-delay="MainCtrl.selectedChar = char" class="list-group-item" >
        </a>

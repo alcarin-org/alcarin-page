@@ -2,21 +2,26 @@ alcarin
     .config ($routeProvider, $locationProvider)->
         $routeProvider
         .when '/',
-            templateUrl: '/static/alcarin/player/main/index.html'
+            templateUrl: '/static/alcarin/player/home/home.html'
             controllerAs: 'MainCtrl'
-            controller: 'MainPageController'
+            controller: 'HomeController'
             permissions: 'LOGGED'
         .when '/game-panel/:charId',
             templateUrl: '/static/alcarin/player/game-panel/main.html'
             controllerAs: 'GamePanelCtrl'
             controller: 'GamePanelController'
             permissions: 'LOGGED'
+        .when '/char/create',
+            templateUrl: '/static/alcarin/player/char/create-char.html'
+            controllerAs: 'CreateCharCtrl'
+            controller: 'CreateCharController'
+            permissions: 'LOGGED'
         .when '/login',
             templateUrl: '/static/alcarin/player/auth/login.html'
             controllerAs: 'LoginCtrl'
             controller: 'LoginController'
             permissions: 'PUBLIC'
-        # .when '/home',
+        # .when '/public',
         # need basic home page, when user can know about game and login/register
         .otherwise
             redirectTo: '/login'
@@ -36,6 +41,6 @@ alcarin
                     """)
 
                 if not Permissions.has(permissions)
-                    $location.path('/home')
+                    $location.path('/public')
 
 
