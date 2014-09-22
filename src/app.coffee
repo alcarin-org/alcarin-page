@@ -63,7 +63,10 @@ $ ->
     # if we have api token in local storage
     # use it to restore user privilages after reconnection
     apiToken = localStorage.getItem('apiToken')
-    bootstrap = -> angular.bootstrap(document.body, ['alcarin'])
+    bootstraped = false
+    bootstrap = ->
+        angular.bootstrap(document.body, ['alcarin']) if not bootstraped
+        bootstraped = true
 
     class UserPermissions extends EventsBus
         permissions: []

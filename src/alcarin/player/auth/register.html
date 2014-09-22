@@ -1,29 +1,45 @@
 <div class="row">
-  <h2>Registration form</h2>
-  <form name="registerForm" role="form" bootstrap-submit="RegisterCtrl.registerUser()">
-    <div class="well well-lg">
-      <div class="form-group"  show-errors>
-        <label for="inputEmail">Email</label>
-        <input type="email" class="form-control" name="inputEmail" id="inputEmail"
-               placeholder="Enter email" required ng-model="RegisterCtrl.email">
+  <div class="col-md-offset-2 col-md-8">
+    <h2>Registration form</h2>
+    <form name="registerForm" role="form" bootstrap-submit="RegisterCtrl.registerUser()">
+      <div class="well well-lg">
+        <div class="form-group" show-errors ng-class="{'has-error': RegisterCtrl.emailOccupied}">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" ng-model-options="{ updateOn: 'blur'}"
+                 name="inputEmail" id="inputEmail" placeholder="Enter email"
+                 required ng-model="RegisterCtrl.email">
+          <span class="help-block"
+             ng-show="registerForm.inputEmail.$dirty && registerForm.inputEmail.$error.email">
+            Please, use valid email format.
+          </span>
+          <span class="help-block" ng-show="RegisterCtrl.emailOccupied">
+            This email address is already in use. Do you prefer to
+            <a href="/login">login</a>?
+          </span>
+        </div>
+        <div class="form-group"  show-errors>
+          <label for="password1">Password</label>
+          <input type="password" class="form-control" ng-model-options="{ updateOn: 'blur'}"
+                 placeholder="Enter password" required ng-model="RegisterCtrl.password1"
+                 name="password1" id="password1" ng-minlength="4">
+          <span class="help-block"
+             ng-show="registerForm.password1.$dirty && registerForm.password1.$error.minlength">
+            Password shoud be minimum 5 chars length.
+          </span>
+        </div>
+        <div class="form-group"  show-errors>
+          <label for="password2">Repeat password</label>
+          <input type="password" class="form-control" id="password2" match="RegisterCtrl.password1"
+                 placeholder="Confirm password" required ng-model="RegisterCtrl.password2"
+                 name="password2" ng-model-options="{ updateOn: 'blur'}" ng-minlength="4">
+        </div>
+        <div class="alert alert-danger"
+             ng-show="registerForm.password2.$dirty && registerForm.password2.$error.match &&
+              !registerForm.password1.$error.minlength">
+          <p>Password is both fields must be exactly the same.</p>
+        </div>
+        <input type="submit" name="submit" value="Register" class="btn btn-block btn-success">
       </div>
-      <div class="form-group"  show-errors>
-        <label for="password1">Password</label>
-        <input type="password" class="form-control" ng-model-options="{ updateOn: 'blur'}"
-               placeholder="Enter email" required ng-model="RegisterCtrl.password1"
-               name="password1" id="password1">
-      </div>
-      <div class="form-group"  show-errors>
-        <label for="password2">Repeat password</label>
-        <input type="password" class="form-control" id="password2" match="RegisterCtrl.password1"
-               placeholder="Enter email" required ng-model="RegisterCtrl.password2"
-               name="password2" ng-model-options="{ updateOn: 'blur'}">
-      </div>
-      <div class="alert alert-danger"
-           ng-show="registerForm.password2.$dirty && registerForm.password2.$error.match">
-        <p>Password is both fields must be exactly the same.</p>
-      </div>
-      <input type="submit" name="submit" value="Register" class="btn btn-block btn-success">
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
