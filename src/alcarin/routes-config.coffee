@@ -17,10 +17,16 @@ alcarin
             controller: 'CreateCharController'
             permissions: 'LOGGED'
         .when '/login',
+            resolve: {logout: -> false}
             templateUrl: '/static/alcarin/player/auth/login.html'
             controllerAs: 'LoginCtrl'
             controller: 'LoginController'
             permissions: 'PUBLIC'
+        .when '/logout',
+            resolve: {logout: -> true}
+            template: ''
+            controller: 'LoginController'
+            permissions: 'LOGGED'
         # .when '/public',
         # need basic home page, when user can know about game and login/register
         .otherwise

@@ -63,7 +63,7 @@ $ ->
     # if we have api token in local storage
     # use it to restore user privilages after reconnection
     apiToken = localStorage.getItem('apiToken')
-    bootstrap = -> angular.bootstrap($('#main-container'), ['alcarin'])
+    bootstrap = -> angular.bootstrap(document.body, ['alcarin'])
 
     class UserPermissions extends EventsBus
         permissions: []
@@ -86,7 +86,7 @@ $ ->
                         console.warn 'Wrong token used.'
                         localStorage.removeItem('apiToken')
                     else
-                        console.warn "Auth token verification failed. #{response.error}"
+                        console.warn 'Auth token verification failed', response.error
                 else
                     userPermissions.set(response.permissions)
                     console.log 'User permissions confirmed on server.'
