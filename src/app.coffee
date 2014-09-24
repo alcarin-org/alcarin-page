@@ -46,7 +46,9 @@ alcarin = angular.module('alcarin', [
                 resolve(response)
             socket._emit.apply(socket, args)
 
-        return promise
+        return promise.catch 'validation.failed', (data)->
+            console.warn('Validation error. Need better validation add client side!', data.body)
+            throw data
 
     return socket
 
