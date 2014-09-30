@@ -8,7 +8,7 @@
       </button>
     </div>
     <div class="list-group">
-      <a ui-sref="gamepanel({charId: char.id})" ng-repeat="char in MainCtrl.characters"
+      <a ui-sref="gamepanel.home({charId: char.id})" ng-repeat="char in MainCtrl.characters"
          ng-bind="char.name" mouse-delay="MainCtrl.selectedChar = char" class="list-group-item" >
        </a>
     </div>
