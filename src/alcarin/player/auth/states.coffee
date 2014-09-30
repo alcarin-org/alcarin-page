@@ -1,18 +1,23 @@
 alcarin
-    .config ($routeProvider, $locationProvider)->
-        $routeProvider
-        .when '/register',
+    .config ($stateProvider, $urlRouterProvider)->
+        $urlRouterProvider.otherwise('/login')
+
+        $stateProvider
+        .state 'register',
+            url: '/register',
             templateUrl: '/static/alcarin/player/auth/register.html'
             controllerAs: 'RegisterCtrl'
             controller: 'RegisterController'
             permissions: 'PUBLIC'
-        .when '/login',
-            resolve: {logout: -> false}
+        .state 'login',
+            url: '/login'
             templateUrl: '/static/alcarin/player/auth/login.html'
+            resolve: {logout: -> false}
             controllerAs: 'LoginCtrl'
             controller: 'LoginController'
             permissions: 'PUBLIC'
-        .when '/logout',
+        .state 'logout',
+            url: '/logout'
             resolve: {logout: -> true}
             template: ''
             controller: 'LoginController'

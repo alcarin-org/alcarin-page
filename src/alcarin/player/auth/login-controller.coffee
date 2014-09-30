@@ -2,7 +2,7 @@ alcarin.controller 'LoginController',
 class LoginController
     email: ''
     password: ''
-    constructor: (@$scope, @socket, @UserPermissions, @$location, logout)->
+    constructor: (@$scope, @socket, @UserPermissions, @$state, logout)->
         @loginInvalid = false
         @logout() if logout
 
@@ -16,7 +16,7 @@ class LoginController
                 {token, permissions} = response
                 @UserPermissions.set(permissions)
                 localStorage.setItem('apiToken', token)
-                @$location.path '/'
+                @$state.go 'home'
                 @loginInvalid = false
             .catch 'authorization.failed', (msg)=>
                 @loginInvalid = true
@@ -24,4 +24,4 @@ class LoginController
     logout: ->
         @UserPermissions.set([])
         localStorage.removeItem('apiToken')
-        @$location.path '/'
+        @$state.go 'home'

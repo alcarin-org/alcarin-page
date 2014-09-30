@@ -36,11 +36,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/">Alcarin</a>
+              <a class="navbar-brand" href="/">
+                <i class="fa fa-bomb"></i> Alcarin
+              </a>
             </div>
             <div class="collapse navbar-collapse bs-navbar-collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li need-permission="LOGGED" ng-cloak><a href="/logout">Logout</a></li>
+                <li need-permission="LOGGED" ng-cloak><a ui-sref="logout">Logout</a></li>
               </ul>
             </div>
           </div>
@@ -50,7 +52,7 @@
             <h2 ng-init="initialized=true" ng-hide="initialized">
               <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
             </h2>
-            <div class="game-container" ng-view>
+            <div class="game-container" ui-view>
             </div>
         </div>
 
@@ -67,6 +69,7 @@
         <script src="/bower_components/angular-socket-io/socket.js"></script>
         <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
         <script src="/bower_components/bluebird/js/browser/bluebird.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
         <!-- endbower -->
 
         <script src="/static/alcarin.js"></script>
