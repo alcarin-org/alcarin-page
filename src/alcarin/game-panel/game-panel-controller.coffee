@@ -1,4 +1,4 @@
 alcarin.controller 'GamePanelController',
 
 class GamePanelController
-    constructor: (@socket)->
+    constructor: (@socket, @$stateParams)->

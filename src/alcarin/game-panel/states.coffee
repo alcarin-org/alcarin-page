@@ -7,3 +7,10 @@ alcarin
             # controllerAs: 'GamePanelCtrl'
             # controller: 'GamePanelController'
             permissions: 'LOGGED'
+        .state 'gamepanel.chars',
+            url: '/chars'
+            templateUrl: '/static/alcarin/game-panel/chars/index.html'
+            # controllerAs: 'GamePanelCtrl'
+            # controller: 'GamePanelController'
+            permissions: 'LOGGED'
+
