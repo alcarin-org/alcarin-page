@@ -9,7 +9,7 @@ alcarin
             permissions: 'LOGGED'
         .state 'gamepanel',
             url: '/game-panel/:charId'
-            templateUrl: '/static/alcarin/player/game-panel/main.html'
+            templateUrl: '/static/alcarin/game-panel/layout.html'
             controllerAs: 'GamePanelCtrl'
             controller: 'GamePanelController'
             permissions: 'LOGGED'

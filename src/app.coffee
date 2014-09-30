@@ -24,8 +24,7 @@ $('html').removeClass('no-js').addClass('js')
 API_SERVER = 'http://localhost:8888'
 
 alcarin = angular.module('alcarin', [
-    # angularjs routing extension
-    'ngRoute',
+    # angularjs state routing extension
     'ui.router',
     # socket.io cooperating with angularjs
     'btford.socket-io',

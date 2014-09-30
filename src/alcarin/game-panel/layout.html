@@ -1,0 +1,63 @@
+<div>
+  <section class="left-container">
+    <div class="fixed-possible" ng-class="{fixed: GamePanelCtrl.pinned}">
+      <div class="pages-container">
+        <h2>
+          <button class="btn btn-sm pin" ng-class="{active: GamePanelCtrl.pinned}"
+                  ng-click="GamePanelCtrl.pinned = !GamePanelCtrl.pinned">
+            <i class="fa fa-thumb-tack"></i>
+          </button>
+        </h2>
+        <div></div>
+
+        <div id="main-nav">
+          <nav>
+            <ul class="nav-bar">
+              <li><a href="#/home"><i class="icon-globe"></i></a></li>
+              <li><a href="#/chars"><i class="icon-user"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </section>
+
+  <section class="right-container">
+    <div class="events-container">
+      <div class="talking">
+        <!-- layout trick to nice, flexible panel -->
+
+        <form class="form-inline" role="form">
+
+          <div class="content" alc-spin="sending">
+            <input placeholder="Mów do wszystkich">
+          </div>
+          <div class="submit">
+            <input type="submit" class="btn" value="Mów" tabindex="2">
+          </div>
+
+        </form>
+      </div>
+      <div class="events-container" alc-spin="gameEvents == null">
+        <div class="game-event" ng-repeat="event in gameEvents">
+          <span class="time">{* event.time | EventTime *}</span>
+          <span class="content">
+            <span ng-repeat="part in event.body">
+              <span ng-switch on="part.type">
+                <span ng-switch-when="text">{* part.text *}</span>
+                <span ng-switch-when="char">
+                  <a href="#" ng-click="charClicked(part)">{* part.text *}</a>
+                </span>
+                <span ng-switch-default>
+                  <!-- Unresolved GameEvent argument -->
+                </span>
+              </span>
+            </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

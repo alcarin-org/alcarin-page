@@ -1,0 +1,71 @@
+//some basic function that we used frequently in another less files
+
+.clearfix()
+{
+  &:after {
+    visibility: hidden;
+    display:block;
+    clear:both;
+    height:0;
+    *zoom:1;
+  }
+}
+
+.animation(@all...) {
+  animation: @all;
+  -webkit-animation: @all;
+}
+
+.v-center() {
+  height:100%;
+  width: 100%;
+  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+}
+
+.h-center() {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.transition(@time: 0.1s, @type: linear) {
+  -webkit-transition: all @time @type;
+  -moz-transition: all @time @type;
+  -ms-transition: all @time @type;
+  -o-transition: all @time @type;
+  transition: all @time @type;
+}
+
+.rounded-corners (@radius: 17px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.scale(@value: 1.1) {
+  -moz-transform: scale(@value);
+  -webkit-transform: scale(@value);
+  -o-transform: scale(@value)
+}
+
+.circle () {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  border-radius: 50px;
+}
+
+.border-box() {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
