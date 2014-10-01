@@ -52,9 +52,10 @@ alcarin = angular.module('alcarin', [
 
     return socket
 
-.run ($rootScope)->
+.run ($rootScope, socket)->
     # lets make bluebird promises start angularjs digest process
     Promise.setScheduler (cb)-> $rootScope.$evalAsync(cb)
+    socket.emit('game.gametime').then (gt)-> $rootScope.gametime = gt.timestamp
 
 $ ->
     ###
