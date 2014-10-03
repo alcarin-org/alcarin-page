@@ -25,11 +25,13 @@ API_SERVER = 'http://localhost:8888'
 
 alcarin = angular.module('alcarin', [
     # angularjs state routing extension
-    'ui.router',
+    'ui.router'
     # socket.io cooperating with angularjs
-    'btford.socket-io',
+    'btford.socket-io'
     # showErrors - bootstrap forms validation way with angularjs
     'ui.bootstrap.showErrors'
+    'ui.bootstrap.tpls'
+    'ui.bootstrap.tooltip'
 ])
 
 .factory 'socket', (socketFactory, ioSocket)->

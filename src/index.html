@@ -41,8 +41,18 @@
               </a>
             </div>
             <div class="collapse navbar-collapse bs-navbar-collapse navbar-right">
-              <p class="navbar-text">
-                <i class="fa fa-clock-o"></i> {{ $root.gametime | gametime }}
+              <p class="navbar-text game-time" tooltip="{{ $root.gametime | gametime: 'long' }}"
+                 tooltip-placement="bottom">
+                <span class="day" ng-cloak>
+                  <i class="fa fa-calendar"></i> {{ $root.gametime | gametime: 'date' }}
+                </span>
+                <span class="hour" ng-cloak>
+                  <i class="fa" ng-class="{
+                    'fa-moon-o':  ($root.gametime | gametime: 'night'),
+                    'fa-sun-o' : !($root.gametime | gametime: 'night')
+                    }"></i>
+                  {{ $root.gametime | gametime: 'short-hour' }}h
+                </span>
               </p>
                 <ul class="nav navbar-nav">
                   <li need-permission="LOGGED" ng-cloak><a ui-sref="logout">Logout</a></li>
