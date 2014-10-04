@@ -7,7 +7,7 @@ alcarin.filter 'gametime', ->
         timestamp = 0 if not timestamp
         switch format
             when 'short-hour'
-                return hour(timestamp) % 24
+                return hour(timestamp) % 48
             when 'hour'
                 return hour(timestamp)
             when 'long'
