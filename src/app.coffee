@@ -46,7 +46,7 @@ alcarin = angular.module('alcarin', [
     socket.emit = (args...)->
         promise = new Promise (resolve, reject)->
             args.push (response)->
-                return reject(response.error) if response.error
+                return reject(response.error) if response?.error
                 resolve(response)
             socket._emit.apply(socket, args)
 
