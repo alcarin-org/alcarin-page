@@ -4,6 +4,6 @@ class GamePanelController
     constructor: (@$scope, @socket, @$stateParams)->
 
     talkToAll: ->
-        @$scope.$emit('show-errors-check-validity')
         if @$scope.sayingForm.$valid
+            @socket.emit('char.saying', @saying)
             @saying = ''

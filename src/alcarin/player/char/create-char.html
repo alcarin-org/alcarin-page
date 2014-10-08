@@ -1,1 +1,30 @@
-creating..
+<form class="col-md-offset-2 col-md-8" novalidate>
+  <wizard class="create-char" on-finish="CreateCharCtrl.createChar()">
+      <wz-step title="Name">
+        <h1>Character name</h1>
+        <p>This name will be present for you on your characters list.
+        Nobody except you can see this.</p>
+        <div class="form-group" show-errors>
+          <input id="char-name" name="charName" ng-model="CreateCharCtrl.char.name"
+                 class="form-control" type="text" required placeholder="Your character name">
+        </div>
+        <div class="form-group">
+          <button ng-disabled="!CreateCharCtrl.char.name.length"
+                  class="btn btn-block btn-success" wz-next>Next</button>
+        </div>
+      </wz-step>
+      <wz-step title="Finish!">
+        <h1>Done!</h1>
+        <p>It's all. You can start playing now.</p>
+
+        <div class="row">
+          <div class="col-sm-10">
+            <button class="btn btn-success btn-block" wz-finish>Finish!</button>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-warning btn-block" wz-previous>Back</button>
+          </div>
+        </div>
+      </wz-step>
+  </wizard>
+</form>

@@ -26,7 +26,7 @@ module.exports = (grunt)->
                     sourceMap: true
                     paths: ['src/components', '.']
                 files:
-                    'dist/alcarin.css': 'src/alcarin/**/*.less'
+                    'dist/alcarin.css': ['src/alcarin/**/*.less', 'src/components/**/*.less']
         htmlmin:
             min:
                 options:

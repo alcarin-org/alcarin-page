@@ -5,7 +5,7 @@ class RegisterController
 
     registerUser: ->
         @emailOccupied = false
-        @socket.emit 'auth.create-player', {
+        @socket.emit 'player.create', {
             email: @email
             password: @password1
         }

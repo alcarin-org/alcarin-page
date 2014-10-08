@@ -32,6 +32,8 @@ alcarin = angular.module('alcarin', [
     'ui.bootstrap.showErrors'
     'ui.bootstrap.tpls'
     'ui.bootstrap.tooltip'
+
+    'mgo-angular-wizard'
 ])
 
 .factory 'socket', (socketFactory, ioSocket)->

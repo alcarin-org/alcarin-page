@@ -4,7 +4,7 @@ alcarin
         .state 'home',
             url: '/'
             templateUrl: '/static/alcarin/player/home/home.html'
-            controllerAs: 'MainCtrl'
+            controllerAs: 'HomeCtrl'
             controller: 'HomeController'
             permissions: 'LOGGED'
         .state 'gamepanel',

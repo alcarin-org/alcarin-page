@@ -8,12 +8,12 @@
       </button>
     </div>
     <div class="list-group">
-      <a ui-sref="gamepanel.home({charId: char.id})" ng-repeat="char in MainCtrl.characters"
-         ng-bind="char.name" mouse-delay="MainCtrl.selectedChar = char" class="list-group-item" >
+      <a ui-sref="gamepanel.home({charId: char.id})" ng-repeat="char in HomeCtrl.chars"
+         ng-bind="char.name" mouse-delay="HomeCtrl.selectedChar = char" class="list-group-item" >
        </a>
     </div>
   </div>
   <div class="col-sm-8">
-    <h2 ng-bind="MainCtrl.selectedChar.name"></h2>
+    <h2 ng-bind="HomeCtrl.selectedChar.name"></h2>
   </div>
 </div>
