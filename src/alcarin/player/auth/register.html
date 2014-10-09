@@ -7,7 +7,7 @@
           <label for="inputEmail">Email</label>
           <input type="email" class="form-control" ng-model-options="{ updateOn: 'blur'}"
                  name="inputEmail" id="inputEmail" placeholder="Enter email"
-                 required ng-model="RegisterCtrl.email">
+                 required ng-model="RegisterCtrl.email" tabindex="1">
           <span class="help-block"
              ng-show="registerForm.inputEmail.$dirty && registerForm.inputEmail.$error.email">
             Please, use valid email format.
@@ -21,7 +21,7 @@
           <label for="password1">Password</label>
           <input type="password" class="form-control" ng-model-options="{ updateOn: 'blur'}"
                  placeholder="Enter password" required ng-model="RegisterCtrl.password1"
-                 name="password1" id="password1" ng-minlength="4">
+                 name="password1" id="password1" ng-minlength="4" tabindex="2">
           <span class="help-block"
              ng-show="registerForm.password1.$dirty && registerForm.password1.$error.minlength">
             Password shoud be minimum 5 chars length.
@@ -31,14 +31,16 @@
           <label for="password2">Repeat password</label>
           <input type="password" class="form-control" id="password2" match="RegisterCtrl.password1"
                  placeholder="Confirm password" required ng-model="RegisterCtrl.password2"
-                 name="password2" ng-model-options="{ updateOn: 'blur'}" ng-minlength="4">
+                 name="password2" ng-model-options="{ updateOn: 'blur'}"
+                 ng-minlength="4" tabindex="3">
         </div>
         <div class="alert alert-danger"
              ng-show="registerForm.password2.$dirty && registerForm.password2.$error.match &&
               !registerForm.password1.$error.minlength">
           <p>Password is both fields must be exactly the same.</p>
         </div>
-        <input type="submit" name="submit" value="Register" class="btn btn-block btn-success">
+        <input type="submit" name="submit" value="Register"
+               tabindex="4" class="btn btn-block btn-success">
       </div>
     </form>
   </div>
