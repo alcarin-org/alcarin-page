@@ -7,7 +7,7 @@ override blubird default 'catch' method to support error reason catch filtering.
 example:
 promise
  .then(...)
- .catch('validation.error', (err)-> console.log('validate problem'))
+ .catch('validation.failed', (err)-> console.log('validate problem'))
  .catch( (err)-> console.log('other problem'))
 ###
 promiseCatch = Promise::catch
@@ -51,7 +51,7 @@ alcarin = angular.module('alcarin', [
             socket._emit.apply(socket, args)
 
         return promise.catch 'validation.failed', (data)->
-            console.warn('Validation error. Need better validation add client side!', data.body)
+            console.warn('"validation.failed": Need better validation add client side!', data.body)
             throw data
 
     return socket
