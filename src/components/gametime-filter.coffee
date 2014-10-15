@@ -3,7 +3,7 @@ alcarin.filter 'gametime', ->
     hour = (timestamp)-> Math.floor((timestamp % DAY_SEC) / (60 * 60))
     day  = (timestamp)-> Math.floor(timestamp / DAY_SEC)
 
-    (timestamp, format='short')->
+    (timestamp, format='long')->
         timestamp = 0 if not timestamp
         switch format
             when 'short-hour'
