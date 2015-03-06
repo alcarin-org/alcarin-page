@@ -1,4 +1,4 @@
-alcarin.controller 'RegisterController',
+angular.module('alcarin').controller 'RegisterController',
 class RegisterController
 
     constructor: (@socket, @$location, @UserPermissions)->

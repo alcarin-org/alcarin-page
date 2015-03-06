@@ -1,4 +1,4 @@
-alcarin.controller 'CreateCharController',
+angular.module('alcarin').controller 'CreateCharController',
 
 class CreateCharController
     constructor: (@socket, @$state)->

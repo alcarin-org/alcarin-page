@@ -1,4 +1,4 @@
-alcarin.directive 'mouseDelay', ($rootScope)->
+angular.module('alcarin').directive 'mouseDelay', ($rootScope)->
     replace: false
     restrict: 'A'
     scope:

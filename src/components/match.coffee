@@ -1,4 +1,4 @@
-alcarin.directive 'match', ->
+angular.module('alcarin').directive 'match', ->
     require: 'ngModel'
     restrict: 'A'
     scope: {

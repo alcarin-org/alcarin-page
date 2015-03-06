@@ -1,4 +1,4 @@
-alcarin.controller 'LoginController',
+angular.module('alcarin').controller 'LoginController',
 class LoginController
     email: ''
     password: ''

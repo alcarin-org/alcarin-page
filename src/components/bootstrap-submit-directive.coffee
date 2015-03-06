@@ -1,4 +1,4 @@
-alcarin.directive 'bootstrapSubmit', ->
+angular.module('alcarin').directive 'bootstrapSubmit', ->
     ###
     # replace ng-submit by bootstrap like version working good with 'show-errors' bootstrap
     # form validation directive.

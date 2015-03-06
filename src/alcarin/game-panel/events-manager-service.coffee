@@ -1,6 +1,6 @@
 EVENTS_REG = /\$([A-Za-z0-9]+)/g
 
-alcarin.service 'EventsManager',
+angular.module('alcarin').service 'EventsManager',
 class EventsManager
     constructor: ->
 

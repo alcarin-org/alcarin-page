@@ -1,4 +1,4 @@
-alcarin
+angular.module('alcarin')
     .config ($stateProvider, $locationProvider)->
         $stateProvider
         .state 'gamepanel.home',

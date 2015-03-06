@@ -1,4 +1,4 @@
-alcarin.controller 'HomeController',
+angular.module('alcarin').controller 'HomeController',
 
 class HomeController
 

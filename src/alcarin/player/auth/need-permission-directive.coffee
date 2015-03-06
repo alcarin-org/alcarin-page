@@ -1,4 +1,4 @@
-alcarin.directive 'needPermission', ($rootScope, Permissions)->
+angular.module('alcarin').directive 'needPermission', ($rootScope, Permissions)->
     replace: false,
     restrict: 'A'
     link: ($scope, $element, $attrs)->

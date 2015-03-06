@@ -1,4 +1,4 @@
-alcarin.controller 'GamePanelController',
+angular.module('alcarin').controller 'GamePanelController',
 
 class GamePanelController
     constructor: (@$scope, @socket, @$stateParams, @$state, @EventsManager)->

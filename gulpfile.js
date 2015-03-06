@@ -18,12 +18,12 @@ gulp.task('connect', function () {
 });
 
 
-gulp.task('coffee', function() {
-  return gulp.src('src/**/*.coffee')
+gulp.task('js', function() {
+  return gulp.src(['src/app.js', 'src/**/*.js'])
     .pipe(plugins.plumber())
-    .pipe(plugins.coffee({
-      bare: false
-    }))
+    // .pipe(plugins.coffee({
+    //   bare: false
+    // }))
     .pipe(plugins.ngAnnotate())
     .pipe(plugins.concat('alcarin.js'))
     // uglify should be reenabled when I done rewriting code to pure js
@@ -31,9 +31,9 @@ gulp.task('coffee', function() {
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
 });
-gulp.task('watch-coffee', function () {
-  plugins.watch('src/**/*.coffee', function () {
-    gulp.start('coffee');
+gulp.task('watch-js', function () {
+  plugins.watch('src/**/*.js', function () {
+    gulp.start('js');
   });
 });
 
@@ -89,10 +89,10 @@ gulp.task('watch-html', function() {
 
 gulp.task('build', function (cb) {
   plugins.runSequence('clean', [
-    'coffee', 'less', 'wiredep', 'minify-html'
+    'js', 'less', 'wiredep', 'minify-html'
   ], cb);
 });
 
-gulp.task('watch', ['watch-coffee', 'watch-less', 'watch-bower', 'watch-html']);
+gulp.task('watch', ['watch-js', 'watch-less', 'watch-bower', 'watch-html']);
 gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['serve']);

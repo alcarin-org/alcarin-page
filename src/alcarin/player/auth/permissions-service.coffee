@@ -1,8 +1,8 @@
-alcarin.service 'Permissions',
+angular.module('alcarin').service 'Permissions',
 
 class Permissions extends EventsBus
-    constructor: (@PermissionsTable, @UserPermissions)->
-        UserPermissions.on 'updated', => @emit('updated')
+    constructor: (@UserPermissions, @PermissionsTable)->
+        @UserPermissions.on 'updated', => @emit('updated')
         super()
 
     hasRaw: (permissionCode)->

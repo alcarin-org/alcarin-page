@@ -1,4 +1,4 @@
-alcarin
+angular.module('alcarin')
     .config ($stateProvider, $locationProvider)->
         $stateProvider
         .state 'home',
@@ -34,9 +34,9 @@ alcarin
                 if not permissions?
                     $state.go('home')
                     event.preventDefault()
-                    throw Error("""
-                    Route '#{next.$$route.originalPath}' have not permissions flag set.
-                    Any route need have required permissions defined.
+                    throw Error("""Permissions
+                        Route '#{next.$$route.originalPath}' have not permissions flag set.
+                        Any route need have required permissions defined.
                     """)
 
                 if not Permissions.has(permissions)

@@ -1,4 +1,4 @@
-alcarin
+angular.module('alcarin')
     .config ($stateProvider, $urlRouterProvider)->
         $urlRouterProvider.otherwise('/login')
 
