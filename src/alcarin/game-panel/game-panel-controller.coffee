@@ -18,7 +18,6 @@ class GamePanelController
     loadEvents: ->
         @socket.emit('char.events').then (events)=>
             @gameEvents = (@EventsManager.split(ev) for ev in events)
-            console.log @gameEvents
 
     talkToAll: ->
         if @$scope.sayingForm.$valid

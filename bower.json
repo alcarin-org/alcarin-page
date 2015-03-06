@@ -23,6 +23,10 @@
     "bluebird": "~2.3.2",
     "font-awesome": "~4.2.0",
     "angular-ui-router": "~0.2.11",
-    "angular-wizard": "~0.4.0"
+    "lodash": "~3.4.0",
+    "angular-wizard": "~0.4.2"
+  },
+  "resolutions": {
+    "lodash": "~3.4.0"
   }
 }
