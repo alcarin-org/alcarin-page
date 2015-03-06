@@ -83,6 +83,9 @@ $(function bootstrapSite() {
         this.permissions = [];
     };
     UserPermissions.prototype = angular.extend(new window.EventsBus(), {
+        has: function userPermissionsGet(code) {
+            return this.permissions.indexOf(code) !== -1;
+        },
         get: function userPermissionsGet() {
             return this.permissions;
         },

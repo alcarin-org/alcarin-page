@@ -21,6 +21,7 @@ gulp.task('connect', function () {
 gulp.task('js', function() {
   return gulp.src(['src/app.js', 'src/**/*.js'])
     .pipe(plugins.plumber())
+    .pipe(plugins.wrap('(function(){\n"use strict";\n<%= contents %>\n})();'))
     // .pipe(plugins.coffee({
     //   bare: false
     // }))

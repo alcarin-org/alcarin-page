@@ -24,6 +24,7 @@
     "gulp-plumber": "^0.6.6",
     "gulp-uglifyjs": "^0.6.0",
     "gulp-watch": "^4.1.1",
+    "gulp-wrap": "^0.11.0",
     "run-sequence": "^1.0.2",
     "wiredep": "^2.2.2"
   }
