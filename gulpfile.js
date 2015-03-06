@@ -1,27 +1,22 @@
+var modulesCache = {};
+function use(module) {
+  if (!(module in modulesCache)) {
+    modulesCache[module] = require(module);
+  }
+  return modulesCache[module];
+}
+
 var gulp = require('gulp');
-var watch = require('gulp-watch');
-
-var wiredep = require('wiredep').stream;
-var connect = require('gulp-connect');
-var clean = require('gulp-clean');
-
-var coffee = require('gulp-coffee');
-var uglify = require('gulp-uglifyjs');
-var ngAnnotate = require('gulp-ng-annotate');
-
-var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
-var concatCss = require('gulp-concat-css');
-
-var minifyHTML = require('gulp-minify-html');
 
 gulp.task('clean', function () {
+  var clean = use('gulp-clean');
   gulp.src('./dist')
     .pipe(clean());
 });
 
 
 gulp.task('connect', function () {
+  var connect = use('gulp-connect');
   connect.server({
     root: ['src', 'lib', 'dist'],
     livereload: true
@@ -30,14 +25,19 @@ gulp.task('connect', function () {
 
 
 gulp.task('coffee', function() {
+  var coffee = use('gulp-coffee');
+  var ngAnnotate = use('gulp-ng-annotate');
+  var connect = use('gulp-connect');
+
   gulp.src('./src/**/*.coffee')
     .pipe(coffee({bare: true}))
     .pipe(ngAnnotate())
-    .pipe(uglify('alcarin.js'))
+    // .pipe(uglify('alcarin.js'))
     .pipe(gulp.dest('dist/static'))
     .pipe(connect.reload());
 });
 gulp.task('watch-coffee', function () {
+  var watch = use('gulp-watch');
   watch('src/**/*.coffee', function () {
     gulp.start('coffee');
   });
@@ -45,6 +45,11 @@ gulp.task('watch-coffee', function () {
 
 
 gulp.task('less', function () {
+  var less = use('gulp-less');
+  var concatCss = use('gulp-concat-css');
+  var minifyCSS = use('gulp-minify-css');
+  var connect = use('gulp-connect');
+
   gulp.src('src/alcarin/**/*.less')
     .pipe(less({
       compress: true,
@@ -56,6 +61,7 @@ gulp.task('less', function () {
     .pipe(connect.reload());
 });
 gulp.task('watch-less', function () {
+  var watch = use('gulp-watch');
   watch('src/**/*.less', function () {
     gulp.start('less');
   });
@@ -63,6 +69,8 @@ gulp.task('watch-less', function () {
 
 
 gulp.task('wiredep', function () {
+  var wiredep = use('wiredep').stream;
+  var connect = use('gulp-connect');
   gulp.src('./src/index.html')
     .pipe(wiredep({
       directory: 'lib/bower',
@@ -72,18 +80,22 @@ gulp.task('wiredep', function () {
     .pipe(connect.reload());
 });
 gulp.task('watch-bower', function () {
+  var watch = use('gulp-watch');
   watch('bower.json', function () {
     gulp.start('wiredep');
   });
 });
 
 gulp.task('minify-html', function() {
+  var connect = use('gulp-connect');
+  var minifyHTML = use('gulp-minify-html');
   return gulp.src('src/**/*.html')
     .pipe(minifyHTML())
     .pipe(gulp.dest('./dist/static'))
     .pipe(connect.reload());
 });
 gulp.task('watch-html', function() {
+  var watch = use('gulp-watch');
   watch('src/**/*.html', function () {
     gulp.start('minify-html');
   });
