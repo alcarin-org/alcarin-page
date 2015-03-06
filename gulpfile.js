@@ -25,7 +25,9 @@ gulp.task('coffee', function() {
       bare: false
     }))
     .pipe(plugins.ngAnnotate())
-    .pipe(plugins.uglifyjs('alcarin.js'))
+    .pipe(plugins.concat('alcarin.js'))
+    // uglify should be reenabled when I done rewriting code to pure js
+    // .pipe(plugins.uglifyjs('alcarin.js'))
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
 });
