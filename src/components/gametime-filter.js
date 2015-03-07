@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('alcarin').filter('gametime', function () {
     var DAY_SEC = 345600; // 60 * 60 * 24 * 4
     var hour = function (timestamp) {

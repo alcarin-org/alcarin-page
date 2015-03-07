@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('alcarin')
 .config(function ($stateProvider, $locationProvider) {
     $stateProvider

@@ -21,11 +21,13 @@ gulp.task('connect', function () {
 gulp.task('js', function() {
   return gulp.src(['src/app.js', 'src/**/*.js'])
     .pipe(plugins.plumber())
-    .pipe(plugins.wrap('(function(){\n"use strict";\n<%= contents %>\n})();'))
+    .pipe(plugins.wrap('(function(){\n\'use strict\';\n<%= contents %>\n})();'))
     // .pipe(plugins.coffee({
     //   bare: false
     // }))
-    .pipe(plugins.ngAnnotate())
+    .pipe(plugins.ngAnnotate({
+      single_quotes: true
+    }))
     .pipe(plugins.concat('alcarin.js'))
     // uglify should be reenabled when I done rewriting code to pure js
     // .pipe(plugins.uglifyjs('alcarin.js'))

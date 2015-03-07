@@ -1,5 +1,3 @@
-'use strict';
-
 // # just tell the world that JS is enabled - by class.
 $('html').removeClass('no-js').addClass('js');
 
@@ -16,6 +14,7 @@ angular.module('alcarin', [
     'ui.bootstrap.showErrors',
     'ui.bootstrap.tpls',
     'ui.bootstrap.tooltip',
+    'ngStorage',
 
     'mgo-angular-wizard'
 ]);

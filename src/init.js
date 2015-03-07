@@ -1,5 +1,3 @@
-'use strict';
-
 var catchFn = Promise.prototype.catch;
 Promise.prototype.catch = function (type, err) {
     /*
@@ -31,21 +29,23 @@ angular.module('alcarin')
     var socket = socketFactory({ioSocket: ioSocket});
     socket._emit = socket.emit;
 
-    var socketResponsePromise = function socketResponsePromise(resolve, reject) {
-        Array.prototype.push.call(arguments, function (response) {
-            if (response && response.error) {
-                return reject(response.error);
-            }
-            resolve(response);
-        });
-        socket._emit.apply(socket, arguments);
-    };
     var validationFailed = function validationFailed(data) {
         console.warn('"validation.failed": Need better validation add client side!', data.body);
         throw data;
     };
     socket.emit = function () {
-        var promise = new Promise(socketResponsePromise);
+        var args = arguments;
+        var promise = new Promise(function socketResponsePromise(
+            resolve, reject
+        ) {
+            Array.prototype.push.call(args, function (response) {
+                if (response && response.error) {
+                    return reject(response.error);
+                }
+                resolve(response);
+            });
+            socket._emit.apply(socket, args);
+        });
         return promise.catch('validation.failed', validationFailed);
     };
     return socket;

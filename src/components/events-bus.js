@@ -1,5 +1,3 @@
-'use strict';
-
 /*
  * how to use system event bus?
  *
