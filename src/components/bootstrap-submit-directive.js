@@ -8,33 +8,33 @@ function bootstrapSubmitDirective() {
     // # form validation directive.
     // ###
     return {
-      restrict: 'A',
-      require: '^form',
-      link: function ($scope, element, attrs, formController) {
-          if (!element.is('form')) {
-              console.warn(
-                'bootstrap-submit directive must be use with \'<form>\' tags.',
-                element
-              );
-              return;
-          }
-          if (element.attr('ng-submit')) {
-            console.warn(
-              'bootstrap-submit directive should replace \'ng-submit\' directive.',
-              element
-            );
-            return;
-          }
-          element.attr('novalidate', true);
-          element.on('submit', function () {
-            $scope.$parent.$broadcast('show-errors-check-validity');
-            if (formController.$valid) {
-              $scope.$apply(function () {
-                $scope.$eval(attrs.bootstrapSubmit);
-              });
+        restrict: 'A',
+        require: '^form',
+        link: function ($scope, element, attrs, formController) {
+            if (!element.is('form')) {
+                console.warn(
+                   'bootstrap-submit directive must be use with \'<form>\' tags.',
+                    element
+                );
+                return;
             }
-          });
-      },
+            if (element.attr('ng-submit')) {
+                console.warn(
+                    'bootstrap-submit directive should replace \'ng-submit\' directive.',
+                    element
+                );
+                return;
+            }
+            element.attr('novalidate', true);
+            element.on('submit', function () {
+                $scope.$parent.$broadcast('show-errors-check-validity');
+                if (formController.$valid) {
+                  $scope.$apply(function () {
+                      $scope.$eval(attrs.bootstrapSubmit);
+                  });
+                }
+            });
+        },
     };
 }
 
