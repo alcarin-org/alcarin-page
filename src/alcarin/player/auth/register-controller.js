@@ -1,4 +1,4 @@
-angular.module('alcarin').controller('RegisterController', RegisterController);
+angular.module('alcarin.auth').controller('RegisterController', RegisterController);
 
 function RegisterController(socket, $location, UserPermissions, $localStorage) {
     var vm = this;

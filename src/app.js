@@ -16,6 +16,7 @@ angular.module('alcarin', [
     'ui.bootstrap.tpls',
     'ui.bootstrap.tooltip',
     'ngStorage',
-
     'mgo-angular-wizard',
+
+    'alcarin.auth',
 ]);

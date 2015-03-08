@@ -1,4 +1,4 @@
-angular.module('alcarin').service('Permissions', PermissionsService);
+angular.module('alcarin.auth').service('Permissions', PermissionsService);
 
 function PermissionsService(UserPermissions, PermissionsTable) {
     var service = this;

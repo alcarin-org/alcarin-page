@@ -88,7 +88,32 @@
         <script src="bower/ngstorage/ngStorage.js"></script>
         <!-- endbower -->
 
-        <script src="/static/alcarin.js"></script>
+        <!-- inject:js -->
+        <script src="/static/components/events-bus.js"></script>
+        <script src="/static/app.js"></script>
+        <script src="/static/alcarin/player/home/home-controller.js"></script>
+        <script src="/static/alcarin/player/char/create-char-controller.js"></script>
+        <script src="/static/alcarin/player/auth/auth.js"></script>
+        <script src="/static/alcarin/player/auth/states.js"></script>
+        <script src="/static/alcarin/player/auth/register-controller.js"></script>
+        <script src="/static/alcarin/player/auth/permissions-service.js"></script>
+        <script src="/static/alcarin/player/auth/need-permission-directive.js"></script>
+        <script src="/static/alcarin/player/auth/login-controller.js"></script>
+        <script src="/static/alcarin/game-panel/states.js"></script>
+        <script src="/static/alcarin/game-panel/game-panel-controller.js"></script>
+        <script src="/static/alcarin/game-panel/events-manager-service.js"></script>
+        <script src="/static/components/stack-trace-sourcemaps.js"></script>
+        <script src="/static/components/mouse-delay-directive.js"></script>
+        <script src="/static/components/match.js"></script>
+        <script src="/static/components/gametime-filter.js"></script>
+        <script src="/static/components/events-bus.js"></script>
+        <script src="/static/components/components.js"></script>
+        <script src="/static/components/bootstrap-submit-directive.js"></script>
+        <script src="/static/alcarin/states.js"></script>
+        <script src="/static/init.js"></script>
+        <!-- endinject -->
+
+        <!-- <script src="/static/alcarin.js"></script> -->
 
         <!-- temporary, debug only -->
         <script src="http://localhost:8888/socket.io/socket.io.js"></script>

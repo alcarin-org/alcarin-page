@@ -20,8 +20,44 @@ gulp.task('connect', function () {
   });
 });
 
+gulp.task('clean-dist-js', function () {
+  gulp.src('dist/static/**/*.js')
+    .pipe(plugins.clean());
+});
+gulp.task('compile-js', ['clean-dist-js'], function() {
+  return gulp.src(['src/app.js', 'src/**/*.js'])
+    .pipe(plugins.plumber())
+    .pipe(plugins.wrap('!function(){\n\'use strict\';\n<%= contents %>\n}()'))
+    .pipe(plugins.ngAnnotate())
+    .pipe(gulp.dest('dist/static'))
 
-gulp.task('js', function() {
+    .pipe(plugins.connect.reload());
+});
+gulp.task('compile-js-and-inject-deps', ['compile-js'], function () {
+  // It's not necessary to read the files (will speed up things),
+  // we're only after their paths:
+  var bus = gulp.src('./dist/static/components/events-bus.js');
+  var sources = gulp.src(
+    ['./dist/static/**/*.js']
+  )
+  .pipe(plugins.angularFilesort());
+
+  return gulp.src('./src/index.html')
+    .pipe(plugins.inject(plugins.eventStream.merge(
+        sources,
+        bus
+      ), {
+      ignorePath: '/dist'
+    }))
+    .pipe(gulp.dest('./src'));
+});
+gulp.task('watch-js', function () {
+  plugins.watch('./src/**/*.js', function () {
+    gulp.start('compile-js-and-inject-deps');
+  });
+});
+
+gulp.task('js-prod', function() {
   return gulp.src(['src/app.js', 'src/**/*.js'])
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
@@ -33,11 +69,6 @@ gulp.task('js', function() {
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
-});
-gulp.task('watch-js', function () {
-  plugins.watch('src/**/*.js', function () {
-    gulp.start('js');
-  });
 });
 
 
@@ -95,10 +126,20 @@ gulp.task('watch-html', function() {
 
 gulp.task('build', function (cb) {
   plugins.runSequence('clean', [
-    'js', 'less', 'wiredep', 'minify-html'
+    'js-prod', 'less', 'wiredep', 'minify-html'
   ], cb);
 });
 
-gulp.task('watch', ['watch-js', 'watch-less', 'watch-bower', 'watch-html']);
-gulp.task('serve', ['connect', 'watch']);
+gulp.task('serve', function (cb) {
+  plugins.runSequence(
+    ['connect', 'compile-js-and-inject-deps'],
+    'watch',
+    cb
+  );
+});
+
+gulp.task('watch', [
+  'watch-js', 'watch-less', 'watch-bower', 'watch-html'
+]);
+// gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', ['serve']);

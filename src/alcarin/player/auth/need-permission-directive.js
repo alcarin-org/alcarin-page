@@ -1,4 +1,4 @@
-angular.module('alcarin').directive('needPermission', needPermissionDirective);
+angular.module('alcarin.auth').directive('needPermission', needPermissionDirective);
 
 function needPermissionDirective ($rootScope, Permissions) {
     return {

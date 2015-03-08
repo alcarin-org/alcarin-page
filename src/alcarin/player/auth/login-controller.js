@@ -1,4 +1,4 @@
-angular.module('alcarin').controller('LoginController', LoginController);
+angular.module('alcarin.auth').controller('LoginController', LoginController);
 
 function LoginController(
     $scope, $state, socket, UserPermissions, logout, $localStorage
