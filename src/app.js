@@ -6,6 +6,7 @@ $('html').removeClass('no-js').addClass('js');
 // ###
 
 angular.module('alcarin', [
+    'stack-trace-sourcemaps',
     // # angularjs state routing extension
     'ui.router',
     // # socket.io cooperating with angularjs
@@ -16,5 +17,5 @@ angular.module('alcarin', [
     'ui.bootstrap.tooltip',
     'ngStorage',
 
-    'mgo-angular-wizard'
+    'mgo-angular-wizard',
 ]);

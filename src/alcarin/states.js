@@ -7,19 +7,20 @@ angular.module('alcarin')
         controllerAs: 'HomeCtrl',
         controller: 'HomeController',
         permissions: 'LOGGED'
+    })
+    .state('gamepanel', {
+        url: '/game-panel/:charId',
+        templateUrl: '/static/alcarin/game-panel/layout.html',
+        controllerAs: 'GamePanelCtrl',
+        controller: 'GamePanelController',
+        permissions: 'LOGGED'
+    }).state('create-char', {
+        url: '/char/create',
+        templateUrl: '/static/alcarin/player/char/create-char.html',
+        controllerAs: 'CreateCharCtrl',
+        controller: 'CreateCharController',
+        permissions: 'LOGGED'
     });
-    // .state 'gamepanel',
-    //     url: '/game-panel/:charId'
-    //     templateUrl: '/static/alcarin/game-panel/layout.html'
-    //     controllerAs: 'GamePanelCtrl'
-    //     controller: 'GamePanelController'
-    //     permissions: 'LOGGED'
-    // .state 'create-char',
-    //     url: '/char/create'
-    //     templateUrl: '/static/alcarin/player/char/create-char.html'
-    //     controllerAs: 'CreateCharCtrl'
-    //     controller: 'CreateCharController'
-    //     permissions: 'LOGGED'
     // # .when '/public',
     // # need basic home page, when user can know about game and login/register
     // # .otherwise

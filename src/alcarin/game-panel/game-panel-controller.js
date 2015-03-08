@@ -5,10 +5,6 @@ function GamePanelController(
 ) {
     var vm = this;
 
-    vm.activateCharacter().then(function () {
-        vm.loadEvents();
-    });
-
     vm.activateCharacter = function () {
         var data = {
             charId: $stateParams.charId
@@ -44,4 +40,7 @@ function GamePanelController(
         }
     };
 
+    vm.activateCharacter().then(function () {
+        vm.loadEvents();
+    });
 }

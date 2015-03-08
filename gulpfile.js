@@ -13,7 +13,10 @@ gulp.task('clean', function () {
 gulp.task('connect', function () {
   plugins.connect.server({
     root: ['src', 'lib', 'dist'],
-    livereload: true
+    livereload: true,
+    middleware: function() {
+      return [plugins.connectHistoryApiFallback];
+    }
   });
 });
 
@@ -21,16 +24,13 @@ gulp.task('connect', function () {
 gulp.task('js', function() {
   return gulp.src(['src/app.js', 'src/**/*.js'])
     .pipe(plugins.plumber())
-    .pipe(plugins.wrap('(function(){\n\'use strict\';\n<%= contents %>\n})();'))
-    // .pipe(plugins.coffee({
-    //   bare: false
-    // }))
-    .pipe(plugins.ngAnnotate({
-      single_quotes: true
-    }))
-    .pipe(plugins.concat('alcarin.js'))
+    .pipe(plugins.sourcemaps.init())
+    .pipe(plugins.wrap('!function(){\n\'use strict\';\n<%= contents %>\n}()'))
+    .pipe(plugins.ngAnnotate())
     // uglify should be reenabled when I done rewriting code to pure js
-    // .pipe(plugins.uglifyjs('alcarin.js'))
+    .pipe(plugins.uglify())
+    .pipe(plugins.concat('alcarin.js'))
+    .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
 });
@@ -44,12 +44,15 @@ gulp.task('watch-js', function () {
 gulp.task('less', function () {
   return gulp.src('src/alcarin/**/*.less')
     .pipe(plugins.plumber())
+    .pipe(plugins.sourcemaps.init())
     .pipe(plugins.less({
       compress: true,
       paths: ['src/components']
     }))
-    .pipe(plugins.concatCss('alcarin.css'))
+    // .pipe(plugins.concatCss('alcarin.css'))
     .pipe(plugins.minifyCss())
+    .pipe(plugins.concat('alcarin.css'))
+    .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
 });
