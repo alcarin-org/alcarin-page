@@ -18,5 +18,6 @@ angular.module('alcarin', [
     'ngStorage',
     'mgo-angular-wizard',
 
+    'alcarin-html-templates',
     'alcarin.auth',
 ]);

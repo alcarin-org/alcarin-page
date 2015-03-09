@@ -5,13 +5,13 @@ angular.module('alcarin.auth')
     $stateProvider
     .state('register', {
         url: '/register',
-        templateUrl: '/static/alcarin/player/auth/register.html',
+        templateUrl: 'alcarin/player/auth/register.html',
         controllerAs: 'RegisterCtrl',
         controller: 'RegisterController',
         permissions: 'PUBLIC'
     }).state('login', {
         url: '/login',
-        templateUrl: '/static/alcarin/player/auth/login.html',
+        templateUrl: 'alcarin/player/auth/login.html',
         resolve: {
             logout: function () { return false; }
         },

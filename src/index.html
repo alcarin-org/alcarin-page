@@ -20,7 +20,11 @@
         <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
         <!-- endbower -->
 
-        <link rel="stylesheet" type="text/css" href="/static/alcarin.css">
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="/game-panel/game-panel.css">
+        <link rel="stylesheet" href="/player/home/char.css">
+        <!-- endinject -->
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -89,31 +93,32 @@
         <!-- endbower -->
 
         <!-- inject:js -->
-        <script src="/static/components/events-bus.js"></script>
-        <script src="/static/app.js"></script>
-        <script src="/static/alcarin/player/home/home-controller.js"></script>
-        <script src="/static/alcarin/player/char/create-char-controller.js"></script>
-        <script src="/static/alcarin/player/auth/auth.js"></script>
-        <script src="/static/alcarin/player/auth/states.js"></script>
-        <script src="/static/alcarin/player/auth/register-controller.js"></script>
-        <script src="/static/alcarin/player/auth/permissions-service.js"></script>
-        <script src="/static/alcarin/player/auth/need-permission-directive.js"></script>
-        <script src="/static/alcarin/player/auth/login-controller.js"></script>
-        <script src="/static/alcarin/game-panel/states.js"></script>
-        <script src="/static/alcarin/game-panel/game-panel-controller.js"></script>
-        <script src="/static/alcarin/game-panel/events-manager-service.js"></script>
-        <script src="/static/components/stack-trace-sourcemaps.js"></script>
-        <script src="/static/components/mouse-delay-directive.js"></script>
-        <script src="/static/components/match.js"></script>
-        <script src="/static/components/gametime-filter.js"></script>
-        <script src="/static/components/events-bus.js"></script>
-        <script src="/static/components/components.js"></script>
-        <script src="/static/components/bootstrap-submit-directive.js"></script>
-        <script src="/static/alcarin/states.js"></script>
-        <script src="/static/init.js"></script>
+        <script src="/components/events-bus.js"></script>
+        <script src="/app.js"></script>
+        <script src="/alcarin/player/home/home-controller.js"></script>
+        <script src="/alcarin/player/char/create-char-controller.js"></script>
+        <script src="/alcarin/player/auth/auth.js"></script>
+        <script src="/alcarin/player/auth/states.js"></script>
+        <script src="/alcarin/player/auth/register-controller.js"></script>
+        <script src="/alcarin/player/auth/permissions-service.js"></script>
+        <script src="/alcarin/player/auth/need-permission-directive.js"></script>
+        <script src="/alcarin/player/auth/login-controller.js"></script>
+        <script src="/alcarin/game-panel/states.js"></script>
+        <script src="/alcarin/game-panel/game-panel-controller.js"></script>
+        <script src="/alcarin/game-panel/events-manager-service.js"></script>
+        <script src="/components/stack-trace-sourcemaps.js"></script>
+        <script src="/components/mouse-delay-directive.js"></script>
+        <script src="/components/match.js"></script>
+        <script src="/components/gametime-filter.js"></script>
+        <script src="/components/events-bus.js"></script>
+        <script src="/components/components.js"></script>
+        <script src="/components/bootstrap-submit-directive.js"></script>
+        <script src="/alcarin/templates.js"></script>
+        <script src="/alcarin/states.js"></script>
+        <script src="/init.js"></script>
         <!-- endinject -->
 
-        <!-- <script src="/static/alcarin.js"></script> -->
+        <script src="/alcarin/templates.js"></script>
 
         <!-- temporary, debug only -->
         <script src="http://localhost:8888/socket.io/socket.io.js"></script>

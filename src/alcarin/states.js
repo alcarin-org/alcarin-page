@@ -3,20 +3,20 @@ angular.module('alcarin')
     $stateProvider
     .state('home', {
         url: '/',
-        templateUrl: '/static/alcarin/player/home/home.html',
+        templateUrl: 'alcarin/player/home/home.html',
         controllerAs: 'HomeCtrl',
         controller: 'HomeController',
         permissions: 'LOGGED'
     })
     .state('gamepanel', {
         url: '/game-panel/:charId',
-        templateUrl: '/static/alcarin/game-panel/layout.html',
+        templateUrl: 'alcarin/game-panel/layout.html',
         controllerAs: 'GamePanelCtrl',
         controller: 'GamePanelController',
         permissions: 'LOGGED'
     }).state('create-char', {
         url: '/char/create',
-        templateUrl: '/static/alcarin/player/char/create-char.html',
+        templateUrl: 'alcarin/player/char/create-char.html',
         controllerAs: 'CreateCharCtrl',
         controller: 'CreateCharController',
         permissions: 'LOGGED'

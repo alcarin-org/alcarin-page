@@ -12,7 +12,7 @@ gulp.task('clean', function () {
 
 gulp.task('connect', function () {
   plugins.connect.server({
-    root: ['src', 'lib', 'dist'],
+    root: ['lib', 'dist/static'],
     livereload: true,
     middleware: function() {
       return [plugins.connectHistoryApiFallback];
@@ -33,27 +33,27 @@ gulp.task('compile-js', ['clean-dist-js'], function() {
 
     .pipe(plugins.connect.reload());
 });
-gulp.task('compile-js-and-inject-deps', ['compile-js'], function () {
-  // It's not necessary to read the files (will speed up things),
-  // we're only after their paths:
+gulp.task('compile-and-inject-deps', ['compile-js', 'compile-less'], function () {
   var bus = gulp.src('./dist/static/components/events-bus.js');
-  var sources = gulp.src(
-    ['./dist/static/**/*.js']
-  )
-  .pipe(plugins.angularFilesort());
+  var jsSources = gulp.src('./dist/static/**/*.js')
+    .pipe(plugins.angularFilesort());
+  var cssSources = gulp.src('./dist/static/**/*.css');
 
   return gulp.src('./src/index.html')
     .pipe(plugins.inject(plugins.eventStream.merge(
-        sources,
+        jsSources,
         bus
       ), {
-      ignorePath: '/dist'
+      ignorePath: '/dist/static'
+    }))
+    .pipe(plugins.inject(cssSources, {
+      ignorePath: '/dist/static'
     }))
     .pipe(gulp.dest('./src'));
 });
 gulp.task('watch-js', function () {
   plugins.watch('./src/**/*.js', function () {
-    gulp.start('compile-js-and-inject-deps');
+    gulp.start('compile-and-inject-deps');
   });
 });
 
@@ -72,7 +72,7 @@ gulp.task('js-prod', function() {
 });
 
 
-gulp.task('less', function () {
+gulp.task('compile-less', function () {
   return gulp.src('src/alcarin/**/*.less')
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
@@ -82,7 +82,7 @@ gulp.task('less', function () {
     }))
     // .pipe(plugins.concatCss('alcarin.css'))
     .pipe(plugins.minifyCss())
-    .pipe(plugins.concat('alcarin.css'))
+    // .pipe(plugins.concat('alcarin.css'))
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('dist/static'))
     .pipe(plugins.connect.reload());
@@ -110,11 +110,20 @@ gulp.task('watch-bower', function () {
   });
 });
 
-gulp.task('minify-html', function() {
-  return gulp.src('src/**/*.html')
+gulp.task('minify-index', function() {
+  return gulp.src('src/index.html')
     .pipe(plugins.plumber())
     .pipe(plugins.minifyHtml())
-    .pipe(gulp.dest('./dist/static'))
+    .pipe(gulp.dest('./dist/static'));
+});
+gulp.task('minify-html', ['minify-index'], function() {
+  return gulp.src('src/alcarin/**/*.html')
+    .pipe(plugins.angularTemplatecache({
+      root: 'alcarin/',
+      module: 'alcarin-html-templates',
+      standalone: true
+    }))
+    .pipe(gulp.dest('./dist/static/alcarin'))
     .pipe(plugins.connect.reload());
 });
 gulp.task('watch-html', function() {
@@ -126,13 +135,13 @@ gulp.task('watch-html', function() {
 
 gulp.task('build', function (cb) {
   plugins.runSequence('clean', [
-    'js-prod', 'less', 'wiredep', 'minify-html'
+    'js-prod', 'compile-less', 'wiredep', 'minify-html'
   ], cb);
 });
 
 gulp.task('serve', function (cb) {
   plugins.runSequence(
-    ['connect', 'compile-js-and-inject-deps'],
+    ['connect', 'compile-and-inject-deps', 'minify-html'],
     'watch',
     cb
   );
