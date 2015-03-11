@@ -48,7 +48,7 @@ gulp.task('compile-and-inject-deps', [
     'then inject output js and css files to `src/index.html`.',
     'Take care of angular.js file order rules.'
   ].join(' '), ['compile-js', 'compile-less'], function () {
-  var bus = gulp.src('./dist/components/events-bus.js');
+  var preload = gulp.src('./dist/components/core/**/*.js');
   var jsSources = gulp.src('./dist/**/*.js')
     .pipe(plugins.angularFilesort());
   var cssSources = gulp.src('./dist/**/*.css');
@@ -56,7 +56,7 @@ gulp.task('compile-and-inject-deps', [
   return gulp.src('./src/index.html')
     .pipe(plugins.inject(plugins.eventStream.merge(
         jsSources,
-        bus
+        preload
       ), {
       ignorePath: '/dist'
     }))
@@ -144,9 +144,8 @@ gulp.task('minify-html', [
     'and save as angular js `templates.js` file.',
     'Reload the server.',
   ].join(' '), ['minify-index'], function() {
-  return gulp.src('src/alcarin/**/*.html')
+  return gulp.src('src/*/**/*.html')
     .pipe(plugins.angularTemplatecache({
-      root: 'alcarin/',
       module: 'alcarin-html-templates',
       standalone: true
     }))
@@ -164,7 +163,7 @@ gulp.task('build', [
     'Rebuild js files, less files, inject deps.'
   ].join(' '), function (cb) {
   plugins.runSequence('clean', [
-    'js-prod', 'compile-less', 'wiredep', 'minify-html'
+    'compile-and-inject-deps', 'wiredep', 'minify-html'
   ], cb);
 });
 

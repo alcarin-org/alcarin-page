@@ -30,40 +30,8 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
-                      data-target=".bs-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/">
-                <i class="fa fa-bomb"></i> Alcarin
-              </a>
-            </div>
-            <div class="collapse navbar-collapse bs-navbar-collapse navbar-right">
-              <p class="navbar-text game-time" tooltip="{{ $root.gametime | gametime: 'long' }}"
-                 tooltip-placement="bottom">
-                <span class="day" ng-cloak>
-                  <i class="fa fa-calendar"></i> {{ $root.gametime | gametime: 'date' }}
-                </span>
-                <span class="hour" ng-cloak>
-                  <i class="fa" ng-class="{
-                    'fa-moon-o':  ($root.gametime | gametime: 'night'),
-                    'fa-sun-o' : !($root.gametime | gametime: 'night')
-                    }"></i>
-                  {{ $root.gametime | gametime: 'short-hour' }}h
-                </span>
-              </p>
-                <ul class="nav navbar-nav">
-                  <li need-permission="LOGGED" ng-cloak><a ui-sref="logout">Logout</a></li>
-                </ul>
-            </div>
-          </div>
-        </nav>
+
+        <div ng-include="'layout/navbar.html'"></div>
 
         <div id="main-container" class="container main">
             <h2 ng-init="initialized=true" ng-hide="initialized">
@@ -93,16 +61,17 @@
         <!-- endbower -->
 
         <!-- inject:js -->
-        <script src="/components/events-bus.js"></script>
-        <script src="/app.js"></script>
+        <script src="/components/core/events-bus.js"></script>
+        <script src="/app.module.js"></script>
         <script src="/alcarin/player/home/home-controller.js"></script>
         <script src="/alcarin/player/char/create-char-controller.js"></script>
-        <script src="/alcarin/player/auth/auth.js"></script>
-        <script src="/alcarin/player/auth/states.js"></script>
+        <script src="/alcarin/player/auth/auth.module.js"></script>
         <script src="/alcarin/player/auth/register-controller.js"></script>
         <script src="/alcarin/player/auth/permissions-service.js"></script>
         <script src="/alcarin/player/auth/need-permission-directive.js"></script>
         <script src="/alcarin/player/auth/login-controller.js"></script>
+        <script src="/alcarin/player/auth/auth.route.js"></script>
+        <script src="/components/core/events-bus.js"></script>
         <script src="/alcarin/game-panel/states.js"></script>
         <script src="/alcarin/game-panel/game-panel-controller.js"></script>
         <script src="/alcarin/game-panel/events-manager-service.js"></script>
@@ -110,7 +79,6 @@
         <script src="/components/mouse-delay-directive.js"></script>
         <script src="/components/match.js"></script>
         <script src="/components/gametime-filter.js"></script>
-        <script src="/components/events-bus.js"></script>
         <script src="/components/components.js"></script>
         <script src="/components/bootstrap-submit-directive.js"></script>
         <script src="/alcarin/templates.js"></script>
