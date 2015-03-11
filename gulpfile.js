@@ -48,9 +48,15 @@ gulp.task('compile-and-inject-deps', [
     'then inject output js and css files to `src/index.html`.',
     'Take care of angular.js file order rules.'
   ].join(' '), ['compile-js', 'compile-less'], function () {
-  var preload = gulp.src('./dist/components/core/**/*.js');
-  var jsSources = gulp.src('./dist/**/*.js')
-    .pipe(plugins.angularFilesort());
+  var preload = gulp.src([
+    'dist/*/**/*.preload.js',
+    'dist/*/**/*.module.js'
+  ]);
+  var jsSources = gulp.src([
+      'dist/**/*.js',
+      '!dist/components/core/**/*.js',
+      '!dist/*/**/*.module.js'
+  ]);
   var cssSources = gulp.src('./dist/**/*.css');
 
   return gulp.src('./src/index.html')
@@ -103,7 +109,7 @@ gulp.task('compile-less', [
     .pipe(plugins.minifyCss())
     // .pipe(plugins.concat('alcarin.css'))
     .pipe(plugins.sourcemaps.write('./'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist/alcarin'))
     .pipe(plugins.connect.reload());
 });
 gulp.task('watch-less', false, function () {
