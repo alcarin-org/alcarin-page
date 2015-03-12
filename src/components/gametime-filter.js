@@ -1,4 +1,7 @@
-angular.module('alcarin').filter('gametime', function () {
+angular.module('alcarin')
+    .filter('gametime', GameTimeFilter);
+
+function GameTimeFilter() {
     var DAY_SEC = 345600; // 60 * 60 * 24 * 4
     var hour = function (timestamp) {
         return Math.floor((timestamp % DAY_SEC) / (60 * 60));
@@ -30,4 +33,4 @@ angular.module('alcarin').filter('gametime', function () {
                 return 'N/N';
         }
     };
-});
+}

@@ -2,10 +2,10 @@
 // I override it here to get proper errors
 angular.module('stack-trace-sourcemaps', [])
 .config(function ($provide) {
-    $provide.decorator('$exceptionHandler', function(/*$delegate*/) {
-        return function(exception/*, cause*/) {
+    // $provide.decorator('$exceptionHandler', function(/*$delegate*/) {
+        // return function(exception/*, cause*/) {
             // $delegate(exception, cause);
-            throw exception;
-        };
-    });
+            // throw exception;
+        // };
+    // });
 });

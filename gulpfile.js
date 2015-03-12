@@ -48,22 +48,15 @@ gulp.task('compile-and-inject-deps', [
     'then inject output js and css files to `src/index.html`.',
     'Take care of angular.js file order rules.'
   ].join(' '), ['compile-js', 'compile-less'], function () {
-  var preload = gulp.src([
-    'dist/*/**/*.preload.js',
-    'dist/*/**/*.module.js'
-  ]);
   var jsSources = gulp.src([
-      'dist/**/*.js',
-      '!dist/components/core/**/*.js',
-      '!dist/*/**/*.module.js'
+      'dist/*/**/*.preload.js',
+      'dist/*/**/*.module.js',
+      'dist/**/*.js'
   ]);
   var cssSources = gulp.src('./dist/**/*.css');
 
   return gulp.src('./src/index.html')
-    .pipe(plugins.inject(plugins.eventStream.merge(
-        jsSources,
-        preload
-      ), {
+    .pipe(plugins.inject(jsSources, {
       ignorePath: '/dist'
     }))
     .pipe(plugins.inject(cssSources, {
