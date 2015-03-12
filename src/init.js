@@ -70,7 +70,7 @@ $(function bootstrapSite() {
     var ioSocket = io.connect(API_SERVER);
     // # if we have api token in local storage
     // # use it to restore user privilages after reconnection
-    var apiToken = localStorage.getItem('apiToken');
+    var apiToken = JSON.parse(localStorage.getItem('ngStorage-apiToken'));
     var bootstraped = false;
     var bootstrapFn = function bootstrapAngular() {
         if (!bootstraped) {
@@ -100,7 +100,7 @@ $(function bootstrapSite() {
     angular.module('alcarin').value('UserPermissions', userPermissions);
     var onVerifyToken = function (response) {
         if (response.error) {
-            if (response.error === 'invalid.token') {
+            if (response.error.reason === 'invalid.token') {
                 console.warn('Wrong token used.');
                 localStorage.removeItem('apiToken');
             }
