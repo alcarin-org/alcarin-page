@@ -3,7 +3,11 @@ angular.module('alcarin.auth').controller('RegisterController', RegisterControll
 function RegisterController(socket, $location, UserPermissions, $localStorage) {
     var vm = this;
 
-    vm.registerUser = function () {
+    vm.registerUser = registerUser;
+
+    ///
+
+    function registerUser() {
         vm.emailOccupied = false;
         socket.emit('player.create', {
             email: vm.email,
@@ -17,5 +21,5 @@ function RegisterController(socket, $location, UserPermissions, $localStorage) {
         .catch('email.occupied', function () {
             vm.emailOccupied = true;
         });
-    };
+    }
 }

@@ -4,9 +4,14 @@ function CreateCharController(socket, $state) {
     var vm = this;
     vm.char = {};
 
-    vm.createChar = function () {
-        vm.socket.emit('player.create-char', vm.char).then(function () {
+    vm.createChar = createChar;
+
+    ///
+
+    function createChar() {
+        vm.socket.emit('player.create-char', vm.char)
+        .then(function () {
             $state.go('home');
         });
-    };
+    }
 }

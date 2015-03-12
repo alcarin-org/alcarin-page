@@ -5,7 +5,15 @@ function GamePanelController(
 ) {
     var vm = this;
 
-    vm.activateCharacter = function () {
+    vm.activateCharacter = activateCharacter;
+    vm.loadEvents = loadEvents;
+    vm.talkToAll = talkToAll;
+
+    activate();
+
+    ///
+
+    function activateCharacter() {
         var data = {
             charId: $stateParams.charId
         };
@@ -19,17 +27,17 @@ function GamePanelController(
             .catch('validation.failed', function () {
                 $state.go('home');
             });
-    };
+    }
 
-    vm.loadEvents = function () {
+    function loadEvents() {
         socket.emit('char.events').then(function (events) {
             vm.gameEvents = events.map(function (ev) {
                 return EventsManager.split(ev);
             });
         });
-    };
+    }
 
-    vm.talkToAll = function () {
+    function talkToAll() {
         if ($scope.sayingForm.$valid) {
             socket.emit('char.say', {content: vm.saying})
             .then(function () {
@@ -38,9 +46,11 @@ function GamePanelController(
                 vm.loadEvents();
             });
         }
-    };
+    }
 
-    vm.activateCharacter().then(function () {
-        vm.loadEvents();
-    });
+    function activate() {
+        vm.activateCharacter().then(function () {
+            vm.loadEvents();
+        });
+    }
 }

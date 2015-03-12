@@ -9,7 +9,14 @@ function LoginController(
     vm.password     = '';
     vm.loginInvalid = false;
 
-    vm.login = function () {
+    vm.login = login;
+    vm.logout = logout;
+
+    activate();
+
+    ///
+
+    function login() {
         socket.emit('auth.login', {
             email: vm.email,
             password: vm.password
@@ -22,13 +29,15 @@ function LoginController(
             console.log('aca');
             vm.loginInvalid = true;
         });
-    };
+    }
 
-    vm.logout = function () {
+    function logout() {
         UserPermissions.set([]);
         delete $localStorage.apiToken;
         $state.go('home');
-    };
+    }
 
-    logout && logout();
+    function activate() {
+        logout && logout();
+    }
 }
