@@ -9,7 +9,7 @@ function CreateCharController(socket, $state) {
     ///
 
     function createChar() {
-        vm.socket.emit('player.create-char', vm.char)
+        socket.emit('player.create-char', vm.char)
         .then(function () {
             $state.go('home');
         });
