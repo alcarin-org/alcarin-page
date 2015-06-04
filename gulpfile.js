@@ -9,7 +9,6 @@ gulp.task('clean', 'Delete `/dist` directory.', function () {
     .pipe(plugins.clean());
 });
 
-
 gulp.task('connect', [
     'Serve `/lib` and `/dist` directories.',
     'Redirect all requests to `/dist/index.html`.',
@@ -19,7 +18,7 @@ gulp.task('connect', [
     root: ['lib', 'dist'],
     livereload: true,
     middleware: function() {
-      return [plugins.connectHistoryApiFallback];
+      return [plugins.connectHistoryApiFallback()];
     }
   });
 });
