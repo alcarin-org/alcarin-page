@@ -24,7 +24,7 @@ function GameTimeFilter() {
                 var h = hour(timestamp);
                 var m = Math.floor((timestamp % (60 * 60)) / 60);
                 var d = day(timestamp);
-                return sprintf('Day %s, %sh %sm', h, m, d);
+                return sprintf('Day %s, %sh %sm', d, h, m);
             case 'date':
                 return day(timestamp);
             case 'night':
