@@ -107,7 +107,7 @@ gulp.task('compile-less', [
 });
 gulp.task('watch-less', false, function () {
   plugins.watch('src/**/*.less', function () {
-    gulp.start('less');
+    gulp.start('compile-less');
   });
 });
 
