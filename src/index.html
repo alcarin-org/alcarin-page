@@ -16,50 +16,22 @@
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
         <!-- bower:css -->
-        <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower/bootstrap-css/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
         <!-- endbower -->
 
-        <link rel="stylesheet" type="text/css" href="/static/alcarin.css">
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/alcarin/main.css">
+        <link rel="stylesheet" href="/alcarin/game-panel/game-panel.css">
+        <link rel="stylesheet" href="/alcarin/player/home/char.css">
+        <!-- endinject -->
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <button class="navbar-toggle collapsed" type="button" data-toggle="collapse"
-                      data-target=".bs-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/">
-                <i class="fa fa-bomb"></i> Alcarin
-              </a>
-            </div>
-            <div class="collapse navbar-collapse bs-navbar-collapse navbar-right">
-              <p class="navbar-text game-time" tooltip="{{ $root.gametime | gametime: 'long' }}"
-                 tooltip-placement="bottom">
-                <span class="day" ng-cloak>
-                  <i class="fa fa-calendar"></i> {{ $root.gametime | gametime: 'date' }}
-                </span>
-                <span class="hour" ng-cloak>
-                  <i class="fa" ng-class="{
-                    'fa-moon-o':  ($root.gametime | gametime: 'night'),
-                    'fa-sun-o' : !($root.gametime | gametime: 'night')
-                    }"></i>
-                  {{ $root.gametime | gametime: 'short-hour' }}h
-                </span>
-              </p>
-                <ul class="nav navbar-nav">
-                  <li need-permission="LOGGED" ng-cloak><a ui-sref="logout">Logout</a></li>
-                </ul>
-            </div>
-          </div>
-        </nav>
+
+        <div ng-include="'layout/navbar.html'"></div>
 
         <div id="main-container" class="container main">
             <h2 ng-init="initialized=true" ng-hide="initialized">
@@ -74,19 +46,46 @@
         </footer>
 
         <!-- bower:js -->
-        <script src="/bower_components/jquery/dist/jquery.js"></script>
-        <script src="/bower_components/angular/angular.js"></script>
-        <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
-        <script src="/bower_components/angular-socket-io/socket.js"></script>
-        <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
-        <script src="/bower_components/bluebird/js/browser/bluebird.js"></script>
-        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
-        <script src="/bower_components/angular-wizard/dist/angular-wizard.js"></script>
+        <script src="bower/jquery/dist/jquery.js"></script>
+        <script src="bower/angular/angular.js"></script>
+        <script src="bower/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower/angular-bootstrap-show-errors/src/showErrors.js"></script>
+        <script src="bower/angular-socket-io/socket.js"></script>
+        <script src="bower/bootstrap-css/js/bootstrap.min.js"></script>
+        <script src="bower/bluebird/js/browser/bluebird.js"></script>
+        <script src="bower/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower/lodash/lodash.js"></script>
+        <script src="bower/angular-wizard/dist/angular-wizard.js"></script>
+        <script src="bower/sprintf/src/sprintf.js"></script>
+        <script src="bower/ngstorage/ngStorage.js"></script>
         <!-- endbower -->
 
-        <script src="/static/alcarin.js"></script>
+        <!-- inject:js -->
+        <script src="/components/events-bus.preload.js"></script>
+        <script src="/components/stack-trace-sourcemaps.module.js"></script>
+        <script src="/alcarin/player/auth/auth.module.js"></script>
+        <script src="/app.module.js"></script>
+        <script src="/init.js"></script>
+        <script src="/alcarin/states.js"></script>
+        <script src="/alcarin/templates.js"></script>
+        <script src="/components/bootstrap-submit-directive.js"></script>
+        <script src="/components/components.js"></script>
+        <script src="/components/gametime-filter.js"></script>
+        <script src="/components/match.js"></script>
+        <script src="/components/mouse-delay-directive.js"></script>
+        <script src="/alcarin/game-panel/events-manager-service.js"></script>
+        <script src="/alcarin/game-panel/game-panel-controller.js"></script>
+        <script src="/alcarin/game-panel/states.js"></script>
+        <script src="/alcarin/player/auth/auth.route.js"></script>
+        <script src="/alcarin/player/auth/login-controller.js"></script>
+        <script src="/alcarin/player/auth/need-permission-directive.js"></script>
+        <script src="/alcarin/player/auth/permissions-service.js"></script>
+        <script src="/alcarin/player/auth/register-controller.js"></script>
+        <script src="/alcarin/player/char/create-char-controller.js"></script>
+        <script src="/alcarin/player/home/home-controller.js"></script>
+        <!-- endinject -->
+
+        <script src="/alcarin/templates.js"></script>
 
         <!-- temporary, debug only -->
         <script src="http://localhost:8888/socket.io/socket.io.js"></script>

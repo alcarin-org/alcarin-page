@@ -47,25 +47,22 @@
 
         </form>
       </div>
-      <div class="events-container" alc-spin="gameEvents == null">
-        <div class="game-event" ng-repeat="event in gameEvents">
-          <span class="time">{* event.time | EventTime *}</span>
+      <div class="events-container" alc-spin="GamePanelCtrl.gameEvents == null">
+        <div class="game-event" ng-repeat="event in GamePanelCtrl.gameEvents | orderBy: 'time' : true">
+          <span class="time">{{ event.time | gametime }}</span>
           <span class="content">
-            <span ng-repeat="part in event.body">
-              <span ng-switch on="part.type">
-                <span ng-switch-when="text">{* part.text *}</span>
-                <span ng-switch-when="char">
-                  <a href="#" ng-click="charClicked(part)">{* part.text *}</a>
-                </span>
-                <span ng-switch-default>
-                  <!-- Unresolved GameEvent argument -->
-                </span>
-              </span>
-            </span>
+            <span ng-repeat="part in event.body" class="content-part" ng-switch on="part.type">
+              <span ng-switch-when="text">{{ part.text }}</span><!--
+              --><span ng-switch-when="char">
+                <a href="#" ng-click="charClicked(part)">{{ part.text }}</a>
+              </span><!--
+              --><span ng-switch-default>
+                <!-- Unresolved GameEvent argument -->
+              </span><!--
+            --></span>
           </span>
         </div>
       </div>
     </div>
   </section>
-
 </div>

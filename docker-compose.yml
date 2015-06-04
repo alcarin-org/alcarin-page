@@ -1,0 +1,8 @@
+webpage:
+  build: .
+  command: gulp
+  volumes:
+    - ./:/app
+  ports:
+    - "35729:35729"
+    - "8080:8080"
