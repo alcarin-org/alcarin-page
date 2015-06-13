@@ -28,7 +28,7 @@
 
         <div ng-include="'layout/navbar.html'"></div>
 
-        <div id="main-container" class="container main">
+        <div id="main-container" class="container-fluid main">
             <h2 ng-init="initialized=true" ng-hide="initialized">
               <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
             </h2>
@@ -71,13 +71,13 @@
         <script src="/alcarin/game-panel/events-manager-service.js"></script>
         <script src="/alcarin/game-panel/game-panel-controller.js"></script>
         <script src="/alcarin/game-panel/states.js"></script>
+        <script src="/alcarin/player/home/home-controller.js"></script>
         <script src="/alcarin/player/auth/auth.route.js"></script>
         <script src="/alcarin/player/auth/login-controller.js"></script>
         <script src="/alcarin/player/auth/need-permission-directive.js"></script>
         <script src="/alcarin/player/auth/permissions-service.js"></script>
         <script src="/alcarin/player/auth/register-controller.js"></script>
         <script src="/alcarin/player/char/create-char-controller.js"></script>
-        <script src="/alcarin/player/home/home-controller.js"></script>
         <!-- endinject -->
 
         <script src="/alcarin/templates.js"></script>
