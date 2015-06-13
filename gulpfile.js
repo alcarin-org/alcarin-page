@@ -1,8 +1,8 @@
-var gulp = require('gulp-help')(require('gulp'));
-var plugins = require('gulp-load-plugins')({
-  pattern: '*',
-  lazy: true
-});
+var gulp = require('./gulp-tasks/gulp');
+
+require('./gulp-tasks');
+
+var plugins = gulp.plugins;
 
 gulp.task('clean', 'Delete `/dist` directory.', function () {
   return gulp.src('./dist')
@@ -43,10 +43,10 @@ gulp.task('compile-js', [
 });
 
 gulp.task('compile-and-inject-deps', [
-    'Run "compile-js" and "compile-less" task,',
+    'Run "compile-js" and "compile-styles" task,',
     'then inject output js and css files to `src/index.html`.',
     'Take care of angular.js file order rules.'
-  ].join(' '), ['compile-js', 'compile-less'], function () {
+  ].join(' '), ['compile-js', 'compile-styles'], function () {
   var jsSources = gulp.src([
       'dist/*/**/*.preload.js',
       'dist/*/**/*.module.js',
@@ -83,32 +83,6 @@ gulp.task('watch-js', false, function () {
 //     .pipe(plugins.connect.reload());
 // });
 
-
-gulp.task('compile-less', [
-    'Compile less files from `src/alcarin` directory.',
-    'Include `src/components/*` less files as less deps.',
-    'Minify css and add source maps.',
-    'Reload the server.'
-  ].join(' '), function () {
-  return gulp.src('src/alcarin/**/*.less')
-    .pipe(plugins.plumber())
-    .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.less({
-      compress: true,
-      paths: ['src/components']
-    }))
-    // .pipe(plugins.concatCss('alcarin.css'))
-    .pipe(plugins.minifyCss())
-    // .pipe(plugins.concat('alcarin.css'))
-    .pipe(plugins.sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/alcarin'))
-    .pipe(plugins.connect.reload());
-});
-gulp.task('watch-less', false, function () {
-  plugins.watch('src/**/*.less', function () {
-    gulp.start('compile-less');
-  });
-});
 
 
 gulp.task('wiredep', [
@@ -158,7 +132,7 @@ gulp.task('watch-html', false, function() {
 
 
 gulp.task('build', [
-    'Rebuild js files, less files, inject deps.'
+    'Rebuild js files, sass files, inject deps.'
   ].join(' '), function (cb) {
   plugins.runSequence('clean', [
     'compile-and-inject-deps', 'wiredep', 'minify-html'
@@ -177,7 +151,7 @@ gulp.task('serve', [
 });
 
 gulp.task('watch', false, [
-  'watch-js', 'watch-less', 'watch-bower', 'watch-html'
+  'watch-js', 'watch-styles', 'watch-bower', 'watch-html'
 ]);
 // gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', 'Just run "serve" task', ['serve']);

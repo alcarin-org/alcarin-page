@@ -1,24 +1,49 @@
+body {
+    padding: 60px 10px;
+}
+
+html, body {
+    height: 100%;
+}
+
+#main-container {
+    min-height: 100%;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.game-time {
+    .day {
+        margin-right: 10px;
+    }
+    .hour {
+
+    }
+}
+
+//////
+
 @import 'core';
 
-@spaces: 8px;
+$spaces: 8px;
 //38.2%
-@left-ratio: 38.2%;
+$left-ratio: 38.2%;
 //navbar color
-@nav-color: rgb(203, 203, 203);
-@panels-color: #EEEEEE;
+$nav-color: rgb(203, 203, 203);
+$panels-color: #EEEEEE;
 
-.both-containers() {
-    background-color: @panels-color;
-    margin: 0 @spaces 2 * @spaces @spaces;
+@mixin both-containers() {
+    background-color: $panels-color;
+    margin: 0 $spaces 2 * $spaces $spaces;
     padding: 20px 30px 20px 30px;
     min-height: 560px;
-    .rounded-corners;
+    border-radius: 17px;
 }
 
 .container {
   padding: 0;
-  min-width: 1024px;
-  width: 100%;
 }
 
 .game-container {
@@ -39,13 +64,13 @@
 
 
 .left-container {
-  width: @left-ratio;
-  min-width: @left-ratio;
+  width: $left-ratio;
+  min-width: $left-ratio;
 
   .fixed-possible {
       &.fixed {
         position: fixed;
-        width: @left-ratio;
+        width: $left-ratio;
         top: 60px;
         z-index: 99;
         padding-right: 8px;
@@ -57,7 +82,7 @@
       position: relative;
 
       .pages-container {
-        .both-containers;
+        @include both-containers;
         h2 {
           margin: 0;
           font-size: 13px;
@@ -70,10 +95,10 @@
 }
 
 .right-container {
-  width: 100% - @left-ratio;
+  width: 100% - $left-ratio;
   .events-container {
     margin-left: 5px;
-    .both-containers;
+    @include both-containers;
     position: relative;
   }
 }
@@ -89,7 +114,7 @@
         height:40px;
         margin: 0;
         resize: vertical;
-        .border-box()
+        box-sizing: border-box;
       }
       width:auto;
       display:table-cell;
@@ -139,20 +164,20 @@
       position: relative;
       list-style: none;
       li.active {
-        background: darken(@nav-color, 20%)
+        background: darken($nav-color, 20%)
       }
       li {
         &:hover {
-          background: darken(@nav-color, 15%)
+          background: darken($nav-color, 15%)
         }
         a {
-          color: lighten(@nav-color, 10%);
+          color: lighten($nav-color, 10%);
           display: block;
           font-size: 20px;
           text-align: center;
           line-height: 40px;
           text-shadow: 0 -1px 2px rgba(0,0,0,0.5), 0 1px 2px rgba(255,255,255,0.5);
-          .transition(0.2s);
+          @include transition(0.2s);
           text-decoration: none;
           &:hover {
             outline: none;
@@ -166,10 +191,10 @@
         position: relative;
         top: 0;
         left: -17px;
-        background: darken(@nav-color, 5%);
+        background: darken($nav-color, 5%);
 
-        .circle;
-        .transition(0.2s);
+        @include circle;
+        @include transition(0.2s);
       }
     }
   }

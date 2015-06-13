@@ -5,13 +5,23 @@ function GamePanelController(
 ) {
     var vm = this;
 
-    vm.activateCharacter = activateCharacter;
-    vm.loadEvents = loadEvents;
-    vm.talkToAll = talkToAll;
+    _.assign(vm, {
+        activateCharacter: activateCharacter,
+        loadEvents: loadEvents,
+        talkToAll: talkToAll,
+        loadLocationDetails: loadLocationDetails
+    });
 
     activate();
 
     ///
+
+    function activate() {
+        vm.activateCharacter().then(function () {
+            vm.loadEvents();
+            vm.loadLocationDetails();
+        });
+    }
 
     function activateCharacter() {
         var data = {
@@ -37,6 +47,12 @@ function GamePanelController(
         });
     }
 
+    function loadLocationDetails() {
+        socket.emit('loc.details').then(function (loc) {
+            console.log(loc);
+        });
+    }
+
     function talkToAll() {
         if ($scope.sayingForm.$valid) {
             socket.emit('char.say', {content: vm.saying})
@@ -46,11 +62,5 @@ function GamePanelController(
                 vm.loadEvents();
             });
         }
-    }
-
-    function activate() {
-        vm.activateCharacter().then(function () {
-            vm.loadEvents();
-        });
     }
 }

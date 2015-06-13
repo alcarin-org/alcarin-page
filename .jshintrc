@@ -24,6 +24,7 @@
     "$": false,
     "console": false,
     "io": false,
-    "sprintf": false
+    "sprintf": false,
+    "_": false
   }
 }
