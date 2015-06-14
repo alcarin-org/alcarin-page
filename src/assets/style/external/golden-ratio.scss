@@ -15,8 +15,8 @@
 // --------------------------------------------------
 
 $golden-ratio:    1.6180339887498948482;
-$golden-lg:       (1 / $golden-ratio);
-$golden-sm:       (1 - $golden-lg);
+$golden-ratio-lg:       (1 / $golden-ratio);
+$golden-ratio-sm:       (1 - $golden-ratio-lg);
 
 
 //
@@ -36,11 +36,11 @@ $golden-sm:       (1 - $golden-lg);
 
 @mixin golden-pair($size) {
   .col-#{$size}-golden-smaller {
-    @include make-col-golden($golden-sm);
+    @include make-col-golden($golden-ratio-sm);
   }
 
   .col-#{$size}-golden-larger {
-    @include make-col-golden($golden-lg);
+    @include make-col-golden($golden-ratio-lg);
   }
 }
 

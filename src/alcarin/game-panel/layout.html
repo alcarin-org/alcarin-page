@@ -1,6 +1,7 @@
-<div class="row">
-  <section class="col-sm-golden-smaller">
-    <div class="fixed-possible" ng-class="{fixed: GamePanelCtrl.pinned}">
+<div class="row game-panel">
+  <section class="col-sm-golden-smaller hidden-xs panel">
+    <div class="panel-body fixed-possible"
+         ng-class="{fixed: GamePanelCtrl.pinned}">
       <div class="pages-container">
         <h2>
           <button class="btn btn-sm pin" ng-class="{active: GamePanelCtrl.pinned}"
@@ -9,26 +10,25 @@
           </button>
         </h2>
         <div ui-view></div>
-
-        <div id="main-nav">
-          <nav>
-            <ul class="nav-bar">
-              <li ui-sref-active="active" >
-                <a ui-sref="gamepanel.home"><i class="fa fa-home"></i></a>
-              </li>
-              <li ui-sref-active="active" >
-                <a ui-sref="gamepanel.chars"><i class="fa fa-users"></i></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
     </div>
-    <div class="clearfix"></div>
   </section>
 
-  <section class="col-sm-golden-larger">
-    <div class="events-container">
+  <div class="middle-nav hidden-xs">
+    <nav>
+      <ul class="nav-bar">
+        <li ui-sref-active="active" >
+          <a ui-sref="gamepanel.home"><i class="fa fa-home"></i></a>
+        </li>
+        <li ui-sref-active="active" >
+          <a ui-sref="gamepanel.chars"><i class="fa fa-users"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <section class="col-sm-golden-larger panel">
+    <div class="panel-body events-container">
       <div class="talking">
         <!-- layout trick to nice, flexible panel -->
 
@@ -36,12 +36,14 @@
               ng-submit="GamePanelCtrl.talkToAll()" novalidate>
 
           <div class="form-group">
-            <div class="col-sm-10">
-              <input name="saying" class="form-control" type="text" ng-model="GamePanelCtrl.saying"
-                     tabindex="1" placeholder="Say to all" required>
+            <div class="col-xs-8 col-sm-10">
+              <input name="saying" class="form-control" type="text"
+                     ng-model="GamePanelCtrl.saying" tabindex="1"
+                     placeholder="Say to all" required>
             </div>
-            <div class="col-sm-2">
-              <input name="sb" type="submit" class="btn btn-block btn-primary" value="Say" tabindex="2">
+            <div class="col-xs-4 col-sm-2">
+              <button name="sb" type="submit" class="btn btn-block btn-primary"
+                     tabindex="2">Say</button>
             </div>
           </div>
 

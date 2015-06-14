@@ -1,11 +1,29 @@
+/**
+ * bootstrap extensions
+ */
 @import "bootstrap/_variables";
 @import "bootstrap-overrides/_variables";
 
 @import "bootstrap";
+@import "bootstrap-overrides/_panels";
 @import "external/golden-ratio";
 
-@import "main";
+@import "./mixins";
+/**
+ * components
+ */
+@import "components/game-time";
+@import "components/middle-nav";
+@import "components/ng-cloak";
 
-@media (min-width: $screen-sm-min) {
-  @include make-grid(sm);
-}
+/**
+ * page general layout
+ */
+@import "layout";
+
+/**
+ * pages
+ */
+@import "page/game-panel";
+
+@import "main";

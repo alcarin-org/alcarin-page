@@ -1,31 +1,5 @@
-body {
-    padding: 60px 10px;
-}
-
-html, body {
-    height: 100%;
-}
-
-#main-container {
-    min-height: 100%;
-}
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
-
-.game-time {
-    .day {
-        margin-right: 10px;
-    }
-    .hour {
-
-    }
-}
 
 //////
-
-@import 'core';
 
 $spaces: 8px;
 //38.2%
@@ -143,59 +117,6 @@ $panels-color: #EEEEEE;
     }
     .content {
       font-size: 10.5pt;
-    }
-  }
-}
-
-#main-nav {
-  position: absolute;
-  right: -5px;
-  top: 0;
-  z-index: 100;
-  padding: 45px 0;
-
-  nav {
-    width: 6px;
-    ul {
-      width: 100%;
-
-      padding: 0;
-      margin: 0;
-      position: relative;
-      list-style: none;
-      li.active {
-        background: darken($nav-color, 20%)
-      }
-      li {
-        &:hover {
-          background: darken($nav-color, 15%)
-        }
-        a {
-          color: lighten($nav-color, 10%);
-          display: block;
-          font-size: 20px;
-          text-align: center;
-          line-height: 40px;
-          text-shadow: 0 -1px 2px rgba(0,0,0,0.5), 0 1px 2px rgba(255,255,255,0.5);
-          @include transition(0.2s);
-          text-decoration: none;
-          &:hover {
-            outline: none;
-          }
-        }
-
-        width: 40px;
-        height: 40px;
-        float: left;
-        margin: 0 0 50px 0;
-        position: relative;
-        top: 0;
-        left: -17px;
-        background: darken($nav-color, 5%);
-
-        @include circle;
-        @include transition(0.2s);
-      }
     }
   }
 }

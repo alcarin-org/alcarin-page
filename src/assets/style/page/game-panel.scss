@@ -1,0 +1,11 @@
+.game-panel {
+  display: flex;
+  position: relative;
+  .panel {
+      min-height: 560px;
+  }
+
+  .middle-nav {
+    margin-top: 30px;
+  }
+}
