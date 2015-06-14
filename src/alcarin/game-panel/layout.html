@@ -55,8 +55,8 @@
           <span class="content">
             <span ng-repeat="part in event.body" class="content-part" ng-switch on="part.type">
               <span ng-switch-when="text">{{ part.text }}</span><!--
-              --><span ng-switch-when="char">
-                <a href="#" ng-click="charClicked(part)">{{ part.text }}</a>
+              --><span ng-switch-when="char"><!--
+                --><a href="#" ng-click="charClicked(part)">{{ part.text }}</a>
               </span><!--
               --><span ng-switch-default>
                 <!-- Unresolved GameEvent argument -->

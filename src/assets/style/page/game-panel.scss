@@ -8,4 +8,19 @@
   .middle-nav {
     margin-top: 30px;
   }
+
+  .events-container {
+    min-height: 600px;
+    .game-event {
+      margin: 1px;
+      padding:3px;
+      .time {
+        margin-right: 5px;
+        font-weight: bold;
+      }
+      .content {
+        font-size: 10.5pt;
+      }
+    }
+  }
 }
