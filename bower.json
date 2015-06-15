@@ -20,13 +20,13 @@
     "angular-bootstrap-show-errors": "~1.0.2",
     "angular-socket-io": "~0.6.0",
     "bluebird": "~2.3.2",
-    "font-awesome": "~4.2.0",
     "angular-ui-router": "~0.2.11",
     "lodash": "~3.4.0",
     "sprintf": "~1.0.2",
     "ngstorage": "~0.3.0",
     "bootstrap-sass": "~3.3.4",
-    "angular-wizard": "psychowico/angular-wizard#master"
+    "angular-wizard": "psychowico/angular-wizard#master",
+    "font-awesome": "~4.3.0"
   },
   "resolutions": {
     "lodash": "~3.4.0"

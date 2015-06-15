@@ -25,9 +25,6 @@
         position: relative;
         background: darken($nav-color, 5%);
 
-        &.active {
-          background: darken($nav-color, 20%)
-        }
         &:hover {
           background: darken($nav-color, 15%)
         }
@@ -42,6 +39,9 @@
           }
         }
       }
+      &.nav-bar--focused li.active, li.events-btn.active {
+        background: darken($nav-color, 20%)
+      }
     }
   }
 
@@ -55,6 +55,9 @@
         left: -20px;
         margin: 0 0 50px 0;
 
+        &.active {
+          background: darken($nav-color, 20%)
+        }
         @include circle;
         @include transition(0.2s);
         a {

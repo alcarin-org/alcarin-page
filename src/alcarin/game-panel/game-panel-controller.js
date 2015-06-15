@@ -9,7 +9,12 @@ function GamePanelController(
         activateCharacter: activateCharacter,
         loadEvents: loadEvents,
         talkToAll: talkToAll,
-        loadLocationDetails: loadLocationDetails
+        loadLocationDetails: loadLocationDetails,
+        reloadView: reloadView,
+        states: [
+            {name: 'gamepanel.home', icon: 'fa-home'},
+            {name: 'gamepanel.chars', icon: 'fa-users'},
+        ]
     });
 
     $scope.$on('$stateChangeSuccess', stateChanged);
@@ -25,10 +30,13 @@ function GamePanelController(
         });
     }
 
-    function stateChanged(event, toState, toParams, fromState) {
-        if (fromState.abstract !== true) {
-            vm.controlPanelFocus = true;
-        }
+    function stateChanged(event, toState) {
+        vm.currentState = toState.name;
+    }
+
+    function reloadView(view) {
+        vm.controlPanelFocus = true;
+        $state.go(view);
     }
 
     function activateCharacter() {
