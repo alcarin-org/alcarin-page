@@ -1,14 +1,13 @@
 <div class="row game-panel">
-  <section class="col-sm-golden-smaller hidden-xs panel">
-    <div class="panel-body fixed-possible"
-         ng-class="{fixed: GamePanelCtrl.pinned}">
+  <section class="col-sm-golden-smaller panel control-panel"
+           ng-class="{'hidden-xs': !GamePanelCtrl.controlPanelFocus}">
+    <div class="panel-body">
       <div class="pages-container">
-        <h2>
-          <button class="btn btn-sm pin" ng-class="{active: GamePanelCtrl.pinned}"
-                  ng-click="GamePanelCtrl.pinned = !GamePanelCtrl.pinned">
-            <i class="fa fa-thumb-tack"></i>
-          </button>
-        </h2>
+        <button type="button" class="close visible-xs-block"
+                ng-click="GamePanelCtrl.controlPanelFocus=false"
+                aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <div ui-view></div>
       </div>
     </div>

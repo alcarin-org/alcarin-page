@@ -12,6 +12,8 @@ function GamePanelController(
         loadLocationDetails: loadLocationDetails
     });
 
+    $scope.$on('$stateChangeSuccess', stateChanged);
+
     activate();
 
     ///
@@ -21,6 +23,12 @@ function GamePanelController(
             vm.loadEvents();
             vm.loadLocationDetails();
         });
+    }
+
+    function stateChanged(event, toState, toParams, fromState) {
+        if (fromState.abstract !== true) {
+            vm.controlPanelFocus = true;
+        }
     }
 
     function activateCharacter() {

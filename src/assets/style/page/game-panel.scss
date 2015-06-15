@@ -24,3 +24,13 @@
     }
   }
 }
+
+  @media (max-width: $screen-xs-max) {
+    .control-panel {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      z-index: 2;
+    }
+  }
