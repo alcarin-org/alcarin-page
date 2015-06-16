@@ -23,38 +23,6 @@ gulp.task('connect', [
   });
 });
 
-gulp.task('clean-dist-js', 'Delete all js files from `/dist` directory.', function () {
-  gulp.src('dist/**/*.js')
-    .pipe(plugins.clean());
-});
-
-gulp.task('compile-and-inject-deps', [
-    'Run "compile-js" and "compile-styles" task,',
-    'then inject output js and css files to `src/index.html`.',
-    'Take care of angular.js file order rules.'
-  ].join(' '), ['compile-js', 'compile-styles'], function () {
-  var jsSources = gulp.src([
-      'dist/*/**/*.preload.js',
-      'dist/*/**/*.module.js',
-      'dist/**/*.js'
-  ]);
-  var cssSources = gulp.src('./dist/**/*.css');
-
-  return gulp.src('./src/index.html')
-    .pipe(plugins.inject(jsSources, {
-      ignorePath: '/dist'
-    }))
-    .pipe(plugins.inject(cssSources, {
-      ignorePath: '/dist'
-    }))
-    .pipe(gulp.dest('./src'));
-});
-gulp.task('watch-js', false, function () {
-  plugins.watch('./src/**/*.js', function () {
-    gulp.start('compile-and-inject-deps');
-  });
-});
-
 // gulp.task('js-prod', function() {
 //   return gulp.src(['src/app.js', 'src/**/*.js'])
 //     .pipe(plugins.plumber())
@@ -137,7 +105,7 @@ gulp.task('serve', [
 });
 
 gulp.task('watch', false, [
-  'watch-js', 'watch-styles', 'watch-bower', 'watch-html'
+  'watch-scripts', 'watch-styles', 'watch-bower', 'watch-html'
 ]);
 // gulp.task('serve', ['connect', 'watch']);
 gulp.task('default', 'Just run "serve" task', ['serve']);

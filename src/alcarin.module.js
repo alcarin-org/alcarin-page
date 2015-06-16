@@ -1,10 +1,6 @@
 // just tell the world that JS is enabled - by class.
 $('html').removeClass('no-js').addClass('js');
 
-/**
- * this file is always compiling first.
- */
-
 angular.module('alcarin', [
     'stack-trace-sourcemaps',
     // angularjs state routing extension

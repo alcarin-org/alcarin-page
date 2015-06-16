@@ -13,6 +13,9 @@ angular.module('alcarin')
         templateUrl: 'alcarin/game-panel/layout.html',
         controllerAs: 'GamePanelCtrl',
         controller: 'GamePanelController',
+        resolve: {
+            charEnv: prepareCharacterEnvironment
+        },
         permissions: 'LOGGED'
     }).state('create-char', {
         url: '/char/create',
@@ -53,3 +56,13 @@ angular.module('alcarin')
 });
 
 
+prepareCharacterEnvironment.$inject = ['$state', '$stateParams', 'CharEnvironment'];
+function prepareCharacterEnvironment($state, $stateParams, CharEnvironment) {
+    return CharEnvironment.factory($stateParams.charId)
+        .catch('permission.denied', function () {
+            $state.go('home');
+        })
+        .catch('validation.failed', function () {
+            $state.go('home');
+        });
+}

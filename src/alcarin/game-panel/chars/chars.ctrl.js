@@ -4,4 +4,12 @@ angular.module('alcarin.game-panel')
 function CharsController(
     $scope, socket
 ) {
+    activate();
+
+    function activate() {
+        socket.emit('char.environment')
+            .then((x) =>
+                console.log(x)
+            );
+    }
 }
