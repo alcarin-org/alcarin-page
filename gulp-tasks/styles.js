@@ -22,6 +22,7 @@ function compileSassStyle() {
         includePaths: ['lib/bower/bootstrap-sass/assets/stylesheets']
     };
     var sassStream = gulp.src('src/assets/style/index.scss')
+        .pipe(plugins.cached('compile-styles'))
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
             .pipe(plugins.sass(sassOptions))

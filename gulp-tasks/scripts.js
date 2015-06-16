@@ -25,8 +25,8 @@ function compileAndInjectScripts() {
       'dist/**/*.module.js',
       'dist/alcarin.module.js',
       'dist/**/*.js'
-  ]);
-  var cssSources = gulp.src('./dist/**/*.css');
+  ], {read: false});
+  var cssSources = gulp.src('./dist/**/*.css', {read: false});
 
   return gulp.src('./src/index.html')
     .pipe(plugins.inject(jsSources, {
@@ -41,6 +41,7 @@ function compileAndInjectScripts() {
 
 function cleanJs() {
   return gulp.src('dist/**/*.js')
+    .pipe(plugins.cached('compile-scripts'))
     .pipe(plugins.clean());
 }
 
@@ -51,6 +52,7 @@ function compileScripts() {
         'src/**/*.js'
     ];
     return gulp.src(jsSources)
+        .pipe(plugins.cached('compile-scripts'))
         .pipe(plugins.sourcemaps.init())
             .pipe(plugins.babel())
             .pipe(plugins.wrapJs('!function(){%= body %}()'))
