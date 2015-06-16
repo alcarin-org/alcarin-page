@@ -1,4 +1,5 @@
-angular.module('alcarin').service('EventsManager', EventsManager);
+angular.module('alcarin.game-panel')
+    .service('EventsManager', EventsManager);
 
 var EVENTS_REG = /\$([A-Za-z0-9]+)/g;
 

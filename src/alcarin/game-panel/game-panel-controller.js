@@ -1,4 +1,5 @@
-angular.module('alcarin').controller('GamePanelController', GamePanelController);
+angular.module('alcarin.game-panel')
+    .controller('GamePanelController', GamePanelController);
 
 function GamePanelController(
     $scope, socket, $stateParams, $state, EventsManager

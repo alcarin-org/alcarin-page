@@ -1,4 +1,4 @@
-angular.module('alcarin')
+angular.module('alcarin.game-panel')
 .config(function ($stateProvider) {
     $stateProvider
     .state('gamepanel.home', {
@@ -8,6 +8,8 @@ angular.module('alcarin')
     }).state('gamepanel.chars', {
         url: '/chars',
         templateUrl: 'alcarin/game-panel/chars/index.html',
-        permissions: 'LOGGED'
+        permissions: 'LOGGED',
+        controller: 'CharsController',
+        controllerAs: 'CharsCtrl',
     });
 });

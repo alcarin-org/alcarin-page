@@ -27,20 +27,6 @@ gulp.task('clean-dist-js', 'Delete all js files from `/dist` directory.', functi
   gulp.src('dist/**/*.js')
     .pipe(plugins.clean());
 });
-gulp.task('compile-js', [
-    'Wrap all js files from `/src` directory in IIFE with "use strict" statement.',
-    'Add AngularJS dependency injection annotations to js.',
-    'Store decorated files in `/dist` directory.',
-    'Reload the server.'
-  ].join(' '), ['clean-dist-js'], function() {
-  return gulp.src(['src/app.js', 'src/**/*.js'])
-    .pipe(plugins.plumber())
-    .pipe(plugins.wrap('!function(){\n\'use strict\';\n<%= contents %>\n}()'))
-    .pipe(plugins.ngAnnotate())
-    .pipe(gulp.dest('dist'))
-
-    .pipe(plugins.connect.reload());
-});
 
 gulp.task('compile-and-inject-deps', [
     'Run "compile-js" and "compile-styles" task,',

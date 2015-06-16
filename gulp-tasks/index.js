@@ -1,1 +1,2 @@
 require('./styles');
+require('./scripts');

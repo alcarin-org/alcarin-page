@@ -1,17 +1,17 @@
-// # just tell the world that JS is enabled - by class.
+// just tell the world that JS is enabled - by class.
 $('html').removeClass('no-js').addClass('js');
 
-// ###
-// this file is always compiling first.
-// ###
+/**
+ * this file is always compiling first.
+ */
 
 angular.module('alcarin', [
     'stack-trace-sourcemaps',
-    // # angularjs state routing extension
+    // angularjs state routing extension
     'ui.router',
-    // # socket.io cooperating with angularjs
+    // socket.io cooperating with angularjs
     'btford.socket-io',
-    // # showErrors - bootstrap forms validation way with angularjs
+    // showErrors - bootstrap forms validation way with angularjs
     'ui.bootstrap.showErrors',
     'ui.bootstrap.tpls',
     'ui.bootstrap.tooltip',
@@ -19,5 +19,6 @@ angular.module('alcarin', [
     'mgo-angular-wizard',
 
     'alcarin-html-templates',
+    'alcarin.game-panel',
     'alcarin.auth',
 ]);
