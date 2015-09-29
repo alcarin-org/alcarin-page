@@ -1,14 +1,12 @@
-/**
- * bootstrap extensions
- */
-@import "bootstrap/_variables";
-@import "bootstrap-overrides/_variables";
-
-@import "bootstrap";
-@import "bootstrap-overrides/_panels";
-@import "external/golden-ratio";
-
+@import "./variables";
 @import "./mixins";
+
+/**
+ * core rules, Kube framework fork
+ */
+@import "./core/kube";
+
+// @import "external/golden-ratio";
 /**
  * components
  */
@@ -17,11 +15,7 @@
 @import "components/ng-cloak";
 
 /**
- * page general layout
+ * page specific
  */
-@import "layout";
-
-/**
- * pages
- */
+@import "page/layout";
 @import "page/game-panel";
