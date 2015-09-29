@@ -1,89 +1,92 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Alcarin</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alcarin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <base href="/">
+    <base href="/">
 
-        <!-- temporary turning off favicon requests -->
-        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <!-- temporary turning off favicon requests -->
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
-        <!-- bower:css -->
-        <link rel="stylesheet" href="bower/angular-wizard/dist/angular-wizard.css" />
-        <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
-        <!-- endbower -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower/angular-wizard/dist/angular-wizard.css" />
+    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
 
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
 
-        <div ng-include="'layout/navbar.html'"></div>
+    <div ng-include="'layout/navbar.html'"></div>
 
-        <div id="main-container" class="container-fluid main">
-            <h2 ng-init="initialized=true" ng-hide="initialized">
-              <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
-            </h2>
-            <div class="game-container" ui-view>
-            </div>
-        </div>
+    <div id="main-container" class="container-fluid main">
+      <h2 ng-init="initialized=true" ng-hide="initialized">
+        <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
+      </h2>
+      <div class="game-container" ui-view>
+      </div>
+    </div>
 
-        <footer>
-            <p>&copy; Not idea what I should write in footer for open-source projects.</p>
-        </footer>
+    <footer>
+      <p>&copy; Not idea what I should write in footer for open-source projects.</p>
+    </footer>
 
-        <!-- bower:js -->
-        <script src="bower/jquery/dist/jquery.js"></script>
-        <script src="bower/angular/angular.js"></script>
-        <script src="bower/angular-socket-io/socket.js"></script>
-        <script src="bower/bluebird/js/browser/bluebird.js"></script>
-        <script src="bower/angular-ui-router/release/angular-ui-router.js"></script>
-        <script src="bower/lodash/lodash.js"></script>
-        <script src="bower/sprintf/src/sprintf.js"></script>
-        <script src="bower/ngstorage/ngStorage.js"></script>
-        <script src="bower/angular-wizard/dist/angular-wizard.js"></script>
-        <!-- endbower -->
+    <!-- bower:js -->
+    <script src="bower/jquery/dist/jquery.js"></script>
+    <script src="bower/angular/angular.js"></script>
+    <script src="bower/angular-socket-io/socket.js"></script>
+    <script src="bower/bluebird/js/browser/bluebird.js"></script>
+    <script src="bower/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower/lodash/lodash.js"></script>
+    <script src="bower/sprintf/src/sprintf.js"></script>
+    <script src="bower/ngstorage/ngStorage.js"></script>
+    <script src="bower/angular-wizard/dist/angular-wizard.js"></script>
+    <!-- endbower -->
 
-        <!-- inject:js -->
-        <script src="/components/events-bus.preload.js"></script>
-        <script src="/alcarin.module.js"></script>
-        <script src="/components/stack-trace-sourcemaps.module.js"></script>
-        <script src="/alcarin/game-panel/game-panel.module.js"></script>
-        <script src="/alcarin/player/auth/auth.module.js"></script>
-        <script src="/init.js"></script>
-        <script src="/alcarin/routes.js"></script>
-        <script src="/alcarin/templates.js"></script>
-        <script src="/components/bootstrap-submit-directive.js"></script>
-        <script src="/components/components.js"></script>
-        <script src="/components/gametime-filter.js"></script>
-        <script src="/components/match.js"></script>
-        <script src="/components/mouse-delay-directive.js"></script>
-        <script src="/alcarin/game-panel/char-environment.service.js"></script>
-        <script src="/alcarin/game-panel/events-manager-service.js"></script>
-        <script src="/alcarin/game-panel/game-panel.ctrl.js"></script>
-        <script src="/alcarin/game-panel/routes.js"></script>
-        <script src="/alcarin/game-panel/chars/chars.ctrl.js"></script>
-        <script src="/alcarin/player/auth/auth.route.js"></script>
-        <script src="/alcarin/player/auth/login-controller.js"></script>
-        <script src="/alcarin/player/auth/need-permission-directive.js"></script>
-        <script src="/alcarin/player/auth/permissions-service.js"></script>
-        <script src="/alcarin/player/auth/register-controller.js"></script>
-        <script src="/alcarin/player/char/create-char-controller.js"></script>
-        <script src="/alcarin/player/home/home-controller.js"></script>
-        <!-- endinject -->
+    <!-- inject:js -->
+    <script src="/components/events-bus.preload.js"></script>
+    <script src="/alcarin.module.js"></script>
+    <script src="/components/stack-trace-sourcemaps.module.js"></script>
+    <script src="/alcarin/game-panel/game-panel.module.js"></script>
+    <script src="/alcarin/player/auth/auth.module.js"></script>
+    <script src="/init.js"></script>
+    <script src="/alcarin/routes.js"></script>
+    <script src="/alcarin/templates.js"></script>
+    <script src="/components/bootstrap-submit-directive.js"></script>
+    <script src="/components/components.js"></script>
+    <script src="/components/gametime-filter.js"></script>
+    <script src="/components/match.js"></script>
+    <script src="/components/mouse-delay-directive.js"></script>
+    <script src="/alcarin/game-panel/char-environment.service.js"></script>
+    <script src="/alcarin/game-panel/events-manager-service.js"></script>
+    <script src="/alcarin/game-panel/game-panel.ctrl.js"></script>
+    <script src="/alcarin/game-panel/routes.js"></script>
+    <script src="/alcarin/game-panel/chars/chars.ctrl.js"></script>
+    <script src="/alcarin/player/auth/auth.route.js"></script>
+    <script src="/alcarin/player/auth/login-controller.js"></script>
+    <script src="/alcarin/player/auth/need-permission-directive.js"></script>
+    <script src="/alcarin/player/auth/permissions-service.js"></script>
+    <script src="/alcarin/player/auth/register-controller.js"></script>
+    <script src="/alcarin/player/char/create-char-controller.js"></script>
+    <script src="/alcarin/player/home/home-controller.js"></script>
+    <!-- endinject -->
 
-        <script src="/alcarin/templates.js"></script>
+    <script src="/alcarin/templates.js"></script>
 
-        <!-- temporary, debug only -->
-        <script src="http://localhost:8888/socket.io/socket.io.js"></script>
-    </body>
+    <!-- temporary, debug only -->
+    <script src="http://localhost:8888/socket.io/socket.io.js"></script>
+  </body>
 </html>
