@@ -1,5 +1,22 @@
 //some basic function that we used frequently in another less files
 
+$color-interval: 10% !global;
+
+@function color($color-name: 'primary', $color-tone: 'base') {
+  @return map-get(map-get($palette, $color-name), $color-tone);
+}
+
+@function literal-color-level($color, $level: 0) {
+  $color-base: if($level < 0, black, white);
+
+  @return mix($color-base, $color, abs($level) * $color-interval);
+}
+
+@function color-level($color-name: 'primary', $level: 0) {
+  $color: color($color-name);
+  @return literal-color-level($color, $level);
+}
+
 @mixin clearfix()
 {
   &:before,
@@ -16,8 +33,6 @@
   height:100%;
   width: 100%;
   display: block;
-  display: -webkit-box;
-  display: -moz-box;
   display: box;
   box-align: center;
 }

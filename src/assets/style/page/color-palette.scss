@@ -1,0 +1,78 @@
+.palette {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 100%;
+
+    .color {
+        $variant-height: 1.5rem;
+        position: relative;
+
+        width: calc(20% - 1rem);
+        height: 170px;
+        display: block;
+
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 30%;
+            bottom: 0;
+            left: 0;
+            padding: 0.5rem;
+            text-transform: uppercase;
+            font-size: 85%;
+            overflow: hidden;
+            word-wrap: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &:before {
+            background-color: white;
+            font-weight: bold;
+        }
+
+        &:after {
+            padding-top: 1.5rem;
+            font-size: 70%;
+            color: gray;
+        }
+
+        @each $color-key, $color-variants in $palette {
+            $base-color-value: map-get($color-variants, 'base');
+
+            &.#{$color-key} {
+                background-color: $base-color-value;
+                $border-color: literal-color-level($base-color-value, 2);
+                border: 1px solid $border-color;
+
+                &:before, &:after {
+                    border-top: 3px solid $border-color;
+                }
+                &:before { content: "#{$color-key}"; }
+                &:after  { content: "#{$base-color-value}"; }
+
+                $variant-gradient: (unquote("to bottom"),);
+
+                $index: 0;
+                @each $variant-name, $variant-value in $color-variants {
+                    $variant-gradient: append($variant-gradient, $variant-value $index * $variant-height);
+                    $index: $index + 1;
+                    $variant-gradient: append($variant-gradient, $variant-value $index * $variant-height);
+                }
+
+                .variants {
+                    border-left: 2px solid white;
+                    border-bottom: 2px solid white;
+                    position: absolute;
+                    height: $variant-height * length($color-variants);
+                    width: $variant-height;
+                    right: 0;
+                    top: 0;
+                    background: linear-gradient(#{$variant-gradient});
+                }
+            }
+        }
+    }
+}

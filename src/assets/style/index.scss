@@ -1,5 +1,5 @@
-@import "./variables";
 @import "./mixins";
+@import "./variables";
 
 /**
  * core rules, Kube framework fork
@@ -19,3 +19,4 @@
  */
 @import "page/layout";
 @import "page/game-panel";
+@import "page/color-palette";

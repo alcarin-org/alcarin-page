@@ -1,4 +1,4 @@
-<header class="group">
+<header class="group topnav">
   <nav class="navbar navbar-left" role="navigation">
     <ul>
       <li>
@@ -14,17 +14,17 @@
       <li class="game-time"
           tooltip="{{ $root.gametime | gametime: 'long' }}"
           tooltip-placement="bottom">
-        <span class="day" ng-cloak>
+        <time class="day" ng-cloak>
           <i class="fa fa-calendar"></i>
           {{ $root.gametime | gametime: 'date' }}
-        </span>
-        <span class="hour" ng-cloak>
+        </time>
+        <time class="hour" ng-cloak>
           <i class="fa" ng-class="{
             'fa-moon-o':  ($root.gametime | gametime: 'night'),
             'fa-sun-o' : !($root.gametime | gametime: 'night')
             }"></i>
           {{ $root.gametime | gametime: 'short-hour' }}h
-        </span>
+        </time>
       </li>
       <li need-permission="LOGGED" ng-cloak>
         <a ui-sref="logout">Logout</a>

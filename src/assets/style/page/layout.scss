@@ -6,6 +6,11 @@ html, body {
     height: 100%;
 }
 
+body {
+    background-color: color('background');
+    color: color('foreground');
+}
+
 #main-container {
     min-height: 100%;
 }
@@ -14,4 +19,9 @@ html, body {
   font-family: "Helvetica";
   font-size: 12.5px;
   margin: 0px auto;
+}
+
+.topnav {
+
+    padding: 15px;
 }
