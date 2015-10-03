@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-    background-color: color('background');
+    background-color: $color-body-bg;
     color: color('foreground');
 }
 
@@ -24,6 +24,7 @@ body {
 .topnav {
     background: $color-topnav-bg;
     margin-bottom: $base-line;
+    border-bottom: 1px solid literal-color-level($color-topnav-bg, 2);
     padding: $base-line / 2;
     .navbar {
         margin-bottom: 0;
