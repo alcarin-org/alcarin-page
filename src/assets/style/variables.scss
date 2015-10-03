@@ -28,6 +28,7 @@ $palette-tone-level: 2;
 
 /**
  * preparing light/base/dark version of all colors in $palette-base
+ * uage: color('primary') ; color('secondary', 'dark')
  */
 @each $key, $color in $palette-base {
     $color-map: (
@@ -39,6 +40,8 @@ $palette-tone-level: 2;
     );
     $palette: map-merge($palette, $color-map)
 }
+
+$color-topnav-bg: color('background', 'dark');
 
 $color-gray: #e0e3e5;
 $color-black: #0f0f0f;
@@ -93,5 +96,5 @@ $color-input-append-background: #f4f4f4;
 $color-input-append-border: #d4d4d4;
 
 // Links Color
-$color-link: #134da5;
-$color-link-hover: $color-red;
+$color-link: color('accent', 'dark');
+$color-link-hover: color('accent');

@@ -22,6 +22,10 @@ body {
 }
 
 .topnav {
-
-    padding: 15px;
+    background: $color-topnav-bg;
+    margin-bottom: $base-line;
+    padding: $base-line / 2;
+    .navbar {
+        margin-bottom: 0;
+    }
 }
