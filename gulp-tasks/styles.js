@@ -26,7 +26,7 @@ function compileSassStyle() {
         // .pipe(plugins.cached('compile-styles'))
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
-            .pipe(plugins.sass(sassOptions))
+            .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
             .pipe(plugins.autoprefixer('last 2 version'))
             .pipe(plugins.minifyCss())
         .pipe(plugins.sourcemaps.write('./'))
