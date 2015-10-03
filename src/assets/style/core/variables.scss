@@ -1,5 +1,3 @@
-// Font
-$font-family-base: "Helvetica Neue", Helvetica, Tahoma, sans-serif;
 $font-family-headings: $font-family-base;
 $font-family-controls: $font-family-base;
 $font-family-code: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -11,7 +9,6 @@ $grid-gutter-width: 30;
 // Base color
 $background-body: #fff;
 $color-body: #222;
-$color-headings: #000;
 
 // Type
 $font-size-root: 0.9375; // 0.9375 = 15px/16px by default

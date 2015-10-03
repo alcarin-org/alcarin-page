@@ -41,12 +41,24 @@ $palette-tone-level: 2;
     $palette: map-merge($palette, $color-map)
 }
 
+$color-headings: color('foreground');
+
 $color-body-bg: color('background', 'dark');
 
 $color-topnav-bg: color('background');
 
 $color-panel-bg: color('background');
 
+$color-btn-success: color('accent', 'dark');
+
+// Font
+$font-family-base: "DejaVu Sans", Helvetica, Tahoma, sans-serif;
+
+// Links Color
+$color-link: color('accent', 'light');
+$color-link-hover: color('accent');
+
+///////// old colors
 $color-gray: #e0e3e5;
 $color-black: #0f0f0f;
 $color-blue: #2575ed;
@@ -98,7 +110,3 @@ $color-blockquote-border: #ddd;
 $color-input-border: #ccc;
 $color-input-append-background: #f4f4f4;
 $color-input-append-border: #d4d4d4;
-
-// Links Color
-$color-link: color('accent');
-$color-link-hover: color('accent', 'light');

@@ -9,6 +9,7 @@ html, body {
 body {
     background-color: $color-body-bg;
     color: color('foreground');
+    font-size: 0.9em;
 }
 
 #main-container {
@@ -16,9 +17,9 @@ body {
 }
 
 .game-container {
-  font-family: "Helvetica";
-  font-size: 12.5px;
-  margin: 0px auto;
+  // font-family: "Helvetica";
+  // font-size: 12.5px;
+  // margin: 0px auto;
 }
 
 .topnav {

@@ -111,9 +111,12 @@ input[type="submit"].btn-blue {
 input[type="submit"].btn-red {
   @include make-color-btn($color-red, $color-red-dark, #fff);
 }
-.btn-green,
-input[type="submit"].btn-green {
-  @include make-color-btn($color-green, $color-green-dark, #fff);
+.btn-success,
+input[type="submit"].btn-success {
+  @include make-color-btn(
+    $color-btn-success, literal-color-level($color-btn-success),
+    color('foreground')
+  );
 }
 .btn-black,
 input[type="submit"].btn-black {
