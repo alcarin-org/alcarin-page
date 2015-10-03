@@ -23,6 +23,7 @@ body {
 footer {
   height: $footer-height;
   margin: $base-line / 2;
+  color: color('background', 'dark');
 }
 
 .game-container {

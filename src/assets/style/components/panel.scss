@@ -1,6 +1,6 @@
 .panel {
     background-color: $color-panel-bg;
 
-    border: 1px solid color('primary');
+    border: 0.2em solid color('primary', 'dark');
     border-radius: 6px;
 }

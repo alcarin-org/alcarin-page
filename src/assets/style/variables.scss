@@ -46,9 +46,9 @@ $footer-height: $base-line;
 
 $color-headings: color('foreground');
 
-$color-body-bg: color('background', 'dark');
+$color-body-bg: color('primary');
 
-$color-topnav-bg: color('background');
+$color-topnav-bg: color('primary', 'dark');
 
 $color-panel-bg: color('background');
 
@@ -58,7 +58,7 @@ $color-btn-success: color('accent', 'dark');
 $font-family-base: "DejaVu Sans", Helvetica, Tahoma, sans-serif;
 
 // Links Color
-$color-link: color('accent', 'light');
+$color-link: color('foreground', 'light');
 $color-link-hover: color('accent');
 
 ///////// old colors
