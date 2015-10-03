@@ -41,6 +41,9 @@ $palette-tone-level: 2;
     $palette: map-merge($palette, $color-map)
 }
 
+// layout
+$footer-height: $base-line;
+
 $color-headings: color('foreground');
 
 $color-body-bg: color('background', 'dark');

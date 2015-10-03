@@ -30,18 +30,22 @@
       </p>
     <![endif]-->
 
-    <div ng-include="'layout/navbar.html'"></div>
-
     <div id="main-container" class="container-fluid main">
-      <h2 ng-init="initialized=true" ng-hide="initialized">
-        <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
-      </h2>
+      <div ng-include="'layout/navbar.html'"></div>
+
+      <div class="site-loading-indicator"
+           ng-init="initialized=true"
+           ng-hide="initialized">
+          <h2>
+            <i class="fa fa-lg fa-cog fa-spin"></i> Please wait...
+          </h2>
+      </div>
       <div class="game-container" ui-view>
       </div>
     </div>
 
     <footer>
-      <p>&copy; Not idea what I should write in footer for open-source projects.</p>
+      &copy; Not idea what I should write in footer for open-source projects.
     </footer>
 
     <!-- bower:js -->

@@ -14,6 +14,15 @@ body {
 
 #main-container {
     min-height: 100%;
+    height: 100%;
+    margin: 0 auto;
+    margin-bottom: -$footer-height - $base-line;
+    padding-bottom: $base-line;
+}
+
+footer {
+  height: $footer-height;
+  margin: $base-line / 2;
 }
 
 .game-container {
@@ -25,7 +34,7 @@ body {
 .topnav {
     background: $color-topnav-bg;
     margin-bottom: $base-line;
-    border-bottom: 1px solid literal-color-level($color-topnav-bg, 2);
+    border-bottom: 1px solid literal-color-level($color-topnav-bg, 3);
     padding: $base-line / 2;
     .navbar {
         margin-bottom: 0;
