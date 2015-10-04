@@ -22,7 +22,7 @@ gulp.task('compile-and-inject-deps', [
 function compileAndInjectScripts() {
   var jsSources = gulp.src([
       'dist/**/*.preload.js',
-      'dist/**/*.module.js',
+      'dist/*/**/*.module.js',
       'dist/alcarin.module.js',
       'dist/**/*.js'
   ], {read: false});
@@ -52,6 +52,7 @@ function compileScripts() {
         'src/**/*.js'
     ];
     return gulp.src(jsSources)
+        .pipe(plugins.plumber())
         .pipe(plugins.cached('compile-scripts'))
         .pipe(plugins.sourcemaps.init())
             .pipe(plugins.babel())

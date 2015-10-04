@@ -61,6 +61,9 @@ $font-family-base: "DejaVu Sans", Helvetica, Tahoma, sans-serif;
 $color-link: color('foreground', 'light');
 $color-link-hover: color('accent');
 
+// Forms
+$color-input-error: literal-color-level(red, -4);
+
 ///////// old colors
 $color-gray: #e0e3e5;
 $color-black: #0f0f0f;

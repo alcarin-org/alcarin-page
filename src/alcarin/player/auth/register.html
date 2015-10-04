@@ -9,21 +9,22 @@
       <label>
         Email
         <input type="email"
-               name="inputEmail"
+               name="email"
                class="width-100"
+               input-error
                placeholder="Enter email"
                required
                ng-model="RegisterCtrl.email"
                tabindex="1">
-        <div class="forms-desc"
-             ng-show="registerForm.inputEmail.$dirty &&
-                      registerForm.inputEmail.$error.email">
-          Please, use valid email format.
-        </div>
-        <div class="forms-desc"
-             ng-show="RegisterCtrl.emailOccupied">
-          This email address is already in use. Do you prefer to
-          <a href="/login">login</a>?
+        <div class="forms-desc error"
+             ng-show="registerForm.email.$touched">
+          <span ng-show="registerForm.email.$error.email">
+            Please, use valid email format.
+          </span>
+          <span ng-show="RegisterCtrl.emailOccupied">
+            This email address is already in use. Do you prefer to
+            <a href="/login">login</a>?
+          </span>
         </div>
       </label>
 

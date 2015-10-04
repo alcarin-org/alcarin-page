@@ -1,7 +1,8 @@
+
 <div class="units-row units-padding">
   <div class="unit-centered unit-40 panel">
     <h3>Login</h3>
-    <form name="form"
+    <form name="loginForm"
           class="forms"
           bootstrap-submit="LoginCtrl.login()">
       <label>
@@ -9,23 +10,31 @@
         <input type="email"
                name="email"
                class="width-100"
+               input-error
                placeholder="Enter email"
                ng-model="LoginCtrl.email"
                tabindex="1"
                required>
+        <div class="forms-desc error"
+             ng-show="loginForm.email.$touched">
+          <span ng-show="loginForm.email.$error.email">
+            Please, use valid email format.
+          </span>
+        </div>
       </label>
       <label>
         Password
         <input type="password"
                name="password"
                class="width-100"
+               input-error
                placeholder="Password"
                ng-model="LoginCtrl.password"
                tabindex="2"
                required>
         <div class="forms-desc"
              ng-show="LoginCtrl.loginInvalid">
-          <p>Sorry, your e-mail or password is incorrect - please try again.</p>
+          Sorry, your e-mail or password is incorrect - please try again.
         </div>
       </label>
       <p>
