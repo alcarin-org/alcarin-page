@@ -1,5 +1,3 @@
-$nav-color: #fff;
-
 $screen-sm-min: 2px;
 $screen-xs-max: 1px;
 
@@ -45,6 +43,8 @@ $palette-tone-level: 2;
     );
     $palette: map-merge($palette, $color-map)
 }
+
+$nav-color: color('accent', 'light');
 
 // layout
 $footer-height: $base-line;

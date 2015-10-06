@@ -4,40 +4,36 @@
   padding: $base-line;
   padding-top: 0;
 
-  .unit-golden-sm {
-    margin-right: $base-line / 2;
+  .unit-golden-sm.panel {
+    margin-right: 0.25em;
   }
-  .unit-golden-lg {
-    margin-left: $base-line / 2;
+  .unit-golden-lg.panel {
+    margin-left: 0.25em;
   }
 
   .middle-nav {
-    margin-top: 30px;
+    margin-top: 2em;
   }
 
   .events-container {
-    margin-left: 1em;
-    min-height: 30em;
     .game-event {
-      margin: 1px;
-      padding:3px;
       .time {
-        margin-right: 5px;
+        margin-right: 0.5em;
         font-weight: bold;
       }
       .content {
-        font-size: 10.5pt;
+        // font-size: 1em;
       }
     }
   }
 }
 
-  @media (max-width: $screen-xs-max) {
-    .control-panel {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      margin: 0;
-      z-index: 2;
-    }
+@media (max-width: $screen-xs-max) {
+  .control-panel {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
   }
+}

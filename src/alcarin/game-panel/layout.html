@@ -2,7 +2,8 @@
   <section class="unit-golden-sm panel control-panel"
            ng-class="{'hidden-xs': !GamePanelCtrl.controlPanelFocus}">
     <div class="pages-container">
-      <button type="button" class="close visible-xs-block"
+      <button type="button"
+              class="close show-on-mobile"
               ng-click="GamePanelCtrl.controlPanelFocus=false"
               aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -15,7 +16,7 @@
     <nav>
       <ul class="nav-bar"
           ng-class="{'nav-bar--focused': GamePanelCtrl.controlPanelFocus}">
-        <li class="events-btn visible-xs-block"
+        <li class="events-btn show-on-mobile"
             ng-click="GamePanelCtrl.controlPanelFocus=false"
             ng-class="{active: !GamePanelCtrl.controlPanelFocus}">
           <a href=""><i class="fa fa-heartbeat"></i></a>
@@ -35,20 +36,26 @@
       <div class="talking">
         <!-- layout trick to nice, flexible panel -->
 
-        <form name="sayingForm" class="form-horizontal" role="form"
-              ng-submit="GamePanelCtrl.talkToAll()" novalidate>
+        <form name="sayingForm"
+              role="form"
+              class="units-row"
+              ng-submit="GamePanelCtrl.talkToAll()"
+              novalidate>
 
-          <div class="form-group">
-            <div class="col-xs-8 col-sm-10">
-              <input name="saying" class="form-control" type="text"
-                     ng-model="GamePanelCtrl.saying" tabindex="1"
-                     placeholder="Say to all" required>
-            </div>
-            <div class="col-xs-4 col-sm-2">
-              <button name="sb" type="submit" class="btn btn-block btn-primary"
-                     tabindex="2">Say</button>
-            </div>
-          </div>
+          <input name="saying"
+                 class="unit-75"
+                 type="text"
+                 ng-model="GamePanelCtrl.saying"
+                 tabindex="1"
+                 placeholder="Say to all"
+                 required>
+
+          <button name="sb"
+                  type="submit"
+                  class="btn unit-push-5 unit-20 btn-primary"
+                  tabindex="2">
+            Say
+          </button>
 
         </form>
       </div>
