@@ -1,8 +1,14 @@
-.game-panel {
+.gameboard {
   display: flex;
   position: relative;
-  .panel {
-      min-height: 560px;
+  padding: $base-line;
+  padding-top: 0;
+
+  .unit-golden-sm {
+    margin-right: $base-line / 2;
+  }
+  .unit-golden-lg {
+    margin-left: $base-line / 2;
   }
 
   .middle-nav {
@@ -10,7 +16,8 @@
   }
 
   .events-container {
-    min-height: 600px;
+    margin-left: 1em;
+    min-height: 30em;
     .game-event {
       margin: 1px;
       padding:3px;

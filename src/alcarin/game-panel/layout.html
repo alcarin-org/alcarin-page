@@ -1,15 +1,13 @@
-<div class="units-row units-split game-panel">
-  <section class="unit-golden-sm control-panel"
+<div class="units-row units-split units-padding unit-centered gameboard">
+  <section class="unit-golden-sm panel control-panel"
            ng-class="{'hidden-xs': !GamePanelCtrl.controlPanelFocus}">
-    <div class="panel">
-      <div class="pages-container">
-        <button type="button" class="close visible-xs-block"
-                ng-click="GamePanelCtrl.controlPanelFocus=false"
-                aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div ui-view></div>
-      </div>
+    <div class="pages-container">
+      <button type="button" class="close visible-xs-block"
+              ng-click="GamePanelCtrl.controlPanelFocus=false"
+              aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div ui-view></div>
     </div>
   </section>
 
@@ -32,8 +30,8 @@
     </nav>
   </div>
 
-  <section class="unit-golden-lg">
-    <div class="panel events-container">
+  <section class="unit-golden-lg panel">
+    <div class="events-container">
       <div class="talking">
         <!-- layout trick to nice, flexible panel -->
 
