@@ -22,10 +22,11 @@ function compileSassStyle() {
         includePaths: ['lib/bower/bootstrap-sass/assets/stylesheets']
     };
     var sassStream = gulp.src('src/assets/style/index.scss')
-        .pipe(plugins.cached('compile-styles'))
+        // other's file can change, but we still need to rebuild css
+        // .pipe(plugins.cached('compile-styles'))
         .pipe(plugins.plumber())
         .pipe(plugins.sourcemaps.init())
-            .pipe(plugins.sass(sassOptions))
+            .pipe(plugins.sass(sassOptions).on('error', plugins.sass.logError))
             .pipe(plugins.autoprefixer('last 2 version'))
             .pipe(plugins.minifyCss())
         .pipe(plugins.sourcemaps.write('./'))

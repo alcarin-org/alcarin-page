@@ -107,5 +107,5 @@ gulp.task('serve', [
 gulp.task('watch', false, [
   'watch-scripts', 'watch-styles', 'watch-bower', 'watch-html'
 ]);
-// gulp.task('serve', ['connect', 'watch']);
+
 gulp.task('default', 'Just run "serve" task', ['serve']);

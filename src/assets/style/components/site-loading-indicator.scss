@@ -1,0 +1,17 @@
+
+.site-loading-indicator {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+
+  h2 {
+    display: table-cell;
+    vertical-align: middle;
+    text-shadow: 2px 2px 4px color('background', 'light');
+    color: inherit;
+  }
+}

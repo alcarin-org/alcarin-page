@@ -1,27 +1,23 @@
-/**
- * bootstrap extensions
- */
-@import "bootstrap/_variables";
-@import "bootstrap-overrides/_variables";
-
-@import "bootstrap";
-@import "bootstrap-overrides/_panels";
-@import "external/golden-ratio";
-
 @import "./mixins";
+@import "./variables";
+
+/**
+ * core rules, Kube framework fork
+ */
+@import "./core/kube";
+
 /**
  * components
  */
+@import "components/panel";
 @import "components/game-time";
 @import "components/middle-nav";
 @import "components/ng-cloak";
+@import "components/site-loading-indicator";
 
 /**
- * page general layout
+ * page specific
  */
-@import "layout";
-
-/**
- * pages
- */
+@import "page/layout";
 @import "page/game-panel";
+@import "page/color-palette";

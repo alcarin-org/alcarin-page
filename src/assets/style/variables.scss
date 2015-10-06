@@ -1,0 +1,123 @@
+$screen-sm-min: 2px;
+$screen-xs-max: 1px;
+
+// Grid
+$grid-width: 1000;
+$grid-gutter-width: 30;
+
+// Type
+$font-size-root: .9375; // .9375 = 15px/16px by default
+$font-size-print: 12pt;
+$font-size-base: $font-size-root + 0em;
+
+$base-line: 1.65em;
+
+$golden-ratio:    1.6180339887498948482;
+$golden-ratio-lg:       (1 / $golden-ratio);
+$golden-ratio-sm:       (1 - $golden-ratio-lg);
+
+$palette-base: (
+    'primary': #85A088,
+    'accent': #93ACB5,
+    'secondary': #88A09E,
+    'foreground': #E2DCDE,
+    'background': #5B635A,
+);
+
+$palette: (
+);
+
+$palette-tone-level: 2;
+
+/**
+ * preparing light/base/dark version of all colors in $palette-base
+ * uage: color('primary') ; color('secondary', 'dark')
+ */
+@each $key, $color in $palette-base {
+    $color-map: (
+        #{$key}: (
+            'light': literal-color-level($color, $palette-tone-level),
+            'base': $color,
+            'dark': literal-color-level($color, -$palette-tone-level)
+        )
+    );
+    $palette: map-merge($palette, $color-map)
+}
+
+$nav-color: color('accent', 'light');
+
+// layout
+$footer-height: $base-line;
+
+$color-headings: color('foreground');
+
+$color-body-bg: color('primary');
+
+$color-topnav-bg: color('primary', 'dark');
+
+$color-panel-bg: color('background');
+
+$color-btn-success: color('primary', 'dark');
+
+// Font
+$font-family-base: "DejaVu Sans", Helvetica, Tahoma, sans-serif;
+
+// Links Color
+$color-link: color('foreground', 'light');
+$color-link-hover: color('accent');
+
+// Forms
+$color-input-error: literal-color-level(red, -4);
+
+///////// old colors
+$color-gray: #e0e3e5;
+$color-black: #0f0f0f;
+$color-blue: #2575ed;
+$color-red: #de2c3b;
+$color-yellow: #ffc800;
+$color-green: #2c9f42;
+$color-white: #fff;
+
+// Colors Dark
+$color-gray-dark: #b3b6b7;
+$color-black-dark: #000;
+$color-blue-dark: #1a52a5;
+$color-red-dark: #b2232f;
+$color-yellow-dark: #cca000;
+$color-green-dark: #237f35;
+
+// Colors Light
+$color-gray-light: #f0f1f2;
+$color-black-light: #363738;
+$color-blue-light: #92baf6;
+$color-red-light: #ef969d;
+$color-yellow-light: #ffe480;
+$color-green-light: #96cfa1;
+
+// Colors Pastel
+$color-gray-pastel: #f7f8f8;
+$color-black-pastel: #dadada;
+$color-blue-pastel: #d3e3fb;
+$color-red-pastel: #f8d5d8;
+$color-yellow-pastel: #fff4cc;
+$color-green-pastel: #d5ecd9;
+
+// Table Color
+$color-table-border: #eee;
+$color-table-stripped: #f8f8f8;
+$color-table-hovered: #f4f4f4;
+
+// Fieldset
+$color-fieldset-border: #ccc;
+
+// Code
+$color-code-background: #f4f4f4;
+$color-code-border: #d4d4d4;
+
+// Blockquote
+$color-blockquote-border: #ddd;
+
+// Input
+$color-input-border: #ccc;
+$color-input-append-background: #f4f4f4;
+$color-input-append-border: #d4d4d4;

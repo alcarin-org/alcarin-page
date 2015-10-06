@@ -1,6 +1,6 @@
 {
   "name": "alcarin-page",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/alcarin-org/alcarin-page",
   "authors": [
     "Wiktor Obrębski <wiktor.obrebski@10clouds.com>"
@@ -15,16 +15,13 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "angular": "1.3.14",
-    "angular-bootstrap": "~0.11.2",
-    "angular-bootstrap-show-errors": "~1.0.2",
-    "angular-socket-io": "~0.6.0",
+    "angular": "1.4.7",
+    "angular-socket-io": "~0.7.0",
     "bluebird": "~2.3.2",
-    "angular-ui-router": "~0.2.11",
+    "angular-ui-router": "~0.2.15",
     "lodash": "~3.4.0",
     "sprintf": "~1.0.2",
     "ngstorage": "~0.3.0",
-    "bootstrap-sass": "~3.3.4",
     "angular-wizard": "psychowico/angular-wizard#master",
     "font-awesome": "~4.3.0"
   },

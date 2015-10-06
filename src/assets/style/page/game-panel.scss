@@ -1,36 +1,39 @@
-.game-panel {
+.gameboard {
   display: flex;
   position: relative;
-  .panel {
-      min-height: 560px;
+  padding: $base-line;
+  padding-top: 0;
+
+  .unit-golden-sm.panel {
+    margin-right: 0.25em;
+  }
+  .unit-golden-lg.panel {
+    margin-left: 0.25em;
   }
 
   .middle-nav {
-    margin-top: 30px;
+    margin-top: 2em;
   }
 
   .events-container {
-    min-height: 600px;
     .game-event {
-      margin: 1px;
-      padding:3px;
       .time {
-        margin-right: 5px;
+        margin-right: 0.5em;
         font-weight: bold;
       }
       .content {
-        font-size: 10.5pt;
+        // font-size: 1em;
       }
     }
   }
 }
 
-  @media (max-width: $screen-xs-max) {
-    .control-panel {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      margin: 0;
-      z-index: 2;
-    }
+@media (max-width: $screen-xs-max) {
+  .control-panel {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 2;
   }
+}

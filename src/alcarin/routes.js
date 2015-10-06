@@ -17,12 +17,18 @@ angular.module('alcarin')
             charEnv: prepareCharacterEnvironment
         },
         permissions: 'LOGGED'
-    }).state('create-char', {
+    })
+    .state('create-char', {
         url: '/char/create',
         templateUrl: 'alcarin/player/char/create-char.html',
         controllerAs: 'CreateCharCtrl',
         controller: 'CreateCharController',
         permissions: 'LOGGED'
+    })
+    .state('color-palette', {
+        url: '/palette',
+        templateUrl: 'layout/color-palette.html',
+        permissions: 'PUBLIC'
     });
     // # .when '/public',
     // # need basic home page, when user can know about game and login/register
