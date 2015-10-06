@@ -175,10 +175,10 @@
     padding: 0.6em 0.7em;
   }
   & a {
-    background: #f6f6f6;
+    background: color('foreground', 'light');
     &:hover {
-      color: #000;
-      background: #eee;
+      color: black;
+      background: color('accent', 'light');
     }
   }
   & li.active a,

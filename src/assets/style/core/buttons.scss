@@ -115,7 +115,7 @@ input[type="submit"].btn-red {
 input[type="submit"].btn-success {
   @include make-color-btn(
     $color-btn-success, literal-color-level($color-btn-success),
-    color('foreground')
+    color('foreground', 'light')
   );
 }
 .btn-black,
