@@ -11,7 +11,12 @@ $grid-gutter-width: 30;
 $font-size-root: .9375; // .9375 = 15px/16px by default
 $font-size-print: 12pt;
 $font-size-base: $font-size-root + 0em;
+
 $base-line: 1.65em;
+
+$golden-ratio:    1.6180339887498948482;
+$golden-ratio-lg:       (1 / $golden-ratio);
+$golden-ratio-sm:       (1 - $golden-ratio-lg);
 
 $palette-base: (
     'primary': #85A088,
