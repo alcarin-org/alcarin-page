@@ -4,10 +4,5 @@ angular.module('alcarin.auth')
 function CharacterService(socket) {
 
     return {
-        fetchPlayableRaces: fetchAvailableRaces,
     };
-
-    function fetchAvailableRaces() {
-        return socket.emit('game.playable-races');
-    }
 }

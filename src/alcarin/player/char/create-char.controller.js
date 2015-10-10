@@ -1,6 +1,6 @@
 angular.module('alcarin').controller('CreateCharController', CreateCharController);
 
-function CreateCharController($state, socket, Character) {
+function CreateCharController($state, socket, Player) {
     var vm = this;
 
     _.assign(vm, {
@@ -15,7 +15,7 @@ function CreateCharController($state, socket, Character) {
 
     function activate() {
         vm.isLoading = true;
-        Character.fetchPlayableRaces().then(
+        Player.fetchPlayableRaces().then(
             (races) => {
                 var race         = _.first(races);
                 vm.char.race     = race.id;
@@ -35,8 +35,8 @@ function CreateCharController($state, socket, Character) {
     }
 
     function createChar() {
-        socket.emit(
-            'player.create-char', vm.char
-        ).then(() => $state.go('home'));
+        Player.createChar(vm.char).then(
+            () => $state.go('home')
+        );
     }
 }
