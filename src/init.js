@@ -55,10 +55,9 @@ angular.module('alcarin')
     Promise.setScheduler(function (cb) {
         return $rootScope.$evalAsync(cb);
     });
-    socket.emit('game.gametime').then(function gameTimeObserver(gt) {
-        $rootScope.gametime = gt.timestamp;
-        console.log(gt.timestamp);
-    });
+    socket.emit('game.gametime').then(
+        (gt) => $rootScope.gametime = gt.timestamp
+    );
 });
 
 $(function bootstrapSite() {

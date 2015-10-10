@@ -3,6 +3,29 @@
         name="createCharForm"
         novalidate>
     <wizard class="create-char" on-finish="CreateCharCtrl.createChar()">
+
+      <wz-step title="Race">
+        <h1>Character race</h1>
+        <p>Any race various in avarage lifespan, skills and talents.</p>
+        <p class="width-100 text-centered">
+          <i ng-if="CreateCharCtrl.isLoading" class="fa fa-spin fa-spinner"></i>
+          <select id="char-race"
+                  ng-hide="CreateCharCtrl.isLoading"
+                  name="charRace"
+                  ng-model="CreateCharCtrl.char.race"
+                  class="width-100"
+                  type="text"
+                  ng-options="race.id as race.id for
+                              race in CreateCharCtrl.playableRaces"
+                  required></select>
+        </p>
+        <button ng-disabled="CreateCharCtrl.isLoading"
+                class="btn btn-success width-100"
+                wz-next>
+          Next
+        </button>
+      </wz-step>
+
       <wz-step title="Name">
         <h1>Character name</h1>
         <p>This name will be present for you on your characters list.
@@ -23,6 +46,7 @@
           Next
         </button>
       </wz-step>
+
       <wz-step title="Finish!">
         <h1>Done!</h1>
         <p>It's all. You can start playing now.</p>
@@ -36,6 +60,7 @@
           </div>
         </div>
       </wz-step>
+
     </wizard>
   </form>
 </div>
