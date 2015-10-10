@@ -41,7 +41,7 @@ function compileAndInjectScripts() {
 
 function cleanJs() {
   return gulp.src('dist/**/*.js')
-    .pipe(plugins.cached('compile-scripts'))
+    // .pipe(plugins.cached('compile-scripts'))
     .pipe(plugins.clean());
 }
 
@@ -53,7 +53,7 @@ function compileScripts() {
     ];
     return gulp.src(jsSources)
         .pipe(plugins.plumber())
-        .pipe(plugins.cached('compile-scripts'))
+        // .pipe(plugins.cached('compile-scripts'))
         .pipe(plugins.sourcemaps.init())
             .pipe(plugins.babel())
             .pipe(plugins.wrapJs('!function(){%= body %}()'))
