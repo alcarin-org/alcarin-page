@@ -4,12 +4,12 @@ function CreateCharController($state, socket, Character) {
     var vm = this;
 
     _.assign(vm, {
-        char: {},
+        step: 'Race',
+        char: {
+        },
         createChar: createChar,
+        selectedRaceGenders: selectedRaceGenders,
     });
-    vm.char = {};
-
-    vm.createChar = createChar;
 
     activate();
 
@@ -17,12 +17,23 @@ function CreateCharController($state, socket, Character) {
         vm.isLoading = true;
         Character.fetchPlayableRaces().then(
             (races) => {
-                vm.char.race = _.first(races).id;
+                var race         = _.first(races);
+                vm.char.race     = race.id;
+                vm.char.gender   = race.possibleGenders[0];
                 vm.playableRaces = races;
-                vm.isLoading = false;
+                vm.isLoading     = false;
             }
         );
     }
+
+    function selectedRaceGenders() {
+        if (!vm.char.race) {
+            return;
+        }
+        var race = _.find(vm.playableRaces, {id: vm.char.race});
+        return race.possibleGenders;
+    }
+
     function createChar() {
         socket.emit(
             'player.create-char', vm.char

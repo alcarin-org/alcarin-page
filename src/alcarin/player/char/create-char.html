@@ -19,11 +19,37 @@
                               race in CreateCharCtrl.playableRaces"
                   required></select>
         </p>
-        <button ng-disabled="CreateCharCtrl.isLoading"
-                class="btn btn-success width-100"
-                wz-next>
-          Next
-        </button>
+        <div class="units-row">
+          <button ng-disabled="CreateCharCtrl.isLoading"
+                  class="btn btn-success unit-100"
+                  wz-next>
+            Next
+          </button>
+        </div>
+      </wz-step>
+
+      <wz-step title="Gender">
+        <h1>Character gender</h1>
+        <p>Genders differ a little, related to selected race.</p>
+        <p class="width-100 text-centered">
+          <select id="char-gender"
+                  ng-hide="CreateCharCtrl.isLoading"
+                  name="charGender"
+                  ng-model="CreateCharCtrl.char.gender"
+                  class="width-100"
+                  type="text"
+                  ng-options="gender for gender in CreateCharCtrl.selectedRaceGenders()"
+                  required></select>
+        </p>
+        <div class="units-row">
+          <button ng-disabled="CreateCharCtrl.isLoading"
+                  class="btn btn-success unit-80"
+                  wz-next>
+            Next
+          </button>
+          <button class="btn btn-warning unit-20"
+                  wz-previous>Back</button>
+        </div>
       </wz-step>
 
       <wz-step title="Name">
@@ -32,7 +58,7 @@
         Nobody except you can see this.</p>
         <p>
           <input id="char-name"
-                 input-error
+                 ng-class="{'input-error': createCharForm.charName.$invalid}"
                  name="charName"
                  ng-model="CreateCharCtrl.char.name"
                  class="width-100"
@@ -40,24 +66,24 @@
                  required
                  placeholder="Your character name">
         </p>
-        <button ng-disabled="createCharForm.charName.$invalid"
-                class="btn btn-success width-100"
-                wz-next>
-          Next
-        </button>
+        <div class="units-row">
+          <button ng-disabled="createCharForm.charName.$invalid"
+                  class="btn btn-success unit-80"
+                  wz-next>
+            Next
+          </button>
+          <button class="btn btn-warning unit-20"
+                  wz-previous>Back</button>
+        </div>
       </wz-step>
 
       <wz-step title="Finish!">
         <h1>Done!</h1>
         <p>It's all. You can start playing now.</p>
 
-        <div class="units-row end units-padding units-split">
-          <div class="unit-80">
-            <button class="btn btn-success width-100" wz-finish>Finish!</button>
-          </div>
-          <div class="unit-20">
-            <button class="btn btn-warning width-100" wz-previous>Back</button>
-          </div>
+        <div class="units-row">
+          <button class="btn btn-success unit-80" wz-finish>Finish!</button>
+          <button class="btn btn-warning unit-20" wz-previous>Back</button>
         </div>
       </wz-step>
 
