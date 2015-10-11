@@ -35,7 +35,7 @@ function CreateCharController($state, socket, Player) {
     }
 
     function createChar() {
-        Player.createChar(vm.char).then(
+        Player.createCharacter(vm.char).then(
             () => $state.go('home')
         );
     }
