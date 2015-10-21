@@ -48,6 +48,9 @@
       &copy; Not idea what I should write in footer for open-source projects.
     </footer>
 
+    <!-- temporary, debug only -->
+    <script src="http://localhost:8888/socket.io/socket.io.js"></script>
+
     <!-- bower:js -->
     <script src="bower/jquery/dist/jquery.js"></script>
     <script src="bower/angular/angular.js"></script>
@@ -58,6 +61,7 @@
     <script src="bower/sprintf/src/sprintf.js"></script>
     <script src="bower/ngstorage/ngStorage.js"></script>
     <script src="bower/angular-wizard/dist/angular-wizard.js"></script>
+    <script src="bower/kefir/dist/kefir.js"></script>
     <!-- endbower -->
 
     <!-- inject:js -->
@@ -70,10 +74,13 @@
     <script src="/init.js"></script>
     <script src="/alcarin/routes.js"></script>
     <script src="/components/bootstrap-submit-directive.js"></script>
-    <script src="/components/gametime-filter.js"></script>
+    <script src="/components/gametime.filter.js"></script>
     <script src="/components/input-error.directive.js"></script>
     <script src="/components/match.js"></script>
     <script src="/components/mouse-delay-directive.js"></script>
+    <script src="/components/socket.service.js"></script>
+    <script src="/components/sockets-as-stream.js"></script>
+    <script src="/components/stream.service.js"></script>
     <script src="/alcarin/game-panel/char-environment.service.js"></script>
     <script src="/alcarin/game-panel/events-manager.service.js"></script>
     <script src="/alcarin/game-panel/game-panel.ctrl.js"></script>
@@ -81,7 +88,7 @@
     <script src="/alcarin/player/player.service.js"></script>
     <script src="/alcarin/game-panel/chars/chars.ctrl.js"></script>
     <script src="/alcarin/player/auth/auth.route.js"></script>
-    <script src="/alcarin/player/auth/login-controller.js"></script>
+    <script src="/alcarin/player/auth/login.controller.js"></script>
     <script src="/alcarin/player/auth/need-permission.directive.js"></script>
     <script src="/alcarin/player/auth/permissions.service.js"></script>
     <script src="/alcarin/player/auth/register.controller.js"></script>
@@ -91,8 +98,5 @@
     <!-- endinject -->
 
     <script src="/alcarin/templates.js"></script>
-
-    <!-- temporary, debug only -->
-    <script src="http://localhost:8888/socket.io/socket.io.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@ function GamePanelController(
     $scope, socket, $stateParams, $state, EventsManager, charEnv
 ) {
     var vm = this;
-    console.log('env', charEnv);
 
     _.assign(vm, {
         loadEvents: loadEvents,
@@ -37,11 +36,14 @@ function GamePanelController(
     }
 
     function loadEvents() {
-        socket.emit('char.events').then(function (events) {
-            vm.gameEvents = events.map(function (ev) {
-                return EventsManager.split(ev);
-            });
-        });
+        vm.gameEvents = [];
+        socket.emit('char.events')
+            .flatten()
+            .map((event) => EventsManager.split(event))
+            // .bufferWhite()
+            .onValue(
+                (gameEvent) => vm.gameEvents.push(gameEvent)
+            );
     }
 
     function talkToAll() {

@@ -1,1 +1,3 @@
-angular.module('alcarin.common', []);
+angular.module('alcarin.common', [
+    'btford.socket-io'
+]);

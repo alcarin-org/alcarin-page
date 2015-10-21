@@ -5,9 +5,7 @@ function PermissionsService(UserPermissions, PermissionsTable) {
     var service = this;
     service.UserPermissions = UserPermissions;
     service.PermissionsTable = PermissionsTable;
-    UserPermissions.on('updated', function () {
-        service.emit('updated');
-    });
+    UserPermissions.on('updated', () => service.emit('updated'));
 }
 
 PermissionsService.prototype = angular.extend(new window.EventsBus(), {

@@ -62,13 +62,15 @@ angular.module('alcarin')
 });
 
 
-prepareCharacterEnvironment.$inject = ['$state', '$stateParams', 'CharEnvironment'];
+prepareCharacterEnvironment.$inject = [
+    '$state', '$stateParams', 'CharEnvironment'
+];
 function prepareCharacterEnvironment($state, $stateParams, CharEnvironment) {
     return CharEnvironment.factory($stateParams.charId)
-        .catch('permission.denied', function () {
+        .onError('permission.denied', function () {
             $state.go('home');
         })
-        .catch('validation.failed', function () {
+        .onError('validation.failed', function () {
             $state.go('home');
         });
 }

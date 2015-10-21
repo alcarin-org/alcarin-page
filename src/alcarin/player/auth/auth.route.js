@@ -13,7 +13,7 @@ angular.module('alcarin.auth')
         url: '/login',
         templateUrl: 'alcarin/player/auth/login.html',
         resolve: {
-            logout: function () { return false; }
+            logoutEnabled: function () { return false; }
         },
         controllerAs: 'LoginCtrl',
         controller: 'LoginController',
@@ -21,7 +21,7 @@ angular.module('alcarin.auth')
     }).state('logout', {
         url: '/logout',
         resolve: {
-            logout: function () { return true; }
+            logoutEnabled: function () { return true; }
         },
         template: '',
         controller: 'LoginController',

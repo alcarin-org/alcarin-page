@@ -4,7 +4,7 @@
     <h3>Login</h3>
     <form name="loginForm"
           class="forms"
-          bootstrap-submit="LoginCtrl.login()">
+          bootstrap-submit="LoginCtrl.formSubmits.emit()">
       <label>
         Email address
         <input type="email"
@@ -32,7 +32,7 @@
                ng-model="LoginCtrl.password"
                tabindex="2"
                required>
-        <div class="forms-desc"
+        <div class="forms-desc error"
              ng-show="LoginCtrl.loginInvalid">
           Sorry, your e-mail or password is incorrect - please try again.
         </div>

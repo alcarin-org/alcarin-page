@@ -25,6 +25,7 @@
     "console": false,
     "io": false,
     "sprintf": false,
-    "_": false
+    "_": false,
+    "Kefir": false
   }
 }

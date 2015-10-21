@@ -10,10 +10,13 @@ function CharEnvironment(socket) {
         return socket.emit('char.activate', {
             charId: charId
         })
-        .then((char) => Promise.props({
-            // list of environment events promises
-            char: char,
-            location: socket.emit('loc.details')
-        }));
+        .flatMap((char) => {
+            return socket.emit('loc.details')
+                .map((locDetails) => ({
+                    // list of environment events promises
+                    char: char,
+                    location: locDetails
+                }));
+        });
     }
 }

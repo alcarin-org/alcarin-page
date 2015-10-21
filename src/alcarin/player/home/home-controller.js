@@ -4,13 +4,10 @@ function HomeController(socket) {
     var vm = this;
 
     activate();
-    ///
 
     function activate() {
         socket.emit('player.fetch-chars')
-        .then(function (chars) {
-            vm.chars = chars;
-        });
+              .onValue((chars) => vm.chars = chars);
     }
 
 }

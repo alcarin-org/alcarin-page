@@ -23,7 +23,8 @@
     "sprintf": "~1.0.2",
     "ngstorage": "~0.3.0",
     "angular-wizard": "psychowico/angular-wizard#master",
-    "font-awesome": "~4.3.0"
+    "font-awesome": "~4.3.0",
+    "kefir": "~3.1.0"
   },
   "resolutions": {
     "lodash": "~3.4.0"
