@@ -15,7 +15,7 @@ function CreateCharController($state, socket, Player) {
 
     function activate() {
         vm.isLoading = true;
-        Player.fetchPlayableRaces().then(
+        Player.fetchPlayableRaces().onValue(
             (races) => {
                 var race         = _.first(races);
                 vm.char.race     = race.id;
@@ -35,7 +35,7 @@ function CreateCharController($state, socket, Player) {
     }
 
     function createChar() {
-        Player.createCharacter(vm.char).then(
+        Player.createCharacter(vm.char).onValue(
             () => $state.go('home')
         );
     }

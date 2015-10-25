@@ -6,6 +6,7 @@ function kefirStreamProvider() {
     _.assign(Kefir, {
         emitter: kefirEmitterFactory,
         fromNgEvent: fromNgEvent,
+        fromNgWatch: fromNgWatch,
     });
 
     var streamProto = Kefir.Observable.prototype;
@@ -54,6 +55,18 @@ function fromNgEvent($scope, eventName) {
             emitter.emit({
                 $event: $event,
                 data: args
+            });
+            $scope.$on('$destroy', () => emitter.end());
+        });
+    });
+}
+
+function fromNgWatch($scope, watchExpression) {
+    return Kefir.stream((emitter) => {
+        $scope.$watch(watchExpression, function (value, oldValue) {
+            emitter.emit({
+                oldValue: oldValue,
+                value: value
             });
             $scope.$on('$destroy', () => emitter.end());
         });

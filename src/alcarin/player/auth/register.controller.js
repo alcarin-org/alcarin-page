@@ -13,13 +13,14 @@ function RegisterController(socket, $location, UserPermissions, $localStorage) {
             email: vm.email,
             password: vm.password1
         })
-        .then(function (response) {
+        .onValue((response) => {
             UserPermissions.set(response.permissions);
             $localStorage.apiToken = response.token;
             $location.path('/');
         })
-        .catch('email.occupied', function () {
-            vm.emailOccupied = true;
-        });
+        .filterErrors(
+            (err) => err.reason === 'email.occupied'
+        )
+        .onError(() => vm.emailOccupied = true);
     }
 }

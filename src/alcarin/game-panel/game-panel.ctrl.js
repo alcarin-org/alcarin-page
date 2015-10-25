@@ -16,8 +16,7 @@ function GamePanelController(
     });
 
     Stream.fromNgEvent($scope, '$stateChangeSuccess')
-        .onValue(stateChanged);
-    // $scope.streamWatch('');
+          .onValue(stateChanged);
 
     activate();
 
