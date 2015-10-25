@@ -3,11 +3,17 @@ angular
     .factory('Stream', kefirStreamProvider);
 
 function kefirStreamProvider() {
-    Kefir.emitter = kefirEmitterFactory;
+    _.assign(Kefir, {
+        emitter: kefirEmitterFactory,
+        fromNgEvent: fromNgEvent,
+    });
+
     var streamProto = Kefir.Observable.prototype;
     streamProto.onError = onStreamErrorFn(streamProto.onError);
+
     return Kefir;
 }
+
 function kefirEmitterFactory() {
     var stream = Kefir.stream((emitter) => {
         ['emit', 'error', 'end'].forEach(
@@ -41,6 +47,15 @@ function onStreamErrorFn(baseOnError) {
         }
     };
 }
-// -    Promise.setScheduler(function (cb) {
-// -        return $rootScope.$evalAsync(cb);
-// -    });
+
+function fromNgEvent($scope, eventName) {
+    return Kefir.stream((emitter) => {
+        $scope.$on(eventName, function ($event, ...args) {
+            emitter.emit({
+                $event: $event,
+                data: args
+            });
+            $scope.$on('$destroy', () => emitter.end());
+        });
+    });
+}

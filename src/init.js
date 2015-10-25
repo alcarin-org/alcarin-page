@@ -44,32 +44,35 @@ $(function bootstrapWebpage() {
     var userPermissions = new UserPermissions();
 
     angular.module('alcarin').value('UserPermissions', userPermissions);
-    var onVerifyToken = function (response) {
-        if (response.error) {
-            if (response.error.reason === 'invalid.token') {
-                console.warn('Wrong token used.');
-                localStorage.removeItem('apiToken');
-            } else {
-                console.warn('Auth token verification failed', response.error);
-            }
-        } else {
-            userPermissions.set(response.permissions);
-            console.log('User permissions confirmed on server.');
-        }
-        bootstrapFn();
-    };
+    ioSocket.on('alcarin.init').onValue(onInitMsg)
 
-    ioSocket.on('alcarin.init').onValue(function onInitMsg(options) {
+    function onInitMsg(options) {
         angular.module('alcarin')
             .value('ioSocket', ioSocket)
             .value('PermissionsTable', options.permissions);
 
         if (apiToken) {
             ioSocket.emit('auth.verifyToken', {token: apiToken})
-                    .onValue(onVerifyToken);
+                    .onValue(onVerifyToken)
+                    .onError(onTokenError)
+                    .onAny(bootstrapFn);
+
         }
         else {
             bootstrapFn();
         }
-    });
+
+        function onVerifyToken(response) {
+            userPermissions.set(response.permissions);
+            console.log('User permissions confirmed on server.');
+        }
+        function onTokenError(err) {
+            if (err.reason === 'invalid.token') {
+                console.warn('Wrong token used.');
+                localStorage.removeItem('apiToken');
+            } else {
+                console.warn('Auth token verification failed', err);
+            }
+        }
+    }
 });

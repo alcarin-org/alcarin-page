@@ -2,13 +2,12 @@ angular.module('alcarin.game-panel')
     .controller('GamePanelController', GamePanelController);
 
 function GamePanelController(
-    $scope, socket, $stateParams, $state, EventsManager, charEnv
+    $scope, socket, $stateParams, $state, EventsManager, Stream
 ) {
     var vm = this;
 
     _.assign(vm, {
-        loadEvents: loadEvents,
-        talkToAll: talkToAll,
+        talkToAll: Stream.emitter(),
         reloadView: reloadView,
         states: [
             {name: 'gamepanel.home', icon: 'fa-home'},
@@ -16,18 +15,20 @@ function GamePanelController(
         ]
     });
 
-    $scope.$on('$stateChangeSuccess', stateChanged);
+    Stream.fromNgEvent($scope, '$stateChangeSuccess')
+        .onValue(stateChanged);
+    // $scope.streamWatch('');
 
     activate();
 
     ///
 
     function activate() {
-        vm.loadEvents();
+        loadEvents();
     }
 
-    function stateChanged(event, toState) {
-        vm.currentState = toState.name;
+    function stateChanged({data: [state]}) {
+        vm.currentState = state.name;
     }
 
     function reloadView(view) {
@@ -36,24 +37,31 @@ function GamePanelController(
     }
 
     function loadEvents() {
-        vm.gameEvents = [];
+        // vm.gameEvents = [];
         socket.emit('char.events')
             .flatten()
             .map((event) => EventsManager.split(event))
-            // .bufferWhite()
+            .scan((arr, val) => {
+                arr.push(val);
+                return arr;
+            }, [])
             .onValue(
-                (gameEvent) => vm.gameEvents.push(gameEvent)
+                (gameEvents) => vm.gameEvents = gameEvents
             );
     }
+    vm.talkToAll
+        .filter(_.negate(_.isUndefined))
+        .log();
+        // .subscribe(() => {
+        //     if ($scope.sayingForm.$valid) {
+        //         socket.emit('char.say', {content: vm.saying})
+        //         .onValue(() => {
+        //             vm.saying = '';
+        //             // # temporary
+        //             vm.loadEvents();
+        //         });
+        //     }
 
-    function talkToAll() {
-        if ($scope.sayingForm.$valid) {
-            socket.emit('char.say', {content: vm.saying})
-            .then(function () {
-                vm.saying = '';
-                // # temporary
-                vm.loadEvents();
-            });
-        }
-    }
+        // });
+    // }
 }

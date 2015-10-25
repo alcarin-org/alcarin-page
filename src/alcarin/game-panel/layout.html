@@ -39,7 +39,7 @@
         <form name="sayingForm"
               role="form"
               class="units-row"
-              ng-submit="GamePanelCtrl.talkToAll()"
+              ng-submit="GamePanelCtrl.talkToAll.emit(GamePanelCtrl.saying)"
               novalidate>
 
           <input name="saying"
@@ -60,7 +60,9 @@
         </form>
       </div>
       <div class="events-container" alc-spin="GamePanelCtrl.gameEvents == null">
-        <div class="game-event" ng-repeat="event in GamePanelCtrl.gameEvents | orderBy: 'time' : true">
+        <div class="game-event"
+             ng-repeat="event in GamePanelCtrl.gameEvents |
+                        orderBy: 'time' : true">
           <span class="time">{{ event.time | gametime }}</span>
           <span class="content">
             <span ng-repeat="part in event.body" class="content-part" ng-switch on="part.type">
