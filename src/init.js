@@ -1,14 +1,16 @@
 var API_SERVER = ':8888';
 
 $(function bootstrapWebpage() {
-    // ###
-    // Configure connection to socket.io and check user privilages.
-    // before this we dont load angularjs - so routing wont be called
-    // before privilages are known.
-    // ###
+    /**
+     * Configure connection to socket.io and check user privilages.
+     * before this we dont load angularjs - so routing wont be called
+     * before privilages are known
+     */
     var ioSocket = io.connect(API_SERVER);
-    // # if we have api token in local storage
-    // # use it to restore user privilages after reconnection
+    /**
+     * if we have api token in local storage
+     * use it to restore user privilages after reconnection
+     */
     var apiToken = JSON.parse(localStorage.getItem('ngStorage-apiToken'));
 
     ioSocket.once('alcarin.init').onValue(onInitMsg);
@@ -22,6 +24,7 @@ $(function bootstrapWebpage() {
             ioSocket.emit('auth.verifyToken', {token: apiToken})
                 .onValue(onVerifyToken)
                 .onError(onTokenError)
+                .ignoreEnd()
                 .onAny(bootstrapAngular);
         }
         else {

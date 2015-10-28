@@ -5,7 +5,7 @@ const GameTimeFetchInterval = 60 * 1000;
 
 function OnAlcarinRun($rootScope, Stream, socket) {
     var intervalStream = Stream.interval(GameTimeFetchInterval);
-    Stream.merge([intervalStream, Stream.constant()])
+    Stream.merge([Stream.constant(), intervalStream])
         .flatMap(
             () => socket.emit('game.gametime')
         )

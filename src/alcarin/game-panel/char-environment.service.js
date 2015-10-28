@@ -1,7 +1,7 @@
 angular.module('alcarin.game-panel')
     .factory('CharEnvironment', CharEnvironment);
 
-function CharEnvironment(socket) {
+function CharEnvironment(Stream, socket) {
     return {
         factory: charEnvironmentInstanceFactory
     };
@@ -11,12 +11,13 @@ function CharEnvironment(socket) {
             charId: charId
         })
         .flatMap((char) => {
-            return socket.emit('loc.details')
-                .map((locDetails) => ({
-                    // list of environment events promises
-                    char: char,
-                    location: locDetails
-                }));
+            return Stream.combine(
+                [
+                    Stream.constant(char),
+                    socket.emit('loc.details')
+                ],
+                (char, locaction) => ({char, locaction})
+            );
         });
     }
 }
