@@ -1,13 +1,5 @@
 var API_SERVER = 'http://localhost:8888';
 
-angular.module('alcarin')
-.run(function ($rootScope, socket) {
-    socket.emit('game.gametime')
-        .onValue(
-            (gt) => $rootScope.gametime = gt.timestamp
-        );
-});
-
 $(function bootstrapWebpage() {
     // ###
     // Configure connection to socket.io and check user privilages.
@@ -48,7 +40,6 @@ $(function bootstrapWebpage() {
     ioSocket.once('alcarin.init').onValue(onInitMsg);
 
     function onInitMsg(options) {
-        console.log(options);
         angular.module('alcarin')
             .value('ioSocket', ioSocket)
             .value('PermissionsTable', options.permissions);
