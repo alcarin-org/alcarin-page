@@ -22,8 +22,8 @@ body {
 }
 
 footer {
-  height: $footer-height;
-  margin: $base-line / 2;
+    height: $footer-height;
+    margin: $base-line / 2;
 }
 
 .game-container {
@@ -33,6 +33,7 @@ footer {
 }
 
 .topnav {
+    position: relative;
     background: $color-topnav-bg;
     margin-bottom: $base-line;
     border-bottom: 1px solid literal-color-level($color-topnav-bg, 3);

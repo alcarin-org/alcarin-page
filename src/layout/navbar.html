@@ -27,8 +27,14 @@
         </time>
       </li>
       <li need-permission="LOGGED" ng-cloak>
-        <a ui-sref="logout">Logout</a>
+        <a href="" ng-click="isUserDropdownOpen = !isUserDropdownOpen">
+          Player
+        </a>
       </li>
     </ul>
   </nav>
+  <ul class="dropdown"
+      dropdown is-open="isUserDropdownOpen">
+    <li><a ui-sref="logout">Logout</a></li>
+  </ul>
 </header>

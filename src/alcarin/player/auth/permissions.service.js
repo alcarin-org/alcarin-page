@@ -3,7 +3,6 @@ angular.module('alcarin.auth')
 
 function PermissionsFactory(InitUserPermissions, PermissionsTable) {
     var Permissions = _.create(window.EventsBus, {
-        __permissions : InitUserPermissions,
         PermissionsTable: PermissionsTable,
         hasRaw: permissionsServiceHasRaw,
         has: permissionsServiceHas,
@@ -12,6 +11,7 @@ function PermissionsFactory(InitUserPermissions, PermissionsTable) {
             this.emit('updated');
         }
     });
+    Permissions.set(InitUserPermissions);
 
     return Permissions;
 

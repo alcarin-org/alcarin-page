@@ -1,5 +1,10 @@
 /* =Dropdown
 -----------------------------------------------------------------------------*/
+.dropdown.dropdown-open {
+  display: block;
+  top: 100%;
+}
+
 .dropdown {
   display: none;
   position: absolute;
