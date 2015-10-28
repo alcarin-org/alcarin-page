@@ -1,47 +1,49 @@
 /*
  * how to use system event bus?
  *
- * //creating object
- * function MyObject(){};
- * //inherit from EventsBus
- * MyObject.prototype = new EventsBus();
+ * // creating object inherit from EventsBus
+ * var myObject = _.create(window.EventsBus, {
+ *     myFn: (x) => x
+ * });
  *
- * var test = new MyObject();
- * test.on('test', function() { alert(5); } );
- * test.emit('test'); //alert(5)!
+ * myObject.on('test', () => alert(5));
+ * myObject.emit('test'); //alert(5)!
  */
 
-var __slice = Array.prototype.slice;
-
-function EventsBus() {
-    this.listeners = {};
-}
-
-EventsBus.prototype.on = function(eventName, callback) {
-    if (this.listeners[eventName] === undefined) {
-      this.listeners[eventName] = [];
-    }
-    return this.listeners[eventName].push(callback);
-};
-
-EventsBus.prototype.emit = function(eventName) {
-    var li, args = [];
-    if(arguments.length > 1) {
-        args = __slice.call(arguments, 1);
-    }
-
-    var __listeners = this.listeners[eventName];
-    if(__listeners !== undefined) {
-        for(li = 0; li < __listeners.length; li++) {
-            __listeners[li].apply(this, args);
+var EventsBus = {
+    __listeners() {
+        if (_.isUndefined(this.__eventHandlers)) {
+            this.__eventHandlers = {};
         }
-    }
+        return this.__eventHandlers;
+    },
 
-    // call asterix, if any registered
-    __listeners = this.listeners['*'];
-    if(__listeners !== undefined) {
-        for(li = 0; li < __listeners.length; li++) {
-            __listeners[li].apply(this, [eventName].concat(args));
+    on(eventName, callback) {
+        var __listeners = this.__listeners();
+
+        if (!(eventName in __listeners)) {
+          __listeners[eventName] = [];
+        }
+        return __listeners[eventName].push(callback);
+    },
+
+    emit(...args) {
+        var __listeners = this.__listeners();
+        var [eventName, ...eventArgs] = args;
+
+        if (eventName in __listeners) {
+            _.forEach(
+                __listeners[eventName],
+                (handler) => handler.apply(this, eventArgs)
+            );
+        }
+
+        // call asterix, if any registered
+        if ('*' in __listeners) {
+            _.forEach(
+                __listeners['*'],
+                (handler) => handler.apply(this, args)
+            );
         }
     }
 };

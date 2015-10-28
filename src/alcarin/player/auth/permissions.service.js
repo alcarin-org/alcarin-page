@@ -1,16 +1,19 @@
 angular.module('alcarin.auth')
-    .service('Permissions', PermissionsService);
+    .factory('Permissions', PermissionsFactory);
 
-function PermissionsService(UserPermissions, PermissionsTable) {
-    var service = this;
-    service.UserPermissions = UserPermissions;
-    service.PermissionsTable = PermissionsTable;
-    UserPermissions.on('updated', () => service.emit('updated'));
-}
+function PermissionsFactory(UserPermissions, PermissionsTable) {
+    var Permissions = _.create(window.EventsBus, {
+        UserPermissions : UserPermissions,
+        PermissionsTable: PermissionsTable,
+        hasRaw: permissionsServiceHasRaw,
+        has: permissionsServiceHas,
+    });
 
-PermissionsService.prototype = angular.extend(new window.EventsBus(), {
-    hasRaw: function permissionsServiceHasRaw(permissionCode) {
-        if (angular.isUndefined(permissionCode)) {
+    UserPermissions.on('updated', () => Permissions.emit('updated'));
+    return Permissions;
+
+    function permissionsServiceHasRaw(permissionCode) {
+        if (_.isUndefined(permissionCode)) {
             return false;
         }
         // public
@@ -19,8 +22,8 @@ PermissionsService.prototype = angular.extend(new window.EventsBus(), {
         }
 
         return this.UserPermissions.has(permissionCode);
-    },
-    has: function permissionsServiceHas(permission) {
+    }
+    function permissionsServiceHas(permission) {
         // ###
         // Interprete permission as string permission name, cast it to int
         // and check user has this permission.
@@ -30,17 +33,14 @@ PermissionsService.prototype = angular.extend(new window.EventsBus(), {
             return true;
         }
 
-        if (!this.PermissionsTable) {
-            return false;
-        }
-
         // # console.log permission, PermissionsTable, UserPermissions.get()
-        if (!(permission in this.PermissionsTable)) {
+        if (!(this.PermissionsTable &&
+             (permission in this.PermissionsTable))
+        ) {
             return false;
         }
 
         var permissionCode = this.PermissionsTable[permission];
         return this.UserPermissions.has(permissionCode);
     }
-});
-
+}

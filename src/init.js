@@ -1,4 +1,4 @@
-var API_SERVER = 'http://localhost:8888';
+var API_SERVER = ':8888';
 
 $(function bootstrapWebpage() {
     // ###
@@ -10,31 +10,21 @@ $(function bootstrapWebpage() {
     // # if we have api token in local storage
     // # use it to restore user privilages after reconnection
     var apiToken = JSON.parse(localStorage.getItem('ngStorage-apiToken'));
-    var bootstraped = false;
-    var bootstrapFn = function bootstrapAngular() {
-        if (!bootstraped) {
-            angular.bootstrap(document.body, ['alcarin']);
-        }
-        bootstraped = true;
-    };
 
-    var UserPermissions = function UserPermissions() {
-        this.permissions = [];
-    };
-    UserPermissions.prototype = angular.extend(new window.EventsBus(), {
-        has: function userPermissionsGet(code) {
+    var userPermissions = _.create(window.EventsBus, {
+        permissions: [],
+
+        has(code) {
             return this.permissions.indexOf(code) !== -1;
         },
-        get: function userPermissionsGet() {
+        get() {
             return this.permissions;
         },
-        set: function userPermissionsSet(val) {
+        set(val) {
             this.permissions = val;
             this.emit('updated');
         }
     });
-
-    var userPermissions = new UserPermissions();
 
     angular.module('alcarin').value('UserPermissions', userPermissions);
     ioSocket.once('alcarin.init').onValue(onInitMsg);
@@ -48,10 +38,10 @@ $(function bootstrapWebpage() {
             ioSocket.emit('auth.verifyToken', {token: apiToken})
                 .onValue(onVerifyToken)
                 .onError(onTokenError)
-                .onAny(bootstrapFn);
+                .onAny(bootstrapAngular);
         }
         else {
-            bootstrapFn();
+            bootstrapAngular();
         }
 
         function onVerifyToken(response) {
@@ -66,5 +56,9 @@ $(function bootstrapWebpage() {
                 console.warn('Auth token verification failed', err);
             }
         }
+    }
+
+    function bootstrapAngular() {
+        angular.bootstrap(document.body, ['alcarin']);
     }
 });
