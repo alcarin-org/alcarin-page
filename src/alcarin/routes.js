@@ -72,5 +72,6 @@ function prepareCharacterEnvironment($state, $stateParams, CharEnvironment) {
         })
         .onError('validation.failed', function () {
             $state.go('home');
-        });
+        })
+        .toPromise();
 }

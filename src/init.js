@@ -2,9 +2,10 @@ var API_SERVER = 'http://localhost:8888';
 
 angular.module('alcarin')
 .run(function ($rootScope, socket) {
-    socket.emit('game.gametime').onValue(
-        (gt) => $rootScope.gametime = gt.timestamp
-    );
+    socket.emit('game.gametime')
+        .onValue(
+            (gt) => $rootScope.gametime = gt.timestamp
+        );
 });
 
 $(function bootstrapWebpage() {
@@ -44,19 +45,19 @@ $(function bootstrapWebpage() {
     var userPermissions = new UserPermissions();
 
     angular.module('alcarin').value('UserPermissions', userPermissions);
-    ioSocket.on('alcarin.init').onValue(onInitMsg)
+    ioSocket.once('alcarin.init').onValue(onInitMsg);
 
     function onInitMsg(options) {
+        console.log(options);
         angular.module('alcarin')
             .value('ioSocket', ioSocket)
             .value('PermissionsTable', options.permissions);
 
         if (apiToken) {
             ioSocket.emit('auth.verifyToken', {token: apiToken})
-                    .onValue(onVerifyToken)
-                    .onError(onTokenError)
-                    .onAny(bootstrapFn);
-
+                .onValue(onVerifyToken)
+                .onError(onTokenError)
+                .onAny(bootstrapFn);
         }
         else {
             bootstrapFn();

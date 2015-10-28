@@ -7,9 +7,6 @@ function CharsController(
     activate();
 
     function activate() {
-        socket.emit('char.environment')
-            .then((x) =>
-                console.log(x)
-            );
+        socket.emit('char.environment').log();
     }
 }

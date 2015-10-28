@@ -6,7 +6,6 @@ angular.module('alcarin', [
     // angularjs state routing extension
     'ui.router',
     // socket.io cooperating with angularjs
-    'btford.socket-io',
     'ngStorage',
     'mgo-angular-wizard',
 

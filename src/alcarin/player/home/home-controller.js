@@ -7,6 +7,6 @@ function HomeController(socket) {
 
     function activate() {
         socket.emit('player.fetch-chars')
-              .onValue((chars) => vm.chars = chars);
+            .onValue((chars) => vm.chars = chars);
     }
 }

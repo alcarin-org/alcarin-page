@@ -5,31 +5,44 @@
 (function (socketBaseOn, socketBaseEmit) {
     var socketProto = io.Socket.prototype;
     _.assign(socketProto, {
-        on: socketFnHandler(socketBaseOn),
-        emit: socketFnHandler(socketBaseEmit),
+        _schedulerCallback: _.noop,
+        on: socketHandlerToStream(),
+        once: socketHandlerToStream(true),
+        emit: socketEmit,
         setScheduler: setSocketScheduler
     });
 
-    function setSocketScheduler(schedulerCallback) {
-        this._schedulerCallback = schedulerCallback;
+    function socketEmit(...args) {
+        var socket = this;
+
+        socketBaseEmit.apply(socket, args);
+
+        var socketReplyEvent = _.first(args) + ':reply';
+        return socket.once(socketReplyEvent);
     }
 
-    function socketFnHandler(baseFn) {
+    function socketHandlerToStream(onceEmitOnly=false) {
         return function socketOn(...args) {
-            var socket = this;
-            var stream = Kefir.stream(socketOnStream);
-            stream.filterErrors(
-                (err) => err.reason === 'validation.failed'
-            ).onError(socketValidationFailed);
+            var socket    = this;
+            var eventName = _.first(args);
 
-            return stream;
+            var stream = Kefir.fromEvents(
+                socket, eventName
+            ).withHandler(
+                (emitter, event) => {
+                    if (event.type === 'value') {
+                        if(event.value && event.value.error) {
+                            return emitter.error(event.value.error);
+                        }
+                        return emitter.emit(event.value);
+                    }
+            }).onAny(socket._schedulerCallback);
 
-            function socketOnStream(emitter) {
-                args.push(
-                    socketStreamHandlerFactory.call(socket, emitter)
-                );
-                baseFn.apply(socket, args);
-            }
+            stream
+                .filterErrors((err) => err.reason === 'validation.failed')
+                .onError(socketValidationFailed);
+
+            return onceEmitOnly ? stream.take(1) : stream;
         };
     }
 
@@ -41,20 +54,8 @@
         throw err;
     }
 
-    function socketStreamHandlerFactory(emitter) {
-        return function onSocketData(response) {
-            if (this._schedulerCallback) {
-                return this._schedulerCallback(socketHandler);
-            }
-            return socketHandler();
-
-            function socketHandler() {
-                if (response && response.error) {
-                    return emitter.error(response.error);
-                }
-                emitter.emit(response);
-            }
-        };
+    function setSocketScheduler(schedulerCallback) {
+        this._schedulerCallback = schedulerCallback;
     }
 })(io.Socket.prototype.on, io.Socket.prototype.emit);
 

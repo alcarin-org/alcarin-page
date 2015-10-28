@@ -18,12 +18,39 @@ function GamePanelController(
     Stream.fromNgEvent($scope, '$stateChangeSuccess')
           .onValue(stateChanged);
 
+    var charEvents = socket.on('char.events:reply');
+    var charSayed  = socket.on('char.say:reply');
+
+    vm.talkToAll
+        .filter(_.negate(_.isUndefined))
+        .onValue(
+            () => socket.emit('char.say', {content: vm.saying})
+        );
+
+    charSayed
+        .onValue(() => {
+            loadEvents();
+            vm.saying = '';
+        });
+
+    charEvents
+        .onValue(() => vm.gameEvents = [])
+        .flatten()
+        .map((event) => EventsManager.split(event))
+        .onValue(
+            (gameEvent) => vm.gameEvents.push(gameEvent)
+        );
+
     activate();
 
     ///
 
     function activate() {
         loadEvents();
+    }
+
+    function loadEvents() {
+        socket.emit('char.events');
     }
 
     function stateChanged({data: [state]}) {
@@ -34,33 +61,4 @@ function GamePanelController(
         vm.controlPanelFocus = true;
         $state.go(view);
     }
-
-    function loadEvents() {
-        // vm.gameEvents = [];
-        socket.emit('char.events')
-            .flatten()
-            .map((event) => EventsManager.split(event))
-            .scan((arr, val) => {
-                arr.push(val);
-                return arr;
-            }, [])
-            .onValue(
-                (gameEvents) => vm.gameEvents = gameEvents
-            );
-    }
-    vm.talkToAll
-        .filter(_.negate(_.isUndefined))
-        .log();
-        // .subscribe(() => {
-        //     if ($scope.sayingForm.$valid) {
-        //         socket.emit('char.say', {content: vm.saying})
-        //         .onValue(() => {
-        //             vm.saying = '';
-        //             // # temporary
-        //             vm.loadEvents();
-        //         });
-        //     }
-
-        // });
-    // }
 }

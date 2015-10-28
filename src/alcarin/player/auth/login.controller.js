@@ -24,7 +24,8 @@ function LoginController(
                 email: vm.email,
                 password: vm.password
             })
-        ).onValue(
+        )
+        .onValue(
             (response) => {
                 UserPermissions.set(response.permissions);
                 $localStorage.apiToken = response.token;
