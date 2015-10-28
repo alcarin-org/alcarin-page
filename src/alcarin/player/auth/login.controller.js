@@ -2,7 +2,7 @@ angular.module('alcarin.auth').controller('LoginController', LoginController);
 
 function LoginController(
     $scope, $state, $localStorage,
-    socket, UserPermissions, logoutEnabled, Stream
+    socket, Permissions, logoutEnabled, Stream
 ) {
     var vm = this;
 
@@ -27,7 +27,7 @@ function LoginController(
         )
         .onValue(
             (response) => {
-                UserPermissions.set(response.permissions);
+                Permissions.set(response.permissions);
                 $localStorage.apiToken = response.token;
                 $state.go('home');
                 vm.loginInvalid = false;
@@ -39,7 +39,7 @@ function LoginController(
         );
 
     function logout() {
-        UserPermissions.set([]);
+        Permissions.set([]);
         delete $localStorage.apiToken;
         $state.go('home');
     }

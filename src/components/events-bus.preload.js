@@ -48,4 +48,4 @@ var EventsBus = {
     }
 };
 
-window.EventsBus = EventsBus;
+window.EventsBus       = EventsBus;

@@ -11,22 +11,6 @@ $(function bootstrapWebpage() {
     // # use it to restore user privilages after reconnection
     var apiToken = JSON.parse(localStorage.getItem('ngStorage-apiToken'));
 
-    var userPermissions = _.create(window.EventsBus, {
-        permissions: [],
-
-        has(code) {
-            return this.permissions.indexOf(code) !== -1;
-        },
-        get() {
-            return this.permissions;
-        },
-        set(val) {
-            this.permissions = val;
-            this.emit('updated');
-        }
-    });
-
-    angular.module('alcarin').value('UserPermissions', userPermissions);
     ioSocket.once('alcarin.init').onValue(onInitMsg);
 
     function onInitMsg(options) {
@@ -41,14 +25,16 @@ $(function bootstrapWebpage() {
                 .onAny(bootstrapAngular);
         }
         else {
+            setInitPermission([]);
             bootstrapAngular();
         }
 
         function onVerifyToken(response) {
-            userPermissions.set(response.permissions);
+            setInitPermission(response.permissions);
             console.log('User permissions confirmed on server.');
         }
         function onTokenError(err) {
+            setInitPermission([]);
             if (err.reason === 'invalid.token') {
                 console.warn('Wrong token used.');
                 localStorage.removeItem('apiToken');
@@ -60,5 +46,12 @@ $(function bootstrapWebpage() {
 
     function bootstrapAngular() {
         angular.bootstrap(document.body, ['alcarin']);
+    }
+
+    function setInitPermission(permissions) {
+        angular.module('alcarin').constant(
+            'InitUserPermissions',
+            permissions
+        );
     }
 });

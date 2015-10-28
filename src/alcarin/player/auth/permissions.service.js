@@ -1,15 +1,18 @@
 angular.module('alcarin.auth')
     .factory('Permissions', PermissionsFactory);
 
-function PermissionsFactory(UserPermissions, PermissionsTable) {
+function PermissionsFactory(InitUserPermissions, PermissionsTable) {
     var Permissions = _.create(window.EventsBus, {
-        UserPermissions : UserPermissions,
+        __permissions : InitUserPermissions,
         PermissionsTable: PermissionsTable,
         hasRaw: permissionsServiceHasRaw,
         has: permissionsServiceHas,
+        set(permissions) {
+            this.__permissions = permissions;
+            this.emit('updated');
+        }
     });
 
-    UserPermissions.on('updated', () => Permissions.emit('updated'));
     return Permissions;
 
     function permissionsServiceHasRaw(permissionCode) {
@@ -21,7 +24,7 @@ function PermissionsFactory(UserPermissions, PermissionsTable) {
             return true;
         }
 
-        return this.UserPermissions.has(permissionCode);
+        return _.contains(this.__permissions, permissionCode);
     }
     function permissionsServiceHas(permission) {
         // ###
@@ -33,7 +36,6 @@ function PermissionsFactory(UserPermissions, PermissionsTable) {
             return true;
         }
 
-        // # console.log permission, PermissionsTable, UserPermissions.get()
         if (!(this.PermissionsTable &&
              (permission in this.PermissionsTable))
         ) {
@@ -41,6 +43,6 @@ function PermissionsFactory(UserPermissions, PermissionsTable) {
         }
 
         var permissionCode = this.PermissionsTable[permission];
-        return this.UserPermissions.has(permissionCode);
+        return _.contains(this.__permissions, permissionCode);
     }
 }
