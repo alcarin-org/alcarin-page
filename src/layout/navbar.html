@@ -35,6 +35,9 @@
   </nav>
   <ul class="dropdown"
       dropdown is-open="isUserDropdownOpen">
+    <li need-permission="MANAGING_PLAYERS">
+      <a ui-sref="manage-players">Players</a>
+    </li>
     <li><a ui-sref="logout">Logout</a></li>
   </ul>
 </header>

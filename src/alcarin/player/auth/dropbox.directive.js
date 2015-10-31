@@ -1,7 +1,7 @@
 angular.module('alcarin.common')
     .directive('dropdown', dropdownDirective);
 
-function dropdownDirective (Stream, $document, $timeout) {
+function dropdownDirective (Stream, $document) {
     return {
         replace: false,
         restrict: 'A',

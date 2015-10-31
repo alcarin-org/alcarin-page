@@ -12,4 +12,5 @@ angular.module('alcarin', [
     'alcarin-html-templates',
     'alcarin.game-panel',
     'alcarin.auth',
+    'alcarin.admin',
 ]);

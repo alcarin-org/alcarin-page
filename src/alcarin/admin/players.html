@@ -1,0 +1,41 @@
+<div class="units-row units-split units-padding unit-centered gameboard">
+  <section class="unit-golden-sm panel">
+    <table>
+      <thead>
+        <tr>
+          <th class="forms">
+            <input type="text" placeholder="Email"
+                   ng-model="PlayersCtrl.filter.email"
+                   ng-change="PlayersCtrl.filterChanges.emit(PlayersCtrl.filter)">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in PlayersCtrl.players track by player.id">
+          <td>
+            <a href=""
+               ng-click="PlayersCtrl.selectedPlayer = player">
+              {{ player.email }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="unit-golden-lg panel">
+    <form class="forms" ng-if="PlayersCtrl.selectedPlayer">
+      <h2>Permissions</h2>
+      <div ng-repeat="(key, perm) in PlayersCtrl.PermissionsList track by key">
+        <label>
+          <input type="checkbox"
+                 ng-checked="PlayersCtrl.selectedPlayer.permissions
+                                        .indexOf(perm) !== -1"
+                 ng-click="PlayersCtrl.permissionToggling.emit(perm)"
+                 ng-disabled="perm === 0">
+          {{ key }}
+        </label>
+      </div>
+    </form>
+  </section>
+</div>
