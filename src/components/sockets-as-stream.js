@@ -42,6 +42,10 @@
                 .filterErrors((err) => err.reason === 'validation.failed')
                 .onError(socketValidationFailed);
 
+            stream
+                .filterErrors((err) => err.reason !== 'validation.failed')
+                .onError(socketErrorsLogger);
+
             return onceEmitOnly ? stream.take(1) : stream;
         };
     }
@@ -52,6 +56,10 @@
             err.body
         );
         throw err;
+    }
+
+    function socketErrorsLogger(err) {
+        console.log(`System "${err.reason}" error: ${err.body}`);
     }
 
     function setSocketScheduler(schedulerCallback) {

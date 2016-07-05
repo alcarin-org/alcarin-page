@@ -2,11 +2,11 @@ angular.module('alcarin.admin')
     .controller('PlayersController', PlayersController);
 
 function PlayersController(
-    $scope, Stream, socket, PermissionsTable
+    $scope, Stream, socket, PermissionsDefTable
 ) {
     var vm = this;
     _.assign(vm, {
-        PermissionsList: PermissionsTable,
+        PermissionsList: PermissionsDefTable,
         permissionToggling: Stream.emitter(),
         filter: {},
         filterChanges: Stream.emitter(),

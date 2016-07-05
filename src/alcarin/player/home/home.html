@@ -4,7 +4,7 @@
     <!-- characters list -->
     <nav class="nav nav-stacked">
       <ul>
-        <li ng-repeat="char in HomeCtrl.chars">
+        <li ng-repeat="char in HomeCtrl.chars track by char.id">
           <a ui-sref="gamepanel.home({charId: char.id})">
             {{ char.name }}
           </a>

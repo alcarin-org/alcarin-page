@@ -18,7 +18,7 @@ $(function bootstrapWebpage() {
     function onInitMsg(options) {
         angular.module('alcarin')
             .value('ioSocket', ioSocket)
-            .value('PermissionsTable', options.permissions);
+            .value('PermissionsDefTable', options.permissions);
 
         if (apiToken) {
             ioSocket.emit('auth.verifyToken', {token: apiToken})
@@ -40,7 +40,7 @@ $(function bootstrapWebpage() {
             setInitPermission([]);
             if (err.reason === 'invalid.token') {
                 console.warn('Wrong token used.');
-                localStorage.removeItem('apiToken');
+                localStorage.removeItem('ngStorage-apiToken');
             } else {
                 console.warn('Auth token verification failed', err);
             }

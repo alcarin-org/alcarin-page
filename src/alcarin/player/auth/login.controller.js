@@ -32,10 +32,12 @@ function LoginController(
                 $state.go('home');
                 vm.loginInvalid = false;
             }
-        ).filterErrors(
+        )
+        .filterErrors(
             (err) => err.reason === 'authorization.failed'
-        ).onError(
-            () => vm.loginInvalid = true
+        )
+        .onError(
+            (err) => vm.loginInvalid = true
         );
 
     function logout() {
