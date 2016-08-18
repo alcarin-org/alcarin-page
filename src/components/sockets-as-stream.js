@@ -2,7 +2,7 @@
  * replace socket.on and socket.emit methods to return Kefir streams instead
  * of working with callbacks
  */
-(function (socketBaseOn, socketBaseEmit) {
+(function (socketBaseOn, socketBaseEmit, localStorage) {
     var socketProto = io.Socket.prototype;
     _.assign(socketProto, {
         _schedulerCallback: _.noop,
@@ -15,7 +15,9 @@
     function socketEmit(...args) {
         var socket = this;
 
-        socketBaseEmit.apply(socket, args);
+        socketBaseEmit.apply(socket, args.concat({
+            token: JSON.parse(localStorage.getItem('ngStorage-apiToken')),
+        }));
 
         var socketReplyEvent = _.first(args) + ':reply';
         return socket.once(socketReplyEvent);
@@ -65,5 +67,5 @@
     function setSocketScheduler(schedulerCallback) {
         this._schedulerCallback = schedulerCallback;
     }
-})(io.Socket.prototype.on, io.Socket.prototype.emit);
+})(io.Socket.prototype.on, io.Socket.prototype.emit, window.localStorage);
 
